@@ -12,31 +12,79 @@
 
 #include "../../../minishell.h"
 
-int	export_exist(char **export, char *variable_name)
+int	export_exist_try_1(char **export, char *var_name_w_equal)
 {
 	int	i;
 
 	i = 0;
 	while (export[i])
 	{
-		if (ft_strbstr(export[i], variable_name))
+		if (ft_strbstr(export[i], var_name_w_equal))
+		{
+			free(var_name_w_equal);
 			return (EXIT_SUCCESS);
+		}
 		i++;
 	}
 	return (EXIT_FAILURE);
 }
 
-int	update_arg_export(char **export, char *arg, char *variable_name)
+int	export_exist_try_2(char **export, char *var_name_w_equal)
 {
 	int	i;
 
 	i = 0;
 	while (export[i])
 	{
-		if (ft_fstrnstr(export[i], variable_name, ft_fstrlen(variable_name)))
+		if (ft_strcstr(export[i], var_name_w_equal))
+		{
+			free (var_name_w_equal);
+			return (EXIT_SUCCESS);
+		}
+		i++;
+	}
+	free(var_name_w_equal);
+	return (EXIT_FAILURE);
+}
+
+int	export_exist(char **export, char *var_name)
+{
+	char *temp;
+	char *var_name_w_equal;
+
+	temp = ft_strjoin("declare -x ", var_name);
+	if (temp == NULL)
+		return (EXIT_FAILURE);
+	var_name_w_equal = ft_strjoin(temp, "=");
+	free(temp);
+	if (var_name_w_equal == NULL)
+		return (EXIT_FAILURE);
+	if (export_exist_try_1(export, var_name_w_equal) == EXIT_SUCCESS)
+		return (EXIT_SUCCESS);
+	var_name_w_equal[ft_fstrlen(var_name_w_equal) - 1] = '\0';
+	return (export_exist_try_2(export, var_name_w_equal));
+}
+
+int	update_arg_export(char **export, char *var_name, char *var_value)
+{
+	int		i;
+	char	*temp;
+	char	*new_arg;
+	
+	i = 0;
+	temp = ft_strjoin("declare -x ", var_name);
+	if (temp == NULL)
+		return (EXIT_FAILURE);
+	new_arg = ft_strjoin(temp, "=");
+	free(temp);
+	if (new_arg == NULL)
+		return (EXIT_FAILURE);
+	while (export[i])
+	{
+		if (ft_strbstr(export[i], new_arg))
 		{
 			free(export[i]);
-			export[i] = ft_strjoin_w_quote("declare -x ", arg);
+			export[i] = ft_strjoin_w_quote(new_arg, var_value);
 			if (export[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
@@ -46,10 +94,12 @@ int	update_arg_export(char **export, char *arg, char *variable_name)
 	return (EXIT_SUCCESS);
 }
 
-int	add_arg_export(t_env_export *env_export, char *arg)
+int	add_arg_export(t_env_export *env_export, char *var_name, char *var_value)
 {
 	int		i;
 	char	**temp;
+	char	*helper;
+	char	*var_name_w_equal;
 
 	i = 0;
 	temp = (char **)ft_fcalloc(sizeof(char *),
@@ -58,7 +108,7 @@ int	add_arg_export(t_env_export *env_export, char *arg)
 		return (EXIT_FAILURE);
 	while (env_export->export[i])
 	{
-		temp[i] = ft_strdup(env_export->export[i]);
+		temp[i] = ft_fstrdup(env_export->export[i]);
 		if (temp[i] == NULL)
 		{
 			free_double(temp);
@@ -66,27 +116,27 @@ int	add_arg_export(t_env_export *env_export, char *arg)
 		}
 		i++;
 	}
-	temp[i] = ft_strjoin_w_quote("declare -x ", arg);
+	helper = ft_strjoin("declare -x ", var_name);
+	if (helper == NULL)
+	{
+		free_double(temp);
+		return (EXIT_FAILURE);
+	}
+	var_name_w_equal = ft_strjoin(helper, "=");
+	free(helper);
+	if (var_name_w_equal == NULL)
+	{
+		free_double(temp);
+		return (EXIT_FAILURE);
+	}
+	temp[i] = ft_strjoin_w_quote(var_name_w_equal, var_value);
+	free(var_name_w_equal);
+	if (temp[i] == NULL)
+	{
+		free_double(temp);
+		return (EXIT_FAILURE);
+	}
 	free_double(env_export->export);
 	env_export->export = temp;
-	return (EXIT_SUCCESS);
-}
-
-int	update_arg_env_export(t_env_export *env_export,
-	char *arg, char *variable_name)
-{
-	if (update_arg_export(env_export->export,
-			arg, variable_name) == EXIT_FAILURE)
-	{
-		free(variable_name);
-		return (EXIT_FAILURE);
-	}
-	if (update_arg_env(env_export->env,
-			arg, variable_name) == EXIT_FAILURE)
-	{
-		free(variable_name);
-		return (EXIT_FAILURE);
-	}
-	free(variable_name);
 	return (EXIT_SUCCESS);
 }

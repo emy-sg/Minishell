@@ -75,7 +75,7 @@ char	*fill_str(const char *str, char delim, int part)
 	return (temp);
 }
 
-char	**ft_split(const char *str, char delim)
+char	**ft_fsplit(const char *str, char delim)
 {
 	char	**splited;
 	int		i;

@@ -23,10 +23,10 @@ char	*home_path(char **env)
 	{
 		if (ft_fstrnstr(env[i], "HOME", 4))
 		{
-			temp = ft_split(env[i], '=');
+			temp = ft_fsplit(env[i], '=');
 			if (temp == NULL)
 				return (NULL);
-			path = ft_strdup(temp[1]);
+			path = ft_fstrdup(temp[1]);
 			free_double(temp);
 			if (path == NULL)
 				return (NULL);
@@ -42,7 +42,7 @@ char	*joined_abs_path(char *env, char *path_w_slash)
 	char	**temp;
 	char	*joined_path;
 
-	temp = ft_split(env, '=');
+	temp = ft_fsplit(env, '=');
 	if (temp == NULL)
 		return (NULL);
 	joined_path = ft_strjoin(temp[1], path_w_slash);
@@ -80,7 +80,7 @@ char	*cd_path(const char *path, char **env)
 	if (path == NULL)
 		return (home_path(env));
 	else if (ft_fstrnstr(path, "/", 1) != 0)
-		return (ft_strdup(path));
+		return (ft_fstrdup(path));
 	else
 		return (abs_path(path, env));
 	return (NULL);

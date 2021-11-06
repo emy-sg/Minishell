@@ -12,6 +12,37 @@
 
 #include "../../../minishell.h"
 
+int	env_exist_try_1(char **env, char *var_name_w_equal)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strbstr(env[i], var_name_w_equal))
+		{
+			printf("env ok!! (%s)\n", var_name_w_equal);
+			free(var_name_w_equal);
+			return (EXIT_SUCCESS);
+		}
+		i++;
+	}
+	free(var_name_w_equal);
+	return (EXIT_FAILURE);
+}
+
+int	env_exist(char **env, char *var_name)
+{
+	char *var_name_w_equal;
+
+	var_name_w_equal = ft_strjoin(var_name, "=");
+	if (var_name_w_equal == NULL)
+		return (EXIT_FAILURE);
+	if (env_exist_try_1(env, var_name_w_equal) == EXIT_SUCCESS)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
 char	**init_env(const char **menv)
 {
 	int		i;
@@ -23,7 +54,7 @@ char	**init_env(const char **menv)
 		return (NULL);
 	while (menv[i])
 	{
-		env[i] = ft_strdup(menv[i]);
+		env[i] = ft_fstrdup(menv[i]);
 		if (env[i] == NULL)
 		{
 			free_double(env);

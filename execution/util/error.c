@@ -14,8 +14,10 @@
 
 int	sys_error(char *cmd, char *arg)
 {
-	if (cmd)
+	if (cmd && arg)
 		printf("minishell: %s: %s: %s\n", cmd, arg, strerror(errno));
+	else if (cmd)
+		printf("minishell: %s: %s\n", cmd, strerror(errno));
 	else
 		printf("minishell: %s\n", strerror(errno));
 	return (EXIT_SUCCESS);

@@ -53,6 +53,34 @@ int	*sort_table(const char **menv)
 	return (sorted);
 }
 
+char	*export_arg(char *menv)
+{
+	char	**temp;
+	char	*helper;
+	char	*var_name;
+	char	*out;
+
+	temp = ft_fsplite(menv, '=');
+	if (temp == NULL)
+		return (NULL);
+	helper = ft_strjoin("declare -x ", temp[0]);
+	if (helper == NULL)
+	{
+		free_double(temp);
+		return (NULL);
+	}
+	var_name = ft_strjoin(helper, "=");
+	if (helper == NULL)
+	{
+		free(helper);
+		free_double(temp);
+		return (NULL);
+	}
+	out = ft_strjoin_w_quote(var_name, temp[1]);
+	free_double(temp);
+	return (out);
+}
+
 int	fill_export(const char **menv, char **export, int *sorted)
 {
 	int		i;
@@ -60,7 +88,7 @@ int	fill_export(const char **menv, char **export, int *sorted)
 	i = 0;
 	while (menv[i])
 	{
-		export[i] = ft_strjoin_w_quote("declare -x ", (char *)menv[sorted[i]]);
+		export[i] = export_arg((char *)menv[sorted[i]]);
 		if (export[i] == NULL)
 		{
 			free(sorted);

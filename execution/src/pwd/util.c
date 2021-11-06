@@ -23,10 +23,10 @@ char	*get_old_pwd(char **env)
 	{
 		if (ft_fstrnstr(env[i], "PWD", 3))
 		{
-			temp = ft_split(env[i], '=');
+			temp = ft_fsplit(env[i], '=');
 			if (temp == NULL)
 				return (NULL);
-			old_pwd = ft_strdup(temp[1]);
+			old_pwd = ft_fstrdup(temp[1]);
 			free_double(temp);
 			if (old_pwd == NULL)
 				return (NULL);

@@ -12,20 +12,20 @@
 
 #include "../../../minishell.h"
 
-int	ft_echo(t_cmd *cmd)
+int	ft_echo(t_ast *s_ast)
 {
 	int	i;
 
-	i = 0;
-	if (ft_strbstr(cmd->arg[0], "-n"))
-		i = 1;
-	while (cmd->arg[i])
+	i = 1;
+	if (s_ast->argv[1] && ft_strbstr(s_ast->argv[1], "-n"))
+		i = 2;
+	while (s_ast->argv[i])
 	{
-		printf("%s", cmd->arg[i]);
-		if (cmd->arg[++i])
+		printf("%s", s_ast->argv[i]);
+		if (s_ast->argv[++i])
 			printf(" ");
 	}
-	if (ft_strbstr(cmd->arg[0], "-n") == NULL)
+	if (s_ast->argv[1] && ft_strbstr(s_ast->argv[1], "-n") == NULL)
 		printf("\n");
 	return (EXIT_SUCCESS);
 }

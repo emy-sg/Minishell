@@ -21,23 +21,22 @@ int	valid_arg(char *arg)
 		return (EXIT_FAILURE);
 	while (arg[i])
 	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '_')
+		if (!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
 			return (EXIT_FAILURE);
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	valid_input(t_cmd *cmd)
+int	valid_input(t_ast *s_ast)
 {
 	int	i;
 
-	i = 0;
-	while (cmd->arg[i])
+	i = 1;
+	while (s_ast->argv[i])
 	{
-		if (valid_arg(cmd->arg[i]) == EXIT_FAILURE)
-			return (prg_error(cmd->cmd, cmd->arg[i],
-					"not a valid identifier"));
+		if (valid_arg(s_ast->argv[i]) == EXIT_FAILURE)
+			prg_error(s_ast->argv[0], s_ast->argv[i], "not a valid identifier");
 		i++;
 	}
 	return (EXIT_SUCCESS);

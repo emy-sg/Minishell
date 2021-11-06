@@ -12,12 +12,12 @@
 
 #include "../../../minishell.h"
 
-int	ft_export(t_cmd *cmd)
+int	ft_export(t_ast *s_ast, t_env_export *env_export)
 {
-	if (cmd->arg == NULL)
-		return (print_export(cmd->env_export->export));
+	if (s_ast->argv[1] == NULL)
+		return (print_export(env_export->export));
 	else
-		return (add_to_export(cmd));
+		return (add_to_export(s_ast, env_export));
 	return (EXIT_SUCCESS);
 }
 
@@ -35,25 +35,31 @@ int	print_export(char **export)
 	return (EXIT_SUCCESS);
 }
 
-int	add_to_export(t_cmd *cmd)
+int	add_to_export(t_ast *s_ast, t_env_export *env_export)
 {
-	int	i;
+	int		i;
+	char	**temp;
 
-	i = 0;
-	while (cmd->arg[i])
+	i = 1;
+	while (s_ast->argv[i])
 	{
-		if (valid_arg(cmd->arg[i]) == EXIT_SUCCESS)
+		if (valid_arg(s_ast->argv[i]) == EXIT_SUCCESS)
 		{
-			if (ft_fstrnstr(cmd->arg[i], "=", 1))
+			if (ft_fstrnstr(s_ast->argv[i], "=", 1))
 			{
-				if (add_env_export(cmd->env_export, cmd->arg[i])
-					== EXIT_FAILURE)
-					return (sys_error(cmd->cmd, cmd->arg[i]));
+				temp = ft_fsplite(s_ast->argv[i], '=');
+				if (temp == NULL)
+					return (EXIT_FAILURE);
+				if (add_env_export(env_export, temp) == EXIT_FAILURE)
+					return (sys_error(s_ast->argv[0], s_ast->argv[i]));
 			}
-			else if (add_export(cmd->env_export, cmd->arg[i]) == EXIT_FAILURE)
-				return (sys_error(cmd->cmd, cmd->arg[i]));
+			else if (add_export(env_export, s_ast->argv[i]) == EXIT_FAILURE)
+				return (sys_error(s_ast->argv[0], s_ast->argv[i]));
 		}
 		i++;
 	}
-	return (valid_input(cmd));
+	return (valid_input(s_ast));
 }
+
+
+ 

@@ -14,6 +14,6 @@
 # define EXIT_H
 
 int		valid_arg_exit(char *arg);
-int		ft_exit(t_cmd *cmd);
+int		ft_exit(t_ast *s_ast);
 
 #endif

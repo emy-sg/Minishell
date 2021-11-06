@@ -1,6 +1,6 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 MAKE = make -C
 
@@ -13,7 +13,7 @@ $(NAME):
 	@$(MAKE) execution
 	@gcc $(FLAG) parsing/libft/libft.a parsing/lexer/lexer.a parsing/parser/parser.a\
 		execution/execution.a\
-		main.c -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I /Users/$(USER)/.brew/opt/readline/include -o $(NAME)
+		main.c -lreadline -L /goinfre//.brew/opt/readline/lib -I /goinfre//.brew/opt/readline/include -o $(NAME)
 
 clean:
 	@$(MAKE) parsing/libft clean

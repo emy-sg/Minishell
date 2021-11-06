@@ -12,7 +12,7 @@
 
 #include "util.h"
 
-char	*ft_strdup(const char *str)
+char	*ft_fstrdup(const char *str)
 {
 	int		i;
 	int		slen;
@@ -31,7 +31,7 @@ char	*ft_strdup(const char *str)
 	return (p);
 }
 
-char	*ft_strdup_wout_quote(const char *str)
+char	*ft_fstrdup_wout_quote(const char *str)
 {
 	int		i;
 	int		j;

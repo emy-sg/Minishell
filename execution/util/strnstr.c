@@ -47,3 +47,19 @@ char	*ft_strbstr(const char *str1, const char *str2)
 	}
 	return ((char *)str2);
 }
+
+char	*ft_strcstr(const char *str1, const char *str2)
+{
+	int	i;
+
+	i = 0;
+	if (ft_fstrlen(str1) != ft_fstrlen(str2))
+		return (NULL);
+	while (str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (NULL);
+		i++;
+	}
+	return ((char *)str2);
+}

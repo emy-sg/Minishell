@@ -12,39 +12,21 @@
 
 #include "../../../minishell.h"
 
-int	add_arg_env_export(t_env_export *env_export, char *arg)
+int	add_env_export(t_env_export *env_export, char **temp)
 {
-	if (add_arg_export(env_export, arg) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (add_arg_env(env_export, arg) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
+	int	ret;
 
-int	add_env_export(t_env_export *env_export, char *arg)
-{
-	char	**temp;
-	char	*temp0;
-	char	*variable_name;
-
-	temp = ft_fsplit(arg, '=');
-	if (temp == NULL)
-		return (EXIT_FAILURE);
-	temp0 = ft_strjoin("declare -x ", temp[0]);
-	if (temp0 == NULL)
-	{
-		free(temp);
-		return (EXIT_FAILURE);
-	}
-	variable_name = ft_strjoin(temp0, "=");
+	ret = EXIT_SUCCESS;
+	if (export_exist(env_export->export, temp[0]) == EXIT_SUCCESS)
+		ret = update_arg_export(env_export->export, temp[0], temp[1]);
+	else if (ret == EXIT_SUCCESS)
+		ret = add_arg_export(env_export, temp[0], temp[1]);
+	if (ret == EXIT_SUCCESS && env_exist(env_export->env, temp[0]) == EXIT_SUCCESS)
+		ret = update_arg_env(env_export->env, temp[0], temp[1]);
+	else if (ret == EXIT_SUCCESS)
+		ret = add_arg_env(env_export, temp[0], temp[1]);
 	free_double(temp);
-	free(temp0);
-	if (variable_name == NULL)
-		return (EXIT_FAILURE);
-	if (export_exist(env_export->export, variable_name) == EXIT_SUCCESS)
-		return (update_arg_env_export(env_export, arg, variable_name));
-	free(variable_name);
-	return (add_arg_env_export(env_export, arg));
+	return (ret);
 }
 
 int	push_arg_export(t_env_export *env_export, char *arg)
@@ -59,7 +41,7 @@ int	push_arg_export(t_env_export *env_export, char *arg)
 		return (EXIT_FAILURE);
 	while (env_export->export[i])
 	{
-		temp[i] = ft_strdup(env_export->export[i]);
+		temp[i] = ft_fstrdup(env_export->export[i]);
 		if (temp[i] == NULL)
 		{
 			free_double(temp);
@@ -76,7 +58,17 @@ int	push_arg_export(t_env_export *env_export, char *arg)
 
 int	add_export(t_env_export *env_export, char *arg)
 {
-	if (export_exist(env_export->export, arg) == EXIT_SUCCESS)
+	char	*temp;
+	char	*variable_name;
+
+	temp = ft_strjoin("declare -x ", arg);
+	if (temp == NULL)
+		return (EXIT_FAILURE);
+	variable_name = ft_strjoin(temp, "=");
+	free(temp);
+	if (variable_name == NULL)
+		return (EXIT_FAILURE);
+	if (export_exist(env_export->export, variable_name) == EXIT_SUCCESS)
 		return (EXIT_SUCCESS);
 	else
 		return (push_arg_export(env_export, arg));

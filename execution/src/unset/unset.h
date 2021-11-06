@@ -13,11 +13,11 @@
 #ifndef UNSET_H
 # define UNSET_H
 
-int	unset(t_cmd *cmd);
+int	unset(t_ast *s_ast, t_env_export *env_export);
 int	remove_arg_env(t_env_export *env_export, char *arg);
 int	remove_arg_export(t_env_export *env_export, char *arg);
 int	remove_arg_env_export(t_env_export *env_export, char *arg);
-int	unset_env_export(t_cmd *cmd);
+int	unset_env_export(t_ast *s_ast, t_env_export *env_export);
 int	delete_export_elements(char **export, char *temp);
 
 #endif

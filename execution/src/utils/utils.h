@@ -14,6 +14,6 @@
 # define UTILS_H
 
 int		valid_arg(char *arg);
-int		valid_input(t_cmd *cmd);
+int		valid_input(t_ast *s_ast);
 
 #endif

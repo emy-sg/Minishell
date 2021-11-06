@@ -15,6 +15,6 @@
 
 char	*try_all_paths(char **all_paths, char *cmd);
 char	*get_cmd_path(char *cmd, char **env);
-int		other(t_cmd *cmd);
+int		other(t_ast *s_ast, t_env_export *env_export);
 
 #endif

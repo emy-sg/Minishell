@@ -13,7 +13,7 @@
 #ifndef CD_H
 # define CD_H
 
-int		cd(t_cmd *cmd);
+int		cd(t_ast *s_ast, t_env_export *env_export);
 char	*home_path(char **env);
 char	*joined_abs_path(char *env, char *path_w_slash);
 char	*abs_path(const char *path, char **env);

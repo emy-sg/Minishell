@@ -36,33 +36,40 @@ char	*get_cmd_path(char *cmd, char **env)
 	{
 		if (ft_fstrnstr(env[i], "PATH=", 5))
 		{
-			all_paths = ft_split(env[i] + 5, ':');
-			if (all_paths == NULL)
-				return (NULL);
+			all_paths = ft_fsplit(env[i] + 5, ':');
 			break ;
 		}
 		i++;
 	}
+	if (all_paths == NULL)
+		return (NULL);
 	cmd_path = try_all_paths(all_paths, cmd);
 	free_double(all_paths);
 	return (cmd_path);
 }
 
-int	other(t_cmd *cmd)
+int	other(t_ast *s_ast, t_env_export *env_export)
 {
 	char	*the_cmd;
+	int		pid;
 
-	if (cmd->cmd[0] == '/')
-		the_cmd = ft_strdup(cmd->cmd);
-	else
-		the_cmd = get_cmd_path(cmd->cmd, cmd->env_export->env);
-	if (the_cmd == NULL)
-	{
-		free (the_cmd);
-		cmd->status->last_status = 1;
-		return (prg_error(cmd->cmd, NULL, "command not found"));
-	}
-	if (execve(the_cmd, cmd->arg, cmd->env_export->env) == -1)
+	pid = fork();
+	if (pid == -1)
 		return (EXIT_FAILURE);
+	else if (pid == 0)
+	{
+		if (s_ast->argv[0][0] == '/')
+			the_cmd = ft_fstrdup(s_ast->argv[0]);
+		else
+			the_cmd = get_cmd_path(s_ast->argv[0], env_export->env);
+		if (the_cmd == NULL)
+		{
+			free(the_cmd);
+			return (prg_error(s_ast->argv[0], NULL, "command not found"));
+		}
+		if (execve(the_cmd, s_ast->argv, env_export->env) == -1)
+			return (EXIT_FAILURE);
+	}
+	waitpid(pid, NULL, 0);
 	return (EXIT_SUCCESS);
 }

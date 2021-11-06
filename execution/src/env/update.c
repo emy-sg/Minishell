@@ -74,28 +74,26 @@ int	update_env_pwd(char **env)
 	return (EXIT_FAILURE);
 }
 
-int	update_arg_env(char **env, char *arg, char *variable_name)
+int	update_arg_env(char **env, char *var_name, char *var_value)
 {
 	int		i;
-	char	**temp;
-
+	char	*new_arg;
+	
 	i = 0;
-	temp = ft_split(variable_name, ' ');
-	if (temp == NULL)
+	new_arg = ft_strjoin(var_name, "=");
+	if (new_arg == NULL)
 		return (EXIT_FAILURE);
 	while (env[i])
 	{
-		if (ft_fstrnstr(env[i], temp[2], ft_fstrlen(temp[2])))
+		if (ft_strbstr(env[i], new_arg))
 		{
 			free(env[i]);
-			free_double(temp);
-			env[i] = ft_strdup_wout_quote(arg);
+			env[i] = ft_strjoin(new_arg, var_value);
 			if (env[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	free_double(temp);
 	return (EXIT_SUCCESS);
 }

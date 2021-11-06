@@ -26,7 +26,7 @@ int	remove_arg_env(t_env_export *env_export, char *arg)
 		if (ft_strbstr(env_export->env[i], temp))
 		{
 			free(env_export->env[i]);
-			env_export->env[i] = ft_strdup("NaN");
+			env_export->env[i] = ft_fstrdup("NaN");
 			if (env_export->env[i] == NULL)
 			{
 				free(temp);
@@ -49,7 +49,7 @@ int	delete_export_elements(char **export, char *temp)
 		if (ft_strbstr(export[i], temp))
 		{
 			free(export[i]);
-			export[i] = ft_strdup("NaN");
+			export[i] = ft_fstrdup("NaN");
 			if (export[i] == NULL)
 			{
 				free(temp);
@@ -86,20 +86,20 @@ int	remove_arg_env_export(t_env_export *env_export, char *arg)
 	return (EXIT_SUCCESS);
 }
 
-int	unset_env_export(t_cmd *cmd)
+int	unset_env_export(t_ast *s_ast, t_env_export *env_export)
 {
 	int	i;
 
-	i = 0;
-	while (cmd->arg[i])
+	i = 1;
+	while (s_ast->argv[i])
 	{
-		if (valid_arg(cmd->arg[i]) == EXIT_SUCCESS)
+		if (valid_arg(s_ast->argv[i]) == EXIT_SUCCESS)
 		{
-			if (remove_arg_env_export(cmd->env_export, cmd->arg[i])
+			if (remove_arg_env_export(env_export, s_ast->argv[i])
 				== EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		i++;
 	}
-	return (valid_input(cmd));
+	return (valid_input(s_ast));
 }

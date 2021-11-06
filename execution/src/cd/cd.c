@@ -12,12 +12,12 @@
 
 #include "../../../minishell.h"
 
-int	cd(t_cmd *cmd)
+int	cd(t_ast *s_ast, t_env_export *env_export)
 {
 	int		ret;
 	char	*path;
 
-	path = cd_path(cmd->arg[0], cmd->env_export->env);
+	path = cd_path(s_ast->argv[1], env_export->env);
 	if (path == NULL)
 		return (EXIT_FAILURE);
 	if (chdir(path) != 0)
@@ -25,7 +25,7 @@ int	cd(t_cmd *cmd)
 		free(path);
 		return (EXIT_FAILURE);
 	}
-	ret = update_env_export(cmd->env_export);
+	ret = update_env_export(env_export);
 	free(path);
 	return (ret);
 }

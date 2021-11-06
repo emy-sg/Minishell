@@ -13,6 +13,6 @@
 #ifndef ECHO_H
 # define ECHO_H
 
-int		ft_echo(t_cmd *cmd);
+int	ft_echo(t_ast *s_ast);
 
 #endif

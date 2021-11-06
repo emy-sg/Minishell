@@ -12,9 +12,9 @@
 
 #include "../../../minishell.h"
 
-int	unset(t_cmd *cmd)
+int	unset(t_ast *s_ast, t_env_export *env_export)
 {
-	if (cmd->arg != NULL)
-		return (unset_env_export(cmd));
+	if (ft_fstrlen_double((const char **)s_ast->argv) > 1)
+		return (unset_env_export(s_ast, env_export));
 	return (EXIT_SUCCESS);
 }

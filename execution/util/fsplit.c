@@ -50,7 +50,7 @@ char	*second_str(char *str, char delim)
 	return (second);
 }
 
-char	**ft_fsplit(const char *str, char delim)
+char	**ft_fsplite(const char *str, char delim)
 {
 	char	**splited;
 

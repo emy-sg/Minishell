@@ -8,8 +8,8 @@ t_cmd	*init_cmds(t_env_export *env_export, t_last_status *last_status)
 	if (cmds == NULL)
 		return (NULL);
 	//cmds[0].arg = NULL;
-	cmds[0].arg = ft_split("wc -l", ' ');
-	cmds[0].cmd = ft_strdup("wc");
+	cmds[0].arg = ft_fsplit("wc -l", ' ');
+	cmds[0].cmd = ft_fstrdup("wc");
 	cmds[0].env_export = env_export;
 	cmds[0].status = last_status;
 	return (cmds);
