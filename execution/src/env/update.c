@@ -23,14 +23,12 @@ int	update_env_old_pwd(char **env, char *old_pwd)
 		{
 			free(env[i]);
 			env[i] = ft_strjoin("OLDPWD=", old_pwd);
-			free(old_pwd);
 			if (env[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	free(old_pwd);
 	return (EXIT_SUCCESS);
 }
 
@@ -45,14 +43,12 @@ int	update_env_pwd(char **env, char *new_pwd)
 		{
 			free(env[i]);
 			env[i] = ft_strjoin("PWD=", new_pwd);
-			free(new_pwd);
 			if (env[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	free(new_pwd);
 	return (EXIT_SUCCESS);
 }
 

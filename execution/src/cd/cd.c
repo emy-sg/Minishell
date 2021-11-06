@@ -26,6 +26,7 @@ int	cd(t_ast *s_ast, t_env_export *env_export)
 		free(path);
 		return (EXIT_FAILURE);
 	}
+	free(path);
 	if (update_env_export_pwd(env_export) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
