@@ -75,15 +75,15 @@ int	update_arg_export(char **export, char *var_name, char *var_value)
 	temp = ft_strjoin("declare -x ", var_name);
 	if (temp == NULL)
 		return (EXIT_FAILURE);
-	new_arg = ft_strjoin(temp, "=");
-	free(temp);
-	if (new_arg == NULL)
-		return (EXIT_FAILURE);
 	while (export[i])
 	{
-		if (ft_strbstr(export[i], new_arg))
+		if (ft_strbstr(export[i], temp))
 		{
+			new_arg = ft_strjoin(temp, "=");
 			free(export[i]);
+			free(temp);
+			if (new_arg == NULL)
+				return (EXIT_FAILURE);
 			export[i] = ft_strjoin_w_quote(new_arg, var_value);
 			if (export[i] == NULL)
 				return (EXIT_FAILURE);

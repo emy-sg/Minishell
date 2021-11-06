@@ -14,7 +14,7 @@ NAME = pwd.a
 
 FLAG = -Wall -Wextra -Werror
 
-FILE = pwd.c util.c
+FILE = pwd.c
 
 $(NAME): $(FILE)
 	@gcc $(FLAG)  -c $(FILE)

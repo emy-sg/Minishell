@@ -14,5 +14,6 @@
 # define ECHO_H
 
 int	ft_echo(t_ast *s_ast);
+int	valid_opt(char *opt);
 
 #endif

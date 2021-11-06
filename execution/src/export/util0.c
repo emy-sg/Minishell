@@ -58,17 +58,7 @@ int	push_arg_export(t_env_export *env_export, char *arg)
 
 int	add_export(t_env_export *env_export, char *arg)
 {
-	char	*temp;
-	char	*variable_name;
-
-	temp = ft_strjoin("declare -x ", arg);
-	if (temp == NULL)
-		return (EXIT_FAILURE);
-	variable_name = ft_strjoin(temp, "=");
-	free(temp);
-	if (variable_name == NULL)
-		return (EXIT_FAILURE);
-	if (export_exist(env_export->export, variable_name) == EXIT_SUCCESS)
+	if (export_exist(env_export->export, arg) == EXIT_SUCCESS)
 		return (EXIT_SUCCESS);
 	else
 		return (push_arg_export(env_export, arg));

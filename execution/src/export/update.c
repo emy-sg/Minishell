@@ -12,27 +12,14 @@
 
 #include "../../../minishell.h"
 
-int	update_export(char **export)
+int	update_export_old_pwd(char **export, char *old_pwd)
 {
-	if (update_export_old_pwd(export) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (update_export_pwd(export) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-int	update_export_old_pwd(char **export)
-{
-	char	*old_pwd;
-	int		i;
+	int	i;
 
 	i = 0;
-	old_pwd = get_old_pwd(export);
-	if (old_pwd == NULL)
-		return (EXIT_FAILURE);
 	while (export[i])
 	{
-		if (ft_fstrnstr(export[i], "OLDPWD", 6))
+		if (ft_strbstr(export[i], "declare -x OLDPWD="))
 		{
 			free(export[i]);
 			export[i] = ft_strjoin("declare -x OLDPWD=", old_pwd);
@@ -43,33 +30,28 @@ int	update_export_old_pwd(char **export)
 		}
 		i++;
 	}
+	free(old_pwd);
 	return (EXIT_SUCCESS);
 }
 
-int	update_export_pwd(char **export)
+int	update_export_pwd(char **export, char *new_pwd)
 {
-	int		i;
-	char	*new_pwd;
+	int	i;
 
 	i = 0;
-	new_pwd = pwd();
-	if (new_pwd == NULL)
-		return (EXIT_FAILURE);
 	while (export[i])
 	{
-		if (ft_fstrnstr(export[i], "PWD", 3))
+		if (ft_strbstr(export[i], "declare -x PWD="))
 		{
-			if (ft_fstrnstr(export[i], "OLDPWD", 6) == NULL)
-			{
-				free(export[i]);
-				export[i] = ft_strjoin("declare -x PWD=", new_pwd);
-				free(new_pwd);
-				if (export[i] == NULL)
-					return (EXIT_FAILURE);
-				return (EXIT_SUCCESS);
-			}
+			free(export[i]);
+			export[i] = ft_strjoin("declare -x PWD=", new_pwd);
+			free(new_pwd);
+			if (export[i] == NULL)
+				return (EXIT_FAILURE);
+			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	return (EXIT_FAILURE);
+	free(new_pwd);
+	return (EXIT_SUCCESS);
 }

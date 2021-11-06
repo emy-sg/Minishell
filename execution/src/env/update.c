@@ -12,27 +12,14 @@
 
 #include "../../../minishell.h"
 
-int	update_env(char **env)
+int	update_env_old_pwd(char **env, char *old_pwd)
 {
-	if (update_env_old_pwd(env) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (update_env_pwd(env) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-int	update_env_old_pwd(char **env)
-{
-	char	*old_pwd;
-	int		i;
+	int	i;
 
 	i = 0;
-	old_pwd = get_old_pwd(env);
-	if (old_pwd == NULL)
-		return (EXIT_FAILURE);
 	while (env[i])
 	{
-		if (ft_fstrnstr(env[i], "OLDPWD", 6))
+		if (ft_strbstr(env[i], "OLDPWD="))
 		{
 			free(env[i]);
 			env[i] = ft_strjoin("OLDPWD=", old_pwd);
@@ -43,35 +30,30 @@ int	update_env_old_pwd(char **env)
 		}
 		i++;
 	}
+	free(old_pwd);
 	return (EXIT_SUCCESS);
 }
 
-int	update_env_pwd(char **env)
+int	update_env_pwd(char **env, char *new_pwd)
 {
-	int		i;
-	char	*new_pwd;
+	int	i;
 
 	i = 0;
-	new_pwd = pwd();
-	if (new_pwd == NULL)
-		return (EXIT_FAILURE);
 	while (env[i])
 	{
-		if (ft_fstrnstr(env[i], "PWD", 3))
+		if (ft_strbstr(env[i], "PWD="))
 		{
-			if (ft_fstrnstr(env[i], "OLDPWD", 6) == NULL)
-			{
-				free(env[i]);
-				env[i] = ft_strjoin("PWD=", new_pwd);
-				free(new_pwd);
-				if (env[i] == NULL)
-					return (EXIT_FAILURE);
-				return (EXIT_SUCCESS);
-			}
+			free(env[i]);
+			env[i] = ft_strjoin("PWD=", new_pwd);
+			free(new_pwd);
+			if (env[i] == NULL)
+				return (EXIT_FAILURE);
+			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	return (EXIT_FAILURE);
+	free(new_pwd);
+	return (EXIT_SUCCESS);
 }
 
 int	update_arg_env(char **env, char *var_name, char *var_value)

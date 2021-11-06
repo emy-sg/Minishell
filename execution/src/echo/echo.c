@@ -12,20 +12,46 @@
 
 #include "../../../minishell.h"
 
+int	valid_opt(char *opt)
+{
+	int i;
+
+	i = 1;
+	if (opt == NULL || opt[0] != '-')
+		return (EXIT_FAILURE);
+	while (opt[i])
+	{
+		if (opt[i] != 'n')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_echo(t_ast *s_ast)
 {
 	int	i;
+	int	new_line;
 
 	i = 1;
-	if (s_ast->argv[1] && ft_strbstr(s_ast->argv[1], "-n"))
-		i = 2;
+	new_line = 1;
+	while (s_ast->argv[i])
+	{
+		if (valid_opt(s_ast->argv[i]) == EXIT_SUCCESS)
+		{
+			new_line = 0;
+			i++;
+		}
+		else
+			break ;
+	}
 	while (s_ast->argv[i])
 	{
 		printf("%s", s_ast->argv[i]);
 		if (s_ast->argv[++i])
 			printf(" ");
 	}
-	if (s_ast->argv[1] && ft_strbstr(s_ast->argv[1], "-n") == NULL)
+	if (new_line)
 		printf("\n");
 	return (EXIT_SUCCESS);
 }

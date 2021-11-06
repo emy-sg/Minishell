@@ -15,6 +15,5 @@
 
 char	*pwd(void);
 int		print_pwd(void);
-char	*get_old_pwd(char **env);
 
 #endif

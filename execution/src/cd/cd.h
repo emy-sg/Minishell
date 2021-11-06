@@ -14,10 +14,10 @@
 # define CD_H
 
 int		cd(t_ast *s_ast, t_env_export *env_export);
+int		update_env_export_old_pwd(t_env_export *env_export);
+int		update_env_export_pwd(t_env_export *env_export);
 char	*home_path(char **env);
-char	*joined_abs_path(char *env, char *path_w_slash);
-char	*abs_path(const char *path, char **env);
-char	*cd_path(const char *path, char **env);
-int		update_env_export(t_env_export *env_export);
+char	*abs_path(const char *arg);
+char	*cd_path(const char *arg, char **env);
 
 #endif

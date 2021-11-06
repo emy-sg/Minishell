@@ -21,7 +21,6 @@ int	env_exist_try_1(char **env, char *var_name_w_equal)
 	{
 		if (ft_strbstr(env[i], var_name_w_equal))
 		{
-			printf("env ok!! (%s)\n", var_name_w_equal);
 			free(var_name_w_equal);
 			return (EXIT_SUCCESS);
 		}

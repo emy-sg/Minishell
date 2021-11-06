@@ -21,7 +21,7 @@ char	*home_path(char **env)
 	i = 0;
 	while (env[i] != NULL)
 	{
-		if (ft_fstrnstr(env[i], "HOME", 4))
+		if (ft_strbstr(env[i], "HOME="))
 		{
 			temp = ft_fsplit(env[i], '=');
 			if (temp == NULL)
@@ -37,60 +37,59 @@ char	*home_path(char **env)
 	return (NULL);
 }
 
-char	*joined_abs_path(char *env, char *path_w_slash)
-{
-	char	**temp;
-	char	*joined_path;
-
-	temp = ft_fsplit(env, '=');
-	if (temp == NULL)
-		return (NULL);
-	joined_path = ft_strjoin(temp[1], path_w_slash);
-	free_double(temp);
-	free(path_w_slash);
-	return (joined_path);
-}
-
-char	*abs_path(const char *path, char **env)
+char	*abs_path(const char *arg)
 {
 	int		i;
+	char	*path;
 	char	*path_w_slash;
 	char	*joined_path;
 
 	i = 0;
-	path_w_slash = ft_strjoin("/", path);
+	path = pwd();
+	if (path == NULL)
+		return (NULL);
+	path_w_slash = ft_strjoin(path, "/");
+	free(path);
 	if (path_w_slash == NULL)
 		return (NULL);
-	while (env[i] != NULL)
+	joined_path = ft_strjoin(path_w_slash, arg);
+	free(path_w_slash);
+	return (joined_path);
+}
+
+char	*cd_path(const char *arg, char **env)
+{
+	char *path;
+
+	if (arg == NULL)
 	{
-		if (ft_fstrnstr(env[i], "PWD", 3))
+		path = home_path(env);
+		if (path == NULL)
 		{
-			joined_path = joined_abs_path(env[i], path_w_slash);
-			if (joined_path == NULL)
-				return (NULL);
-			return (joined_path);
+			prg_error("cd", NULL, "HOME not set");
+			return (NULL);
 		}
-		i++;
+		return (path);
+	}
+	else if (ft_fstrnstr(arg, "/", 1) != 0)
+	{
+		path = ft_fstrdup(arg);
+		if (path == NULL)
+		{
+			sys_error("cd", NULL);
+			return (NULL);
+		}
+		return (path);
+	}
+	else
+	{
+		path = abs_path(arg);
+		if (path == NULL)
+		{
+			sys_error("cd", NULL);
+			return (NULL);
+		}
+		return (path);
 	}
 	return (NULL);
-}
-
-char	*cd_path(const char *path, char **env)
-{
-	if (path == NULL)
-		return (home_path(env));
-	else if (ft_fstrnstr(path, "/", 1) != 0)
-		return (ft_fstrdup(path));
-	else
-		return (abs_path(path, env));
-	return (NULL);
-}
-
-int	update_env_export(t_env_export *env_export)
-{
-	if (update_env(env_export->env) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	if (update_export(env_export->export) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }

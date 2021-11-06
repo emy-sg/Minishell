@@ -30,13 +30,13 @@ int	remove_arg_env(t_env_export *env_export, char *arg)
 			if (env_export->env[i] == NULL)
 			{
 				free(temp);
-				return (EXIT_FAILURE);
+				return (ERROR);
 			}
 		}
 		i++;
 	}
 	free(temp);
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	delete_export_elements(char **export, char *temp)
@@ -53,13 +53,13 @@ int	delete_export_elements(char **export, char *temp)
 			if (export[i] == NULL)
 			{
 				free(temp);
-				return (EXIT_FAILURE);
+				return (ERROR);
 			}
+			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	free(temp);
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	remove_arg_export(t_env_export *env_export, char *arg)
@@ -70,8 +70,13 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 	temp0 = ft_strjoin("declare -x ", arg);
 	if (temp0 == NULL)
 		return (EXIT_FAILURE);
+	if (delete_export_elements(env_export->export, temp0) == EXIT_SUCCESS)
+	{
+		free(temp0);
+		return (EXIT_SUCCESS);
+	}
 	temp = ft_strjoin(temp0, "=");
-	free (temp0);
+	free(temp0);
 	if (temp == NULL)
 		return (EXIT_FAILURE);
 	return (delete_export_elements(env_export->export, temp));
@@ -79,9 +84,9 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 
 int	remove_arg_env_export(t_env_export *env_export, char *arg)
 {
-	if (remove_arg_env(env_export, arg) == EXIT_FAILURE)
+	if (remove_arg_env(env_export, arg) == ERROR)
 		return (EXIT_FAILURE);
-	if (remove_arg_export(env_export, arg) == EXIT_FAILURE)
+	if (remove_arg_export(env_export, arg) == ERROR)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
