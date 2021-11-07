@@ -11,9 +11,7 @@ $(NAME):
 	@$(MAKE) parsing/lexer
 	@$(MAKE) parsing/parser
 	@$(MAKE) execution
-	@gcc $(FLAG) parsing/libft/libft.a parsing/lexer/lexer.a parsing/parser/parser.a\
-		execution/execution.a\
-		main.c -lreadline -L /goinfre//.brew/opt/readline/lib -I /goinfre//.brew/opt/readline/include -o $(NAME)
+	@gcc $(FLAG) execution/execution.a parsing/libft/libft.a parsing/lexer/lexer.a parsing/parser/parser.a main.c -lreadline -o $(NAME)
 
 clean:
 	@$(MAKE) parsing/libft clean

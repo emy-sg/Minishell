@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_string_within_quotes.c                     :+:      :+:    :+:   */
+/*   free_simple_cmd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 21:28:50 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:31:57 by isghioua         ###   ########.fr       */
+/*   Created: 2021/11/05 21:32:21 by isghioua          #+#    #+#             */
+/*   Updated: 2021/11/05 21:40:46 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*extract_string_within_quotes(char *content, int *index,
-		char char_quote)
+void	free_simple_cmd(t_ast *s_simple_cmd)
 {
-	char	*new_content;
-	int		length;
-
-	length = find_closing_quote(content, *index, char_quote);
-	if (length == 0)
-	{
-		new_content = ft_substr(content, *index, 1);
-		*index += 1;
-	}
-	else
-	{
-		*index += 1;
-		new_content = ft_substr(content, *index, length);
-		*index += length;
-	}
-	return (new_content);
+	if (s_simple_cmd->argv)
+		free_table_of_string(s_simple_cmd->argv);
+	if (s_simple_cmd->redir)
+		free_table_of_redir(s_simple_cmd->redir);
+	s_simple_cmd->child_cmd = NULL;
 }

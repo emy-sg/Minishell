@@ -84,7 +84,7 @@ typedef struct	ast_struct
 		AST_PIPLINE_COMMAND,
 	}	type;
 	char				**argv;
-	char				**redir;
+	t_redir				**redir;
 	int					nbr_pipes;
 	struct ast_struct	*child_cmd;
 }						t_ast;

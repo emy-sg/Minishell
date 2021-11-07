@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:38:46 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/04 17:31:33 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/10/13 18:03:21 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parse_and_execute(t_lexer *s_lexer, t_env_export *env_export)
 			//free_cmd_tree(s_ast);
 			break ;
 		}
-		execute_command(s_ast, env_export);		
+		//execute_command(s_ast);		
 		//free_cmd_tree(s_cmd);
 
 		//	printf("Token[%d]=[%s]\n", s_token->type, s_token->value);

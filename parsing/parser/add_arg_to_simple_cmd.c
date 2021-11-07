@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_arg_to_simple_cmd.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/05 21:15:41 by isghioua          #+#    #+#             */
+/*   Updated: 2021/11/05 21:17:31 by isghioua         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
-void	add_arg_to_simple_cmd(t_token **s_token, t_lexer *s_lexer, t_ast *s_cmd, char **table_of_env_var)
+void	add_arg_to_simple_cmd(t_token **s_token, t_lexer *s_lexer,
+		t_ast *s_cmd, char **table_of_env_var)
 {
 	char	**new_argv;
 	int		size;
-	
+
 	if (s_cmd->argv == NULL)
 	{
 		s_cmd->argv = malloc(sizeof(char *) * 2);

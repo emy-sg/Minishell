@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_string_within_quotes.c                     :+:      :+:    :+:   */
+/*   get_size_of_redir_table.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 21:28:50 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:31:57 by isghioua         ###   ########.fr       */
+/*   Created: 2021/11/05 21:43:01 by isghioua          #+#    #+#             */
+/*   Updated: 2021/11/05 21:49:32 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*extract_string_within_quotes(char *content, int *index,
-		char char_quote)
+int	get_size_of_redir_table(t_redir **table)
 {
-	char	*new_content;
-	int		length;
+	int	i;
 
-	length = find_closing_quote(content, *index, char_quote);
-	if (length == 0)
-	{
-		new_content = ft_substr(content, *index, 1);
-		*index += 1;
-	}
-	else
-	{
-		*index += 1;
-		new_content = ft_substr(content, *index, length);
-		*index += length;
-	}
-	return (new_content);
+	i = 0;
+	while (table[i])
+		i++;
+	return (i);
 }

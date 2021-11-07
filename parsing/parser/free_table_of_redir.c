@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_string_within_quotes.c                     :+:      :+:    :+:   */
+/*   free_table_of_redir.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 21:28:50 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:31:57 by isghioua         ###   ########.fr       */
+/*   Created: 2021/11/05 21:32:25 by isghioua          #+#    #+#             */
+/*   Updated: 2021/11/05 21:40:20 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*extract_string_within_quotes(char *content, int *index,
-		char char_quote)
+void	free_table_of_redir(t_redir **s_redir)
 {
-	char	*new_content;
-	int		length;
+	int		i;
 
-	length = find_closing_quote(content, *index, char_quote);
-	if (length == 0)
+	i = 0;
+	while (s_redir[i])
 	{
-		new_content = ft_substr(content, *index, 1);
-		*index += 1;
+		free(s_redir[i]->file_name);
+		s_redir[i]->file_name = NULL;
+		free(s_redir[i]);
+		s_redir[i] = NULL;
+		i++;
 	}
-	else
-	{
-		*index += 1;
-		new_content = ft_substr(content, *index, length);
-		*index += length;
-	}
-	return (new_content);
+	free(s_redir);
+	s_redir = NULL;
 }

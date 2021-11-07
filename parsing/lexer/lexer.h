@@ -9,4 +9,12 @@ char	*get_string(t_lexer *s_lexer);
 char	*get_string_btw_quotes(t_lexer *s_lexer, char delimeter);
 int		find_closing_quote(char *str, int index, char char_quote);
 
+t_token *tokenize(t_lexer *s_lexer);
+t_token *init_token(int type, char *value);
+t_token	*lexer_get_pipe_token(t_lexer *s_lexer);
+t_token	*lexer_get_input_redir_token(t_lexer *s_lexer);
+t_token	*lexer_get_output_redir_token(t_lexer *s_lexer);
+t_token	*lexer_get_next_token(t_lexer *s_lexer);
+t_token	*lexer_get_string(t_lexer *s_lexer);
+
 #endif

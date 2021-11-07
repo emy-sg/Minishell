@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_string_within_quotes.c                     :+:      :+:    :+:   */
+/*   free_ast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 21:28:50 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:31:57 by isghioua         ###   ########.fr       */
+/*   Created: 2021/11/05 21:32:15 by isghioua          #+#    #+#             */
+/*   Updated: 2021/11/05 21:36:16 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	*extract_string_within_quotes(char *content, int *index,
-		char char_quote)
+void	free_ast(t_ast	*s_ast)
 {
-	char	*new_content;
-	int		length;
+	t_ast	*s_simple_cmd;
+	t_ast	*s_next_simple_cmd;
 
-	length = find_closing_quote(content, *index, char_quote);
-	if (length == 0)
-	{
-		new_content = ft_substr(content, *index, 1);
-		*index += 1;
-	}
+	if (!(s_ast->child_cmd))
+		free_simple_cmd(s_ast);
 	else
 	{
-		*index += 1;
-		new_content = ft_substr(content, *index, length);
-		*index += length;
+		while (s_ast->child_cmd)
+		{
+			s_simple_cmd = s_ast->child_cmd;
+			s_next_simple_cmd = s_simple_cmd->child_cmd;
+			free_simple_cmd(s_simple_cmd);
+			free(s_simple_cmd);
+			s_ast->child_cmd = NULL;
+			s_ast->child_cmd = s_next_simple_cmd;
+		}
 	}
-	return (new_content);
+	free(s_ast);
+	s_ast = NULL;
 }
