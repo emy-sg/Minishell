@@ -49,7 +49,7 @@ int	push_arg_export(t_env_export *env_export, char *arg)
 		}
 		i++;
 	}
-	temp[i] = ft_strjoin("declare -x ", arg);
+	temp[i] = ft_fstrjoin("declare -x ", arg);
 	temp[i + 1] = NULL;
 	free_double(env_export->export);
 	env_export->export = temp;

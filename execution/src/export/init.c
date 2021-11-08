@@ -63,20 +63,20 @@ char	*export_arg(char *menv)
 	temp = ft_fsplite(menv, '=');
 	if (temp == NULL)
 		return (NULL);
-	helper = ft_strjoin("declare -x ", temp[0]);
+	helper = ft_fstrjoin("declare -x ", temp[0]);
 	if (helper == NULL)
 	{
 		free_double(temp);
 		return (NULL);
 	}
-	var_name = ft_strjoin(helper, "=");
+	var_name = ft_fstrjoin(helper, "=");
 	if (helper == NULL)
 	{
 		free(helper);
 		free_double(temp);
 		return (NULL);
 	}
-	out = ft_strjoin_w_quote(var_name, temp[1]);
+	out = ft_fstrjoin_w_quote(var_name, temp[1]);
 	free_double(temp);
 	return (out);
 }

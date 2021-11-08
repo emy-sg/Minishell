@@ -18,7 +18,7 @@ int	remove_arg_env(t_env_export *env_export, char *arg)
 	char	*temp;
 
 	i = 0;
-	temp = ft_strjoin(arg, "=");
+	temp = ft_fstrjoin(arg, "=");
 	if (temp == NULL)
 		return (EXIT_FAILURE);
 	while (env_export->env[i])
@@ -67,7 +67,7 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 	char	*temp0;
 	char	*temp;
 
-	temp0 = ft_strjoin("declare -x ", arg);
+	temp0 = ft_fstrjoin("declare -x ", arg);
 	if (temp0 == NULL)
 		return (EXIT_FAILURE);
 	if (delete_export_elements(env_export->export, temp0) == EXIT_SUCCESS)
@@ -75,7 +75,7 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 		free(temp0);
 		return (EXIT_SUCCESS);
 	}
-	temp = ft_strjoin(temp0, "=");
+	temp = ft_fstrjoin(temp0, "=");
 	free(temp0);
 	if (temp == NULL)
 		return (EXIT_FAILURE);

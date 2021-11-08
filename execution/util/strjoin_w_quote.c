@@ -34,7 +34,7 @@ char	*ft_copy(char *str1, char *str2, int length)
 	return (output);
 }
 
-char	*ft_strjoin_w_quote(char *str1, char *str2)
+char	*ft_fstrjoin_w_quote(char *str1, char *str2)
 {
 	int		length;
 	char	*output;

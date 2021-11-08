@@ -9,10 +9,10 @@ char	*try_all_paths(char **all_paths, char *cmd)
 	i = 0;
 	while (all_paths[i])
 	{
-		path_w_slash = ft_strjoin(all_paths[i], "/");
+		path_w_slash = ft_fstrjoin(all_paths[i], "/");
 		if (path_w_slash == NULL)
 			return (NULL);
-		candidate_path = ft_strjoin(path_w_slash, cmd);
+		candidate_path = ft_fstrjoin(path_w_slash, cmd);
 		free(path_w_slash);
 		if (candidate_path == NULL)
 			return (NULL);

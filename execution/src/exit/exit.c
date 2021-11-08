@@ -19,7 +19,7 @@ int	valid_arg_exit(char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (!ft_isdigit(arg[i]))
+		if (!ft_fisdigit(arg[i]))
 			return (EXIT_FAILURE);
 		i++;
 	}

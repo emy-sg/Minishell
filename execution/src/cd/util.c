@@ -46,11 +46,11 @@ char	*abs_path(const char *arg)
 	path = pwd();
 	if (path == NULL)
 		return (NULL);
-	path_w_slash = ft_strjoin(path, "/");
+	path_w_slash = ft_fstrjoin(path, "/");
 	free(path);
 	if (path_w_slash == NULL)
 		return (NULL);
-	joined_path = ft_strjoin(path_w_slash, arg);
+	joined_path = ft_fstrjoin(path_w_slash, arg);
 	free(path_w_slash);
 	return (joined_path);
 }

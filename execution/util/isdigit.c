@@ -12,7 +12,7 @@
 
 #include "util.h"
 
-int	ft_isdigit(int a)
+int	ft_fisdigit(int a)
 {
 	if (a >= 48 && a <= 57)
 		return (1);
