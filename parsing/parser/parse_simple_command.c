@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:24 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:43:25 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:02:45 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_ast	*parse_simple_command(t_token **s_token, t_lexer *s_lexer, char	**table_of
 		printf("syntax error near unexpected token `|'\n");
 		exit(1);
 	}
-	int k = 0;
 	while ((*s_token)->type != TOKEN_EOF && (*s_token)->type != TOKEN_PIPE)
 	{
 		if ((*s_token)->type == TOKEN_HERE_DOC_INPUT
