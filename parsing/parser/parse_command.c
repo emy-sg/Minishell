@@ -18,6 +18,7 @@ t_ast	*parse_command(t_token **s_token, t_lexer *s_lexer, char **table_of_env_va
 	t_ast	*s_cmd;
 	t_ast	*s_pipeline;
 	
+	s_pipeline = NULL;
 	s_cmd = parse_simple_command(s_token, s_lexer, table_of_env_var);
 	while ((*s_token)->type  != TOKEN_EOF)
 	{
