@@ -30,7 +30,7 @@ int	parse_and_execute(t_lexer *s_lexer, t_env_export *env_export)
 			//free_cmd_tree(s_ast);
 			break ;
 		}
-		//execute_command(s_ast);		
+		execute_command(s_ast, env_export);		
 		//free_cmd_tree(s_cmd);
 
 		//	printf("Token[%d]=[%s]\n", s_token->type, s_token->value);

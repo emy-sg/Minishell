@@ -16,10 +16,10 @@ char	*pwd(void)
 {
 	char	*pwd;
 
-	pwd = (char *)ft_fcalloc(sizeof(char), 256);
+	pwd = (char *)ft_fcalloc(sizeof(char), 1024);
 	if (pwd == NULL)
 		return (NULL);
-	pwd = getcwd(pwd, sizeof(char) * 256);
+	pwd = getcwd(pwd, sizeof(char) * 1024);
 	if (pwd == NULL)
 		return (NULL);
 	return (pwd);
@@ -33,5 +33,6 @@ int	print_pwd(void)
 	if (path == NULL)
 		return (EXIT_FAILURE);
 	printf("%s\n", path);
+	free(path);
 	return (EXIT_SUCCESS);
 }

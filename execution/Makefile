@@ -5,7 +5,7 @@ FLAG = -Wall -Wextra -Werror
 
 LIB = util/*.o init/*.o src/cmd/*.o src/cd/*.o src/env/*.o src/export/*.o\
 		src/pwd/*.o src/unset/*.o src/utils/*.o src/echo/*.o\
-		src/exit/*.o src/other/*.o
+		src/exit/*.o src/other/*.o redirection/*.o
 
 all: util_all src_all $(NAME)
 
@@ -32,6 +32,7 @@ src_all:
 	@make -C src/echo
 	@make -C src/exit
 	@make -C src/other
+	@make -C redirection
 src_clean:
 	@make clean -C init
 	@make clean -C src/cd
@@ -44,6 +45,7 @@ src_clean:
 	@make clean -C src/echo
 	@make clean -C src/exit
 	@make clean -C src/other
+	@make clean -C redirection
 src_fclean:
 	@make fclean -C init
 	@make fclean -C src/cd
@@ -56,6 +58,7 @@ src_fclean:
 	@make fclean -C src/echo
 	@make fclean -C src/exit
 	@make fclean -C src/other
+	@make fclean -C redirection
 src_re:
 	@make re -C init
 	@make re -C src/cd
@@ -68,6 +71,7 @@ src_re:
 	@make re -C src/echo
 	@make re -C src/exit
 	@make re -C src/other
+	@make re -C redirection
 
 
 util_all:
