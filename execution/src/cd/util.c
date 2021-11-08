@@ -39,12 +39,10 @@ char	*home_path(char **env)
 
 char	*abs_path(const char *arg)
 {
-	int		i;
 	char	*path;
 	char	*path_w_slash;
 	char	*joined_path;
 
-	i = 0;
 	path = pwd();
 	if (path == NULL)
 		return (NULL);
