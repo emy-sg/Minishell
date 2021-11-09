@@ -42,6 +42,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 	if (pipe(fd) == -1)
 		return (sys_error(s_ast->argv[0], NULL));
 	while (i < s_ast->nbr_pipes)
+	//while (i < s_ast->nbr_pipes)
 	{
 		if (dup2(fd[1], STDOUT_FILENO) < 0)
 			return (sys_error(s_ast->argv[0], s_ast->argv[1]));
@@ -50,6 +51,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 		printf("%d\n", the_cmd->nbr_pipes);
 		//ft_cmd(the_cmd, env_export);
 		print_export(env_export->export);
+
 		the_cmd = the_cmd->child_cmd;
 		i++;
 	}

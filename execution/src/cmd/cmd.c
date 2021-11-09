@@ -20,14 +20,22 @@ int ft_cmd_phase_1(t_ast *s_ast, t_env_export *env_export)
 	if (ft_strcstr(s_ast->argv[0], "cd"))
 	{
 		executed = 1;
+		g_status = 0;
 		if (cd(s_ast, env_export) == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	else if (ft_strcstr(s_ast->argv[0], "pwd"))
 	{
 		executed = 1;
+		g_status = 0;
 		if (print_pwd() == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	return (executed);
 }
@@ -40,14 +48,22 @@ int ft_cmd_phase_2(t_ast *s_ast, t_env_export *env_export)
 	if (ft_strcstr(s_ast->argv[0], "export"))
 	{
 		executed = 1;
+		g_status = 0;
 		if (ft_export(s_ast, env_export) == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	else if (ft_strcstr(s_ast->argv[0], "env"))
 	{
 		executed = 1;
+		g_status = 0;
 		if (env(env_export->env) == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	return (executed);
 }
@@ -60,14 +76,22 @@ int ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export)
 	if (ft_strcstr(s_ast->argv[0], "unset"))
 	{
 		executed = 1;
+		g_status = 0;
 		if (unset(s_ast, env_export) == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	else if (ft_strcstr(s_ast->argv[0], "echo"))
 	{
 		executed = 1;
+		g_status = 0;
 		if (ft_echo(s_ast) == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	return (executed);
 }
@@ -81,13 +105,20 @@ int ft_cmd_phase_4(t_ast *s_ast, t_env_export *env_export)
 	{
 		executed = 1;
 		if (ft_exit(s_ast) == EXIT_FAILURE)
+		{
+			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	else
 	{
 		executed = 1;
+		g_status = 0;
 		if (other(s_ast, env_export) == EXIT_FAILURE)
-			sys_error(s_ast->argv[0], s_ast->argv[1]);	
+		{
+			g_status = 1;
+			sys_error(s_ast->argv[0], NULL);
+		}
 	}
 	return (executed);
 }
@@ -107,7 +138,6 @@ int ft_cmd(t_ast *s_ast, t_env_export *env_export)
 
 int	execute_command(t_ast *s_ast, t_env_export *env_export)
 {
-
 	//if (s_ast->nbr_pipes > 0)
 	//	return (ft_pipe(s_ast, env_export));
 	if (s_ast->redir)

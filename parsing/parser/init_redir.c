@@ -16,7 +16,7 @@ t_redir	*init_redir(t_token *s_token, char *name_file)
 {
 	t_redir	*s_redir;
 
-	s_redir = malloc(sizeof(s_redir));
+	s_redir = malloc(sizeof(t_redir));
 	if (ft_strlen(s_token->value) == 1)
 	{
 		if (ft_strncmp(s_token->value, "<", 1) == 0)
