@@ -22,8 +22,8 @@ int main(int argc, char **argv, char **arge)
 			add_history(cmdline_buf);
 			s_lexer = init_lexer(cmdline_buf);
 			parse_and_execute(s_lexer, env_export);
-			free(cmdline_buf);
-			free(s_lexer);
+			//free(cmdline_buf);
+			//free(s_lexer);
 		}
 	}
 	clear_history();

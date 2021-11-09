@@ -6,11 +6,16 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:11 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:43:12 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 18:11:34 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+/*
+ 	#define MALLOC(x, y) (x = malloc(sizeof(*(x)) * (y))) // deferencement
+	 https://gcc.gnu.org/onlinedocs/gcc-4.9.4/gfortran/SIZEOF.html
+*/
 
 t_redir	*init_redir(t_token *s_token, char *name_file)
 {

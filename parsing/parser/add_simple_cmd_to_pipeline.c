@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:15:55 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:15:56 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:36:34 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	add_simple_cmd_to_pipeline(t_ast *s_parent, t_ast *s_child)
 	t_ast	*s_next_child;
 
 	if (!s_parent->child_cmd)
-	{
-		s_parent->nbr_pipes += 1;
 		s_parent->child_cmd = s_child;
-	}
 	else
 	{
 		s_parent->nbr_pipes += 1;

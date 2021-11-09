@@ -6,13 +6,13 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:15:51 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:21:19 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:55:10 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	add_redir_to_table_of_redirection(t_ast *s_cmd, t_token **s_redir,
+void	add_redir_to_table_of_redirection(t_ast **s_cmd, t_token **s_redir,
 		t_token **s_filename, char **table_of_env_var)
 {
 	int		i;
@@ -30,12 +30,12 @@ void	add_redir_to_table_of_redirection(t_ast *s_cmd, t_token **s_redir,
 			free_token(s_filename);
 			free_ast(s_cmd);
 			printf("ambiguous redirect\n");
-			exit(1);
+			return ;
 		}
 		free(str);
 		str = NULL;
 		i = 0;
 	}
 	str = unlock_file_name((*s_filename)->value, table_of_env_var);
-	fill_table_of_redir(s_cmd, s_redir, s_filename, str);
+	fill_table_of_redir(*s_cmd, s_redir, s_filename, str);
 }
