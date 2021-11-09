@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:16:02 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:23:06 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 18:14:24 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var)
 	else
 	{
 		if (content[next_char] == '?')
-			str = ft_itoa(0);
+			str = ft_itoa(g_status);
 		else
 			str = ft_substr(content, *index, 2);
-		*index += 2;
+		*index += 1;
 	}
 	return (str);
 }
