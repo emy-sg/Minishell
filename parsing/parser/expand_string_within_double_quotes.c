@@ -6,11 +6,17 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:16:07 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:26:55 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:44:54 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	incremente_integers(int *i, int *j)
+{
+	*i += 1;
+	*j += 1;
+}
 
 char	*expand_string_within_double_quotes(char **table_of_env_var,
 		char *content)
@@ -28,10 +34,7 @@ char	*expand_string_within_double_quotes(char **table_of_env_var,
 	{
 		j = 0;
 		while (content[i] && content[i] != '$')
-		{
-			i++;
-			j++;
-		}
+			incremente_integers(&i, &j);
 		str = ft_substr(content, (i - j), j);
 		ft_strjoin_and_free(&cap_content, &str);
 		if (content[i] == '$')

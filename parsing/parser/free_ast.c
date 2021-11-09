@@ -6,13 +6,13 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:32:15 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 17:58:16 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:43:13 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	free_ast(t_ast	**s_ast)
+t_ast	*free_ast(t_ast	**s_ast)
 {
 	t_ast	*s_simple_cmd;
 	t_ast	*s_next_simple_cmd;
@@ -33,4 +33,5 @@ void	free_ast(t_ast	**s_ast)
 	}
 	free(*s_ast);
 	*s_ast = NULL;
+	return (NULL);
 }

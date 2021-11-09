@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:28:44 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 15:49:41 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:26:23 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
 	char	**new_args;
 	int		i;
 	int		j;
-	int		x;
 
 	if (ft_strchr(content, ' ') == 0)
 		return (content);
@@ -39,8 +38,7 @@ char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
 		free(str[0]);
 		new_args[j] = content;
 		j++;
-		
-		x = 1;
+		int		x = 1;
 		while (j < i)
 		{
 			new_args[j] = str[x];
