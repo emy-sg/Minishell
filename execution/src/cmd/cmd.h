@@ -17,7 +17,7 @@ int	execute_command(t_ast *s_ast, t_env_export *env_export);
 int ft_cmd_phase_1(t_ast *s_ast, t_env_export *env_export);
 int ft_cmd_phase_2(t_ast *s_ast, t_env_export *env_export);
 int ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export);
-int ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export);
+int ft_cmd_phase_4(t_ast *s_ast, t_env_export *env_export);
 int ft_cmd(t_ast *s_ast, t_env_export *env_export);
 
 #endif

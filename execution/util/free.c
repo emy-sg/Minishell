@@ -24,3 +24,16 @@ void	free_double(char **double_ptr)
 	}
 	free(double_ptr);
 }
+
+void	free_double_int(int **double_ptr)
+{
+	int	i;
+
+	i = 0;
+	while (double_ptr[i])
+	{
+		free(double_ptr[i]);
+		i++;
+	}
+	free(double_ptr);
+}

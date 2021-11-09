@@ -20,11 +20,15 @@
 
 # define ERROR -1
 
-typedef struct s_cmd 
+int g_status;
+
+typedef struct s_redirect
 {
-	int fdin;
 	int fdout;
-}	t_cmd;
+	int fdin;
+	int	stdout_fd;
+	int	stdin_fd;
+}	t_redirect;
 
 typedef struct s_env_export 
 {
@@ -43,7 +47,6 @@ typedef struct	LEXER_STRUCT
 	unsigned int	index;
 	char		current_char;
 }		t_lexer;
-
 
 typedef struct	token_struct
 {
@@ -71,7 +74,7 @@ typedef struct	redir_struct
 		INPUT_REDIR,
 		HERE_DOC_REDIR,
 		OVERWRITE_REDIR,
-		TRUNC_REDIR,
+		APPEND_REDIR,
 	}	type;
 	char	*file_name;
 }			t_redir;

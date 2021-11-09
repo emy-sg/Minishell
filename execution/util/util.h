@@ -46,5 +46,6 @@ int		ft_fisalnum(int a);
 int		ft_fisdigit(int a);
 long	ft_fatoi(const char *str);
 char	*ft_strcstr(const char *str1, const char *str2);
+void	free_double_int(int **double_ptr);
 
 #endif

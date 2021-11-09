@@ -23,5 +23,6 @@
 # include "execution/src/other/other.h"
 # include "execution/init/init.h"
 # include "execution/redirection/redirection.h"
+# include "execution/pipe/pipe.h"
 
 #endif

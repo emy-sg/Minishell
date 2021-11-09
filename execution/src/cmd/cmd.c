@@ -107,23 +107,10 @@ int ft_cmd(t_ast *s_ast, t_env_export *env_export)
 
 int	execute_command(t_ast *s_ast, t_env_export *env_export)
 {
-	t_cmd cmd;
-	int stdout_fd;
-	
-	cmd.fdin = 0;
-	cmd.fdout = 1;
-	stdout_fd = dup(1);
+
+	//if (s_ast->nbr_pipes > 0)
+	//	return (ft_pipe(s_ast, env_export));
 	if (s_ast->redir)
-		cmd.fdout = redirection(s_ast);
-	if (cmd.fdout > 0)
-	{
-		if (dup2(cmd.fdout, STDOUT_FILENO) < 0)
-			return (sys_error(s_ast->argv[0], s_ast->argv[1]));
-		close(cmd.fdout);
-	}
-	ft_cmd(s_ast, env_export);
-	if (dup2(stdout_fd, STDOUT_FILENO) < 0)
-		return (sys_error(s_ast->argv[0], s_ast->argv[1]));
-	close(stdout_fd);
-	return (EXIT_SUCCESS);
+		return (simple_redir(s_ast, env_export));
+	return (ft_cmd(s_ast, env_export));
 }

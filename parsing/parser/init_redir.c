@@ -16,7 +16,7 @@ t_redir	*init_redir(t_token *s_token, char *name_file)
 {
 	t_redir	*s_redir;
 
-	s_redir = (t_redir *)ft_calloc(sizeof(s_redir), 2);
+	s_redir = malloc(sizeof(s_redir));
 	if (ft_strlen(s_token->value) == 1)
 	{
 		if (ft_strncmp(s_token->value, "<", 1) == 0)
@@ -29,7 +29,7 @@ t_redir	*init_redir(t_token *s_token, char *name_file)
 		if (ft_strncmp(s_token->value, "<<", 2) == 0)
 			s_redir->type = HERE_DOC_REDIR;
 		else
-			s_redir->type = TRUNC_REDIR;
+			s_redir->type = APPEND_REDIR;
 	}
 	s_redir->file_name = name_file;
 	return (s_redir);

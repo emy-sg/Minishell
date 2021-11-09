@@ -58,7 +58,8 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 		return (EXIT_FAILURE);
 	else if (pid == 0)
 	{
-		if (s_ast->argv[0][0] == '/')
+		if (s_ast->argv[0][0] == '/'
+			|| (s_ast->argv[0][0] == '.' && s_ast->argv[0][1] == '/'))
 			the_cmd = ft_fstrdup(s_ast->argv[0]);
 		else
 			the_cmd = get_cmd_path(s_ast->argv[0], env_export->env);
