@@ -43,7 +43,7 @@ t_redirect	*init_redirect(t_ast *s_ast)
 	while (s_ast->redir[i])
 	{
 		redirect->fdin = redir_fdin(s_ast->redir[i]);
-		redirect->fdout = redir_fdin(s_ast->redir[i]);
+		redirect->fdout = redir_fdout(s_ast->redir[i]);
 		if (redirect->fdin == -1 || redirect->fdout == -1)
 		{
 			sys_error(s_ast->argv[0], s_ast->redir[i]->file_name);
