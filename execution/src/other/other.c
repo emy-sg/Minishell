@@ -34,7 +34,7 @@ char	*get_cmd_path(char *cmd, char **env)
 	all_paths = NULL;
 	while (env[i])
 	{
-		if (ft_fstrnstr(env[i], "PATH=", 5))
+		if (ft_strbstr(env[i], "PATH="))
 		{
 			all_paths = ft_fsplit(env[i] + 5, ':');
 			break ;

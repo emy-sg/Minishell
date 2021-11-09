@@ -70,13 +70,14 @@ char	*export_arg(char *menv)
 		return (NULL);
 	}
 	var_name = ft_fstrjoin(helper, "=");
-	if (helper == NULL)
+	free(helper);
+	if (var_name == NULL)
 	{
-		free(helper);
 		free_double(temp);
 		return (NULL);
 	}
 	out = ft_fstrjoin_w_quote(var_name, temp[1]);
+	free(var_name);
 	free_double(temp);
 	return (out);
 }

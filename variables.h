@@ -20,6 +20,12 @@
 
 # define ERROR -1
 
+typedef struct s_cmd 
+{
+	int fdin;
+	int fdout;
+}	t_cmd;
+
 typedef struct s_env_export 
 {
 	char	**export;
@@ -30,14 +36,6 @@ typedef struct s_last_status
 {
 	int	last_status;
 }	t_last_status;
-
-typedef struct s_cmd 
-{
-	char			*cmd;
-	char			**arg;
-	t_env_export	*env_export;
-	t_last_status	*status;
-}	t_cmd;
 
 typedef struct	LEXER_STRUCT
 {
