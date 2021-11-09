@@ -18,7 +18,7 @@ void	add_simple_cmd_to_pipeline(t_ast *s_parent, t_ast *s_child)
 
 	if (!s_parent->child_cmd)
 	{
-		s_parent->nbr_pipes += 1;
+		s_parent->nbr_pipes += 1 ;
 		s_parent->child_cmd = s_child;
 	}
 	else
