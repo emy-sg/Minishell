@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:20 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/05 21:43:21 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/08 20:02:38 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_ast	*parse_command(t_token **s_token, t_lexer *s_lexer, char **table_of_env_var)
 {
-	t_token *next_token;
 	t_ast	*s_cmd;
 	t_ast	*s_pipeline;
 	

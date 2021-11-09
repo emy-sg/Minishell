@@ -22,7 +22,7 @@ int	update_export_old_pwd(char **export, char *old_pwd)
 		if (ft_strbstr(export[i], "declare -x OLDPWD="))
 		{
 			free(export[i]);
-			export[i] = ft_strjoin("declare -x OLDPWD=", old_pwd);
+			export[i] = ft_fstrjoin("declare -x OLDPWD=", old_pwd);
 			free(old_pwd);
 			if (export[i] == NULL)
 				return (EXIT_FAILURE);
@@ -44,7 +44,7 @@ int	update_export_pwd(char **export, char *new_pwd)
 		if (ft_strbstr(export[i], "declare -x PWD="))
 		{
 			free(export[i]);
-			export[i] = ft_strjoin("declare -x PWD=", new_pwd);
+			export[i] = ft_fstrjoin("declare -x PWD=", new_pwd);
 			free(new_pwd);
 			if (export[i] == NULL)
 				return (EXIT_FAILURE);

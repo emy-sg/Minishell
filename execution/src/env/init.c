@@ -34,7 +34,7 @@ int	env_exist(char **env, char *var_name)
 {
 	char *var_name_w_equal;
 
-	var_name_w_equal = ft_strjoin(var_name, "=");
+	var_name_w_equal = ft_fstrjoin(var_name, "=");
 	if (var_name_w_equal == NULL)
 		return (EXIT_FAILURE);
 	if (env_exist_try_1(env, var_name_w_equal) == EXIT_SUCCESS)

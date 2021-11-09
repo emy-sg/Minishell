@@ -52,10 +52,10 @@ int	export_exist(char **export, char *var_name)
 	char *temp;
 	char *var_name_w_equal;
 
-	temp = ft_strjoin("declare -x ", var_name);
+	temp = ft_fstrjoin("declare -x ", var_name);
 	if (temp == NULL)
 		return (EXIT_FAILURE);
-	var_name_w_equal = ft_strjoin(temp, "=");
+	var_name_w_equal = ft_fstrjoin(temp, "=");
 	free(temp);
 	if (var_name_w_equal == NULL)
 		return (EXIT_FAILURE);
@@ -72,19 +72,19 @@ int	update_arg_export(char **export, char *var_name, char *var_value)
 	char	*new_arg;
 	
 	i = 0;
-	temp = ft_strjoin("declare -x ", var_name);
+	temp = ft_fstrjoin("declare -x ", var_name);
 	if (temp == NULL)
 		return (EXIT_FAILURE);
 	while (export[i])
 	{
 		if (ft_strbstr(export[i], temp))
 		{
-			new_arg = ft_strjoin(temp, "=");
+			new_arg = ft_fstrjoin(temp, "=");
 			free(export[i]);
 			free(temp);
 			if (new_arg == NULL)
 				return (EXIT_FAILURE);
-			export[i] = ft_strjoin_w_quote(new_arg, var_value);
+			export[i] = ft_fstrjoin_w_quote(new_arg, var_value);
 			if (export[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
@@ -116,20 +116,20 @@ int	add_arg_export(t_env_export *env_export, char *var_name, char *var_value)
 		}
 		i++;
 	}
-	helper = ft_strjoin("declare -x ", var_name);
+	helper = ft_fstrjoin("declare -x ", var_name);
 	if (helper == NULL)
 	{
 		free_double(temp);
 		return (EXIT_FAILURE);
 	}
-	var_name_w_equal = ft_strjoin(helper, "=");
+	var_name_w_equal = ft_fstrjoin(helper, "=");
 	free(helper);
 	if (var_name_w_equal == NULL)
 	{
 		free_double(temp);
 		return (EXIT_FAILURE);
 	}
-	temp[i] = ft_strjoin_w_quote(var_name_w_equal, var_value);
+	temp[i] = ft_fstrjoin_w_quote(var_name_w_equal, var_value);
 	free(var_name_w_equal);
 	if (temp[i] == NULL)
 	{

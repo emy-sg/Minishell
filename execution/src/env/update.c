@@ -22,7 +22,7 @@ int	update_env_old_pwd(char **env, char *old_pwd)
 		if (ft_strbstr(env[i], "OLDPWD="))
 		{
 			free(env[i]);
-			env[i] = ft_strjoin("OLDPWD=", old_pwd);
+			env[i] = ft_fstrjoin("OLDPWD=", old_pwd);
 			if (env[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
@@ -42,7 +42,7 @@ int	update_env_pwd(char **env, char *new_pwd)
 		if (ft_strbstr(env[i], "PWD="))
 		{
 			free(env[i]);
-			env[i] = ft_strjoin("PWD=", new_pwd);
+			env[i] = ft_fstrjoin("PWD=", new_pwd);
 			if (env[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);
@@ -58,7 +58,7 @@ int	update_arg_env(char **env, char *var_name, char *var_value)
 	char	*new_arg;
 	
 	i = 0;
-	new_arg = ft_strjoin(var_name, "=");
+	new_arg = ft_fstrjoin(var_name, "=");
 	if (new_arg == NULL)
 		return (EXIT_FAILURE);
 	while (env[i])
@@ -66,7 +66,7 @@ int	update_arg_env(char **env, char *var_name, char *var_value)
 		if (ft_strbstr(env[i], new_arg))
 		{
 			free(env[i]);
-			env[i] = ft_strjoin(new_arg, var_value);
+			env[i] = ft_fstrjoin(new_arg, var_value);
 			if (env[i] == NULL)
 				return (EXIT_FAILURE);
 			return (EXIT_SUCCESS);

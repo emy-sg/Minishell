@@ -22,7 +22,7 @@ size_t	lenth(const char *s, const char *s0)
 		return (ft_fstrlen(s) + ft_fstrlen(s0) + 1);
 }
 
-char	*ft_strjoin(const char *s, const char *s0)
+char	*ft_fstrjoin(const char *s, const char *s0)
 {
 	char	*p;
 	size_t	j;

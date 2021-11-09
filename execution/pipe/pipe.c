@@ -14,7 +14,7 @@ int	**ft_pipe(int pipe_length)
 		fd[i] = (int *)ft_fcalloc(sizeof(int), 2);
 		if (fd[i] == NULL || pipe(fd[i]) == ERROR)
 		{
-			free_double(fd);
+			// free_double(fd);
 			return (NULL);
 		}
 		i++;

@@ -33,13 +33,13 @@ int	add_arg_env(t_env_export *env_export, char *var_name, char *var_value)
 		}
 		i++;
 	}
-	var_name_w_equal = ft_strjoin(var_name, "=");
+	var_name_w_equal = ft_fstrjoin(var_name, "=");
 	if (var_name_w_equal == NULL)
 	{
 		free_double(temp);
 		return (EXIT_FAILURE);
 	}
-	temp[i] = ft_strjoin(var_name_w_equal, var_value);
+	temp[i] = ft_fstrjoin(var_name_w_equal, var_value);
 	free(var_name_w_equal);
 	if (temp[i] == NULL)
 	{

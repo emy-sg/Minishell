@@ -17,11 +17,11 @@ int	valid_arg(char *arg)
 	int	i;
 
 	i = 1;
-	if (!ft_isalpha(arg[0]) && arg[0] != '_')
+	if (!ft_fisalpha(arg[0]) && arg[0] != '_')
 		return (EXIT_FAILURE);
 	while (arg[i])
 	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
+		if (!ft_fisalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
 			return (EXIT_FAILURE);
 		i++;
 	}

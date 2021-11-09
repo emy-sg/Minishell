@@ -1,32 +1,23 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror -g -fsanitize=address
+# FLAG = -Wall -Wextra -Werror -g -fsanitize=address
+FLAG = -Wall -Wextra -Werror
 
-MAKE = make -C
+EXECUTION = execution/*/*.c execution/*/*/*.c
+
+PARSING = parsing/*/*.c
+
+MAIN = main.c
 
 all : $(NAME)
 
-$(NAME):
-	@$(MAKE) parsing/libft
-	@$(MAKE) parsing/lexer
-	@$(MAKE) parsing/parser
-	@$(MAKE) execution
-	@gcc $(FLAG) parsing/libft/libft.a parsing/lexer/lexer.a parsing/parser/parser.a\
-		execution/execution.a\
-		main.c -lreadline -L /goinfre//.brew/opt/readline/lib -I /goinfre//.brew/opt/readline/include -o $(NAME)
+$(NAME): $(EXECUTION) $(PARSING)
+	gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -o $(NAME)
 
-clean:
-	@$(MAKE) parsing/libft clean
-	@$(MAKE) parsing/lexer clean
-	@$(MAKE) parsing/parser clean
-	@$(MAKE) execution clean
-	rm -rf main.o
+clean: 
+	rm -fr minishell.dSYM
 
 fclean: clean
-	@$(MAKE)  parsing/libft fclean
-	@$(MAKE)  parsing/lexer fclean
-	@$(MAKE)  parsing/parser fclean
-	@$(MAKE) execution fclean
-	rm -rf $(NAME)
+	rm -fr $(NAME)
 
 re: fclean all
