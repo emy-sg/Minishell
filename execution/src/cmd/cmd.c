@@ -115,10 +115,7 @@ int ft_cmd_phase_4(t_ast *s_ast, t_env_export *env_export)
 		executed = 1;
 		g_status = 0;
 		if (other(s_ast, env_export) == EXIT_FAILURE)
-		{
-			g_status = 1;
 			sys_error(s_ast->argv[0], NULL);
-		}
 	}
 	return (executed);
 }

@@ -51,7 +51,8 @@ char	*get_cmd_path(char *cmd, char **env)
 int	other(t_ast *s_ast, t_env_export *env_export)
 {
 	char	*the_cmd;
-	int		pid;
+	pid_t	pid;
+	int		status;
 
 	pid = fork();
 	if (pid == -1)
@@ -69,8 +70,10 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 			return (prg_error(s_ast->argv[0], NULL, "command not found"));
 		}
 		if (execve(the_cmd, s_ast->argv, env_export->env) == -1)
-			return (EXIT_FAILURE);
+			exit(1);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	if (status != 0)
+		g_status = 1;
 	return (EXIT_SUCCESS);
 }

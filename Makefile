@@ -15,7 +15,7 @@ $(NAME): $(EXECUTION) $(PARSING)
 	gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -o $(NAME)
 
 clean: 
-	rm -fr minishell.dSYM
+	rm -fr minishell.dSYM temp
 
 fclean: clean
 	rm -fr $(NAME)
