@@ -28,6 +28,7 @@ typedef struct s_redirect
 	int fdin;
 	int	stdout_fd;
 	int	stdin_fd;
+	// char 
 }	t_redirect;
 
 typedef struct s_env_export 
