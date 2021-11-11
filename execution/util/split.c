@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util.h"
+#include "../../minishell.h"
 
 int	delim_length(char const *str, char delim)
 {

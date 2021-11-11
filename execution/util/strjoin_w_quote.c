@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "util.h"
+#include "../../minishell.h"
 
 char	*ft_copy(char *str1, char *str2, int length)
 {

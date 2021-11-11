@@ -2,12 +2,6 @@
 
 int	first_cmd(int *fd, t_ast *the_cmd, t_env_export *env_export)
 {
-	int	stdin_fd;
-
-	stdin_fd = dup(0);
-	if (dup2(0, STDIN_FILENO) < 0)
-		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
-	close(stdin_fd);
 	if (dup2(fd[1], STDOUT_FILENO) < 0)
 		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
 	if (the_cmd->redir)
@@ -17,12 +11,7 @@ int	first_cmd(int *fd, t_ast *the_cmd, t_env_export *env_export)
 
 int	last_cmd(int *fd, t_ast *the_cmd, t_env_export *env_export)
 {
-	int	stdout_fd;
-
-	stdout_fd = dup(1);
-	if (dup2(stdout_fd, STDOUT_FILENO) < 0)
-		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
-	close(stdout_fd);
+	dup2(1, STDOUT_FILENO);
 	if (dup2(fd[0], STDIN_FILENO) < 0)
 		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
 	if (the_cmd->redir)
@@ -30,7 +19,17 @@ int	last_cmd(int *fd, t_ast *the_cmd, t_env_export *env_export)
 	return (ft_cmd(the_cmd, env_export));
 }
 
-int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
+void func()
+{
+	// commands
+	int fd = 0;
+	while(commands)
+	{
+		fd = ft_pipe(hdfk, fd);
+	}
+}
+
+int	ft_pipe(t_ast *s_ast, t_env_export *env_export, )
 {
 	t_ast	*the_cmd;
 	pid_t	pid;
@@ -48,13 +47,21 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 		if (pid == 0)
 		{
 			if (i == 0)
+			{
+
 				first_cmd(fd, the_cmd, env_export);
+			}
 			else if (i == s_ast->nbr_pipes)
+			{
 				last_cmd(fd, the_cmd, env_export);
+				close(fd[0]);
+			}
 			exit(0);
 		}
 		i++;
 	}
-	while (wait(NULL) > 0);
+	close(fd[0]);
+	close(fd[1]);
+	while (wait(NULL) != -1);
 	return (EXIT_SUCCESS);
 }
