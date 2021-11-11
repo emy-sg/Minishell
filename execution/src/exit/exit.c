@@ -42,6 +42,6 @@ int	ft_exit(t_ast *s_ast)
 	else if (length == 1)
 		exit(ft_fatoi(s_ast->argv[1]));
 	else
-		return (prg_error_no_exit(s_ast->argv[0], "too many arguments"));
+		return (prg_error(s_ast->argv[0], NULL,  "too many arguments"));
 	return (EXIT_SUCCESS);
 }

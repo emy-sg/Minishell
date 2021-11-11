@@ -144,7 +144,7 @@ int	redir_out_back_to_normal(t_redirect *redirect, t_ast *s_ast)
 }
 
 
-int	simple_redir(t_ast *s_ast, t_env_export *env_export)
+int	ft_redir(t_ast *s_ast, t_env_export *env_export)
 {
 	t_redirect *redirect;
 	

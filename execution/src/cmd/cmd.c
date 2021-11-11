@@ -138,6 +138,6 @@ int	execute_command(t_ast *s_ast, t_env_export *env_export)
 	if (s_ast->nbr_pipes > 0)
 		return (ft_pipe(s_ast, env_export));
 	if (s_ast->redir)
-		return (simple_redir(s_ast, env_export));
+		return (ft_redir(s_ast, env_export));
 	return (ft_cmd(s_ast, env_export));
 }

@@ -10,6 +10,6 @@ int	simple_redir_in(t_redirect *redirect, t_ast *s_ast);
 int	simple_redir_out(t_redirect *redirect, t_ast *s_ast);
 int	redir_in_back_to_normal(t_redirect *redirect, t_ast *s_ast);
 int	redir_out_back_to_normal(t_redirect *redirect, t_ast *s_ast);
-int	simple_redir(t_ast *s_ast, t_env_export *env_export);
+int	ft_redir(t_ast *s_ast, t_env_export *env_export);
 
 #endif
