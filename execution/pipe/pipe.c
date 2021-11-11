@@ -1,59 +1,60 @@
 #include "../../minishell.h"
 
-//int	**pipe_fd(int pipe_length)
-//{
-//	int	**fd;
-//	int	i;
+int	first_cmd(int *fd, t_ast *the_cmd, t_env_export *env_export)
+{
+	int	stdin_fd;
 
-//	i = 0;
-//	fd = (int **)ft_fcalloc(sizeof(int *), pipe_length);
-//	if (fd == NULL)
-//		return (NULL);
-//	while (i < pipe_length)
-//	{
-//		fd[i] = (int *)ft_fcalloc(sizeof(int), 2);
-//		if (fd[i] == NULL || pipe(fd[i]) == -1)
-//		{
-//			free_double_int(fd);
-//			return (NULL);
-//		}
-//		i++;
-//	}
-//	return (fd);
-//}
+	stdin_fd = dup(0);
+	if (dup2(0, STDIN_FILENO) < 0)
+		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
+	close(stdin_fd);
+	if (dup2(fd[1], STDOUT_FILENO) < 0)
+		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
+	if (the_cmd->redir)
+		return (simple_redir(the_cmd, env_export));
+	return (ft_cmd(the_cmd, env_export));
+}
 
-//int	*pipe_fd(void)
-//{
-//	int	fd[2];
+int	last_cmd(int *fd, t_ast *the_cmd, t_env_export *env_export)
+{
+	int	stdout_fd;
 
-//	if (pipe(fd) == -1)
-//		return (NULL);
-//	return (fd);
-//}
+	stdout_fd = dup(1);
+	if (dup2(stdout_fd, STDOUT_FILENO) < 0)
+		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
+	close(stdout_fd);
+	if (dup2(fd[0], STDIN_FILENO) < 0)
+		return (sys_error(the_cmd->argv[0], the_cmd->argv[1]));
+	if (the_cmd->redir)
+		return (simple_redir(the_cmd, env_export));
+	return (ft_cmd(the_cmd, env_export));
+}
 
 int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 {
 	t_ast	*the_cmd;
+	pid_t	pid;
 	int		fd[2];
 	int		i;
 
 	i = 0;
 	the_cmd = s_ast;
 	if (pipe(fd) == -1)
-		return (sys_error(s_ast->argv[0], NULL));
-	while (i < s_ast->nbr_pipes)
-	//while (i < s_ast->nbr_pipes)
+		return (sys_error(NULL, NULL));
+	while (i <= s_ast->nbr_pipes)
 	{
-		if (dup2(fd[1], STDOUT_FILENO) < 0)
-			return (sys_error(s_ast->argv[0], s_ast->argv[1]));
-		if (dup2(fd[0], STDIN_FILENO) < 0)
-			return (sys_error(s_ast->argv[0], s_ast->argv[1]));
-		printf("%d\n", the_cmd->nbr_pipes);
-		//ft_cmd(the_cmd, env_export);
-		print_export(env_export->export);
-
 		the_cmd = the_cmd->child_cmd;
+		pid = fork();
+		if (pid == 0)
+		{
+			if (i == 0)
+				first_cmd(fd, the_cmd, env_export);
+			else if (i == s_ast->nbr_pipes)
+				last_cmd(fd, the_cmd, env_export);
+			exit(0);
+		}
 		i++;
 	}
+	while (wait(NULL) > 0);
 	return (EXIT_SUCCESS);
 }
