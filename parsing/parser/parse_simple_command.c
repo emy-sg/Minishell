@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:24 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 19:06:07 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/12 18:23:06 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_ast	*parse_simple_command(t_token **s_token, t_lexer *s_lexer,
 				return (NULL);
 		}
 		else if ((*s_token)->type == TOKEN_STRING)
-			add_arg_to_simple_cmd(s_token, s_lexer, s_cmd, table_of_env_var);
+			add_arg_to_simple_cmd(s_token, s_lexer, &s_cmd, table_of_env_var);
 	}
 	return (s_cmd);
 }

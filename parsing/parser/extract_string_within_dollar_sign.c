@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:28:44 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/12 13:14:34 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/12 19:11:57 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 	return (ft_strdup(""));
 }*/
 
-void	expand_dollar_sign_in_table(t_ast *s_cmd, int size, char **str_before,
+void	expand_dollar_sign_in_table(t_ast **s_cmd, int size, char **str_before,
 			char **str)
 {
 	char	**new_args;
@@ -67,9 +67,9 @@ void	expand_dollar_sign_in_table(t_ast *s_cmd, int size, char **str_before,
 	int		j;
 	int		k;
 
-	i = get_size_of_table(s_cmd->argv) + size;
-	j = get_size_of_table(s_cmd->argv) - 1;
-	new_args = ft_realloc_table(s_cmd->argv, size);
+	i = get_size_of_table((*s_cmd)->argv) + size;
+	j = get_size_of_table((*s_cmd)->argv) - 1;
+	new_args = ft_realloc_table((*s_cmd)->argv, size + 1);
 	content = ft_strjoin(*str_before, str[0]);
 	free(*str_before);
 	*str_before = ft_strdup("");
@@ -84,10 +84,11 @@ void	expand_dollar_sign_in_table(t_ast *s_cmd, int size, char **str_before,
 		j++;
 		k++;
 	}
-	s_cmd->argv = new_args;
+	new_args[j] = NULL;
+	(*s_cmd)->argv = new_args;
 }
 
-char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
+char	*extract_string_within_dollar_sign(t_ast **s_cmd, char **str_before,
 		char *content)
 {
 	char	**str;
@@ -97,7 +98,6 @@ char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
 		return (content);
 	else
 	{
-
 		str = ft_split(content, ' ');
 		free(content);
 		content = NULL;
