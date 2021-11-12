@@ -31,7 +31,7 @@ int	print_pwd(void)
 
 	path = pwd();
 	if (path == NULL)
-		return (EXIT_FAILURE);
+		return (ERROR);
 	printf("%s\n", path);
 	free(path);
 	return (EXIT_SUCCESS);

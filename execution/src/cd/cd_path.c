@@ -12,6 +12,28 @@
 
 #include "../../../minishell.h"
 
+char	*cd_path(const char *arg, char **env)
+{
+	if (arg == NULL)
+		return (home_path(env));
+	else if (arg[0] == '/')
+		return (path_w_slash(arg));
+	return (abs_path(arg));
+}
+
+char	*path_w_slash(const char *arg)
+{
+	char	*path;
+
+	path = ft_fstrdup(arg);
+	if (path == NULL)
+	{
+		sys_error("cd", NULL);
+		return (NULL);
+	}
+	return (path);
+}
+
 char	*home_path(char **env)
 {
 	int		i;
@@ -25,15 +47,22 @@ char	*home_path(char **env)
 		{
 			temp = ft_fsplit(env[i], '=');
 			if (temp == NULL)
+			{
+				sys_error("cd", NULL);
 				return (NULL);
+			}
 			path = ft_fstrdup(temp[1]);
 			free_double(temp);
 			if (path == NULL)
+			{
+				sys_error("cd", NULL);
 				return (NULL);
+			}
 			return (path);
 		}
 		i++;
 	}
+	prg_error("cd", NULL, "HOME not set");
 	return (NULL);
 }
 
@@ -45,49 +74,19 @@ char	*abs_path(const char *arg)
 
 	path = pwd();
 	if (path == NULL)
+	{
+		sys_error("cd", NULL);
 		return (NULL);
+	}
 	path_w_slash = ft_fstrjoin(path, "/");
 	free(path);
 	if (path_w_slash == NULL)
+	{
+		sys_error("cd", NULL);
 		return (NULL);
+	}
 	joined_path = ft_fstrjoin(path_w_slash, arg);
 	free(path_w_slash);
 	return (joined_path);
 }
 
-char	*cd_path(const char *arg, char **env)
-{
-	char *path;
-
-	if (arg == NULL)
-	{
-		path = home_path(env);
-		if (path == NULL)
-		{
-			prg_error("cd", NULL, "HOME not set");
-			return (NULL);
-		}
-		return (path);
-	}
-	else if (ft_fstrnstr(arg, "/", 1) != 0)
-	{
-		path = ft_fstrdup(arg);
-		if (path == NULL)
-		{
-			sys_error("cd", NULL);
-			return (NULL);
-		}
-		return (path);
-	}
-	else
-	{
-		path = abs_path(arg);
-		if (path == NULL)
-		{
-			sys_error("cd", NULL);
-			return (NULL);
-		}
-		return (path);
-	}
-	return (NULL);
-}

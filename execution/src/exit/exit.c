@@ -12,20 +12,6 @@
 
 #include "../../../minishell.h"
 
-int	valid_arg_exit(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if (!ft_fisdigit(arg[i]))
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	ft_exit(t_ast *s_ast)
 {
 	int	length;
@@ -41,7 +27,20 @@ int	ft_exit(t_ast *s_ast)
 	}
 	else if (length == 1)
 		exit(ft_fatoi(s_ast->argv[1]));
-	else
-		return (prg_error(s_ast->argv[0], NULL,  "too many arguments"));
+	prg_error(s_ast->argv[0], NULL,  "too many arguments");
+	return (EXIT_SUCCESS);
+}
+
+int	valid_arg_exit(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (!ft_fisdigit(arg[i]))
+			return (EXIT_FAILURE);
+		i++;
+	}
 	return (EXIT_SUCCESS);
 }

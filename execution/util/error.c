@@ -14,6 +14,7 @@
 
 int	sys_error(char *cmd, char *arg)
 {
+	g_status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{
@@ -27,12 +28,13 @@ int	sys_error(char *cmd, char *arg)
 	}
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
-	return (EXIT_SUCCESS);
+	return (ERROR);
 }
 
 int	prg_error(char *cmd, char *arg, char *msg)
 {
 
+	g_status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{
@@ -46,5 +48,5 @@ int	prg_error(char *cmd, char *arg, char *msg)
 	}
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
-	return (EXIT_SUCCESS);
+	return (ERROR);
 }

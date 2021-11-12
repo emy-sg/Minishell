@@ -20,7 +20,10 @@ int	env(char **env)
 	i = 0;
 	path = get_cmd_path("env", env);
 	if (path == NULL)
-		return (prg_error("env", NULL, "command not found"));
+	{
+		prg_error("env", NULL, "command not found");
+		return (EXIT_SUCCESS);
+	}
 	while (env[i])
 	{
 		if (ft_strbstr(env[i], "NaN") == NULL)

@@ -12,22 +12,6 @@
 
 #include "../../../minishell.h"
 
-int	valid_opt(char *opt)
-{
-	int i;
-
-	i = 1;
-	if (opt == NULL || opt[0] != '-')
-		return (EXIT_FAILURE);
-	while (opt[i])
-	{
-		if (opt[i] != 'n')
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	ft_echo(t_ast *s_ast)
 {
 	int	i;
@@ -55,3 +39,20 @@ int	ft_echo(t_ast *s_ast)
 		printf("\n");
 	return (EXIT_SUCCESS);
 }
+
+int	valid_opt(char *opt)
+{
+	int i;
+
+	i = 1;
+	if (opt == NULL || opt[0] != '-')
+		return (EXIT_FAILURE);
+	while (opt[i])
+	{
+		if (opt[i] != 'n')
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
