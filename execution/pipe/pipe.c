@@ -27,6 +27,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 	pid_t	pid;
 	int		**pipe_fd;
 	int		i;
+	int		status;
 
 	i = 0;
 
@@ -86,6 +87,8 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 			close(pipe_fd[i][1]);
 		i++;
 	}
-	while (wait(NULL) != -1);
+	while (waitpid(pid, &status, 0) != -1);
+	if (status != 0)
+		g_status = 1;
 	return (EXIT_SUCCESS);
 }

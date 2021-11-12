@@ -67,7 +67,8 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 		if (the_cmd == NULL)
 		{
 			free(the_cmd);
-			return (prg_error(s_ast->argv[0], NULL, "command not found"));
+			prg_error(s_ast->argv[0], NULL, "command not found");
+			exit(1);
 		}
 		if (execve(the_cmd, s_ast->argv, env_export->env) == -1)
 			exit(1);

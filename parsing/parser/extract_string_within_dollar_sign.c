@@ -97,6 +97,7 @@ char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
 		return (content);
 	else
 	{
+
 		str = ft_split(content, ' ');
 		free(content);
 		content = NULL;
