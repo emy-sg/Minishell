@@ -37,7 +37,7 @@ int	ft_exit(t_ast *s_ast)
 	else if (valid_arg_exit(s_ast->argv[1]) == EXIT_FAILURE)
 	{
 		prg_error(s_ast->argv[0], s_ast->argv[1], "numeric argument required");
-		exit (255);
+		exit(255);
 	}
 	else if (length == 1)
 		exit(ft_fatoi(s_ast->argv[1]));

@@ -21,7 +21,7 @@ int	valid_arg(char *arg)
 		return (EXIT_FAILURE);
 	while (arg[i])
 	{
-		if (!ft_fisalnum(arg[i]) && arg[i] != '_' && arg[i] != '=')
+		if (!ft_fisalnum(arg[i]) && arg[i] != '_' && arg[i] != '=' && arg[i] != ' ')
 			return (EXIT_FAILURE);
 		i++;
 	}

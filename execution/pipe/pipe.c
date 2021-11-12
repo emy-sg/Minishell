@@ -71,12 +71,15 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 				dup2(pipe_fd[i - 1][0], STDIN_FILENO);
 				dup2(pipe_fd[i][1], STDOUT_FILENO);
 			}
-			ft_cmd_pipe(the_cmd, env_export);
+			if (ft_strcstr(the_cmd->argv[0], "exit") == NULL)
+				ft_cmd_pipe(the_cmd, env_export);
 			if (i < s_ast->nbr_pipes)
 			{
 				close(pipe_fd[i][0]);
 				close(pipe_fd[i][1]);
 			}
+			//ft_putstr_fd(the_cmd->argv[0], 2);
+			//ft_putstr_fd(" : [DONE]\n", 2);
 			exit(0);
 		}
 		if (i < s_ast->nbr_pipes)
