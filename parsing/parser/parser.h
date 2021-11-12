@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:28 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/12 13:08:19 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/12 18:48:07 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ t_ast	*parse_command(t_token **s_token, t_lexer *s_lexer,
 t_ast	*parse_simple_command(t_token **s_token, t_lexer *s_lexer,
 			char **table_of_env_var);	
 void	add_arg_to_simple_cmd(t_token **s_token, t_lexer *s_lexer,
-			t_ast *s_cmd, char **table_of_env_var);
+			t_ast **s_cmd, char **table_of_env_var);
 void	add_redir_to_simple_cmd(t_lexer *s_lexer, t_token **s_token,
 			t_ast **s_cmd, char **table_of_env_var);
 void	add_simple_cmd_to_pipeline(t_ast *s_parent, t_ast *s_child);
-void	add_string_to_table_of_args(char **cap_content, t_ast *s_cmd);
+void	add_string_to_table_of_args(char **cap_content, t_ast **s_cmd);
 
 char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var);
 char	*expand_string_within_double_quotes(char **table_of_env_var,
 			char *content);
-char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
+char	*extract_string_within_dollar_sign(t_ast **s_cmd, char **str_before,
 			char *content);
-void	expand_dollar_sign_in_table(t_ast *s_cmd, int size, char **str_before,
+void	expand_dollar_sign_in_table(t_ast **s_cmd, int size, char **str_before,
 			char **str);
 char	*extract_string_within_quotes(char *content, int *index,
 			char char_quote);
@@ -54,7 +54,7 @@ void	fill_table_of_redir(t_ast *s_cmd, t_token **s_redir,
 t_redir	*init_redir(t_token *s_redir, char *name_file);
 
 char	*unlock_file_name(char *content, char **table_of_env_var);
-void	unlock_string(char *content, t_ast *cmd, char **table_of_env_var);
+void	unlock_string(char *content, t_ast **cmd, char **table_of_env_var);
 
 char	**ft_realloc_table(char **args, int size);
 t_redir	**ft_realloc_redir_table(t_redir **s_redir, int i);

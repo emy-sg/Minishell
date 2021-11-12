@@ -6,13 +6,13 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:35 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 18:58:18 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/12 18:47:20 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	unlock_string(char *content, t_ast *s_cmd, char **table_of_env_var)
+void	unlock_string(char *content, t_ast **s_cmd, char **table_of_env_var)
 {
 	char	*new_str;
 	char	*cap_content;
