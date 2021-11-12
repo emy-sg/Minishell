@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:28 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 19:44:57 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:08:19 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ char	*expand_string_within_double_quotes(char **table_of_env_var,
 			char *content);
 char	*extract_string_within_dollar_sign(t_ast *s_cmd, char **str_before,
 			char *content);
+void	expand_dollar_sign_in_table(t_ast *s_cmd, int size, char **str_before,
+			char **str);
 char	*extract_string_within_quotes(char *content, int *index,
 			char char_quote);
-
 char	*get_env_var_value(char *var, int size, char **table_of_env_var);
 char	*get_env_var_name(char *content, int i, int *j);
 
