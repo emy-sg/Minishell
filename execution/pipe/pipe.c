@@ -17,7 +17,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 	pid_t	pid;
 	pid_t	*pidd;
 	int		pipe_fd[2];
-	int		in_fd;
+	int		in_fd = -1;
 	int		i;
 
 	i = 0;
@@ -33,25 +33,26 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 			pidd[i] = pid;
 		if (pid == 0)
 		{
-			//ft_putstr_fd("child : in_fd = ", 2);
-			//ft_putnbr_fd(in_fd, 2);
-			//ft_putstr_fd("\n", 2);
-			close(pipe_fd[0]);
+		// 	ft_putstr_fd("child : in_fd = ", 2);
+		// 	ft_putnbr_fd(in_fd, 2);
 			if (i == 0)
 			{
 				dup2(0, STDIN_FILENO);
 				dup2(pipe_fd[1], STDOUT_FILENO);
 			}
-			if (i == s_ast->nbr_pipes)
+			else if (i == s_ast->nbr_pipes)
 			{
 				dup2(in_fd, STDIN_FILENO);
 				dup2(1, STDOUT_FILENO);
 			}
 			else
 			{
+				ft_putnbr_fd(i, 2);
+				ft_putstr_fd("\n", 2);
 				dup2(in_fd, STDIN_FILENO);
 				dup2(pipe_fd[1], STDOUT_FILENO);
 			}
+			close(pipe_fd[0]);
 			ft_cmd_pipe(the_cmd, env_export);
 			close(pipe_fd[1]);
 			close(in_fd);
@@ -62,14 +63,15 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 		//ft_putstr_fd("\n", 2);
 		close(in_fd);
 		in_fd = pipe_fd[0];
-		close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		i++;
 	}
-	ft_putstr_fd("parent : ", 2);
-	ft_putstr_fd(" | pid = ", 2);
-	ft_putnbr_fd(pid, 2);
-	ft_putstr_fd("\n", 2);
+	close(pipe_fd[0]);
+
+	// ft_putstr_fd("parent : ", 2);
+	// ft_putstr_fd(" | pid = ", 2);
+	// ft_putnbr_fd(pid, 2);
+	// ft_putstr_fd("\n", 2);
 	//waitpid(-1,NULL, 0);
 	//while (wait(NULL) != -1);
 	int status;

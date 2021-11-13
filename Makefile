@@ -1,7 +1,7 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror -g -fsanitize=address
-#FLAG = -Wall -Wextra -Werror
+# FLAG = -Wall -Wextra -Werror -g -fsanitize=address
+FLAG = -Wall -Wextra -Werror
 #FLAG = -g -fsanitize=address
 
 EXECUTION = execution/*/*.c execution/*/*/*.c
