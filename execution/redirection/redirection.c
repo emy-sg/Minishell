@@ -6,10 +6,7 @@ int	ft_redir(t_ast *s_ast, t_env_export *env_export)
 	
 	redirect = init_redirect(s_ast);
 	if (redirect == NULL)
-	{
-		sys_error(NULL, NULL);
 		return (ERROR);
-	}
 	if (redirect->fdin != 0)
 		simple_redir_in(redirect, s_ast);
 	if (redirect->fdout != 0)

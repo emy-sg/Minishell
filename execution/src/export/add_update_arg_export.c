@@ -17,8 +17,7 @@ int	add_arg_export(t_env_export *env_export, char *var_name, char *var_value)
 	int		i;
 	char	**temp;
 
-
-	i = 0;
+	i = ft_fstrlen_double((const char **)env_export->export);
 	temp = refill_export(env_export->export);
 	if (temp == NULL)
 		return (ERROR);

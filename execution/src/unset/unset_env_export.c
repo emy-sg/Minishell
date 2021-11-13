@@ -85,7 +85,9 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 	free(temp0);
 	if (temp == NULL)
 		return (ERROR);
-	return (delete_export_elements(env_export->export, temp));
+	ret = delete_export_elements(env_export->export, temp);
+	free(temp);
+	return (ret);
 }
 
 
@@ -99,7 +101,6 @@ int	delete_export_elements(char **export, char *temp)
 		if (ft_strbstr(export[i], temp))
 		{
 			free(export[i]);
-			free(temp);
 			export[i] = ft_fstrdup("NaN");
 			if (export[i] == NULL)
 				return (ERROR);
@@ -107,6 +108,5 @@ int	delete_export_elements(char **export, char *temp)
 		}
 		i++;
 	}
-	free(temp);
 	return (EXIT_FAILURE);
 }

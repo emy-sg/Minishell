@@ -42,7 +42,7 @@ int	add_arg_env(t_env_export *env_export, char *var_name, char *var_value)
 	char	**temp;
 	char	*var_name_w_equal;
 
-	i = 0;
+	i = ft_fstrlen_double((const char **)env_export->env);;
 	temp = refill_env(env_export->env);
 	if (temp == NULL)
 		return (ERROR);

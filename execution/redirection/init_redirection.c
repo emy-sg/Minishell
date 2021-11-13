@@ -14,11 +14,12 @@ t_redirect	*init_redirect(t_ast *s_ast)
 	redirect->stdin_fd = dup(0);
 	redirect->fdin = 0;
 	redirect->fdout = 0;
-	open_files(s_ast, redirect);
+	if (open_files(s_ast, redirect) == ERROR)
+		return (NULL);
 	return (redirect);
 }
 
-void	open_files(t_ast *s_ast, t_redirect *redirect)
+int	open_files(t_ast *s_ast, t_redirect *redirect)
 {
 	int			i;
 
@@ -32,10 +33,11 @@ void	open_files(t_ast *s_ast, t_redirect *redirect)
 		if (redirect->fdin == -1 || redirect->fdout == -1)
 		{
 			g_status = 1;
-			sys_error(NULL, s_ast->redir[i]->file_name);
+			return (sys_error(NULL, s_ast->redir[i]->file_name));
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	redir_fdin(t_redir *redir)

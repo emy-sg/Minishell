@@ -14,7 +14,7 @@ int  		here_doc(char *limiter);
 
 //init_redirection.c
 t_redirect 	*init_redirect(t_ast *s_ast);
-void 		open_files(t_ast *s_ast, t_redirect *redirect);
+int	 		open_files(t_ast *s_ast, t_redirect *redirect);
 int 		redir_fdin(t_redir *redir);
 int 		redir_fdout(t_redir *redir);
 
