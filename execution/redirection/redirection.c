@@ -1,10 +1,10 @@
 #include "../../minishell.h"
 
-int	ft_redir(t_ast *s_ast, t_env_export *env_export)
+int	ft_redir(t_ast *s_ast, t_env_export *env_export, int fdout)
 {
 	t_redirect *redirect;
 	
-	redirect = init_redirect(s_ast);
+	redirect = init_redirect(s_ast, fdout);
 	if (redirect == NULL)
 		return (ERROR);
 	if (redirect->fdin != 0)

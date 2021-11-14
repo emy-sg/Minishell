@@ -28,7 +28,6 @@ typedef struct s_redirect
 	int fdin;
 	int	stdout_fd;
 	int	stdin_fd;
-	// char 
 }	t_redirect;
 
 typedef struct s_env_export 
@@ -92,5 +91,18 @@ typedef struct	ast_struct
 	int					nbr_pipes;
 	struct ast_struct	*child_cmd;
 }						t_ast;
+
+typedef struct s_cmd_pipe
+{
+	t_ast	*cmd;
+	pid_t	*child_ps_id;
+	pid_t	pid;
+	int		pipe_fd[2];
+	int		**here_doc_fd;
+	int		here_doc_length;
+	int		fdin;
+
+} t_cmd_pipe;
+
 
 #endif

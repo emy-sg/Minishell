@@ -1,9 +1,0 @@
-Makefile
-execution
-main.c
-minishell
-minishell.dSYM
-minishell.h
-ok
-parsing
-variables.h

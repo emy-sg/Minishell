@@ -5,12 +5,9 @@ char *mini_gnl(void)
 	char *buf;
 	char *temp;
 	char *line;
-	//int fdin;
 
 	line = (char *)ft_calloc(sizeof(char), 2);
 	buf = (char *)ft_calloc(sizeof(char), 2);
-	//fdin = dup(0);
-	//dup2(fdin, STDIN_FILENO);
 	while (read(STDIN_FILENO, buf, 1))
 	{
 		temp = ft_fstrjoin(line, buf);
@@ -20,7 +17,6 @@ char *mini_gnl(void)
 		if (buf[0] == '\n')
 			break;
 	}
-	//close(fdin);
 	free(buf);
 	return (line);
 }
@@ -34,8 +30,6 @@ int here_doc(char *limiter)
 	
 	limiter_w_efl = ft_fstrjoin(limiter, "\n");
 	fd = open("/tmp/heredoc", O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	//fdout = dup(0);
-	//dup2(fdout, STDOUT_FILENO);
 	if (fd == -1)
 		return (-1);
 	while (1)
@@ -52,6 +46,5 @@ int here_doc(char *limiter)
 		free(line);
 	}
 	close(fd);
-	//close(fdout);
 	return (open("/tmp/heredoc", O_RDONLY, 0777));
 }

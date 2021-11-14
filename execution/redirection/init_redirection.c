@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-t_redirect	*init_redirect(t_ast *s_ast)
+t_redirect	*init_redirect(t_ast *s_ast, int fdout)
 {
 	t_redirect	*redirect;
 
@@ -13,7 +13,7 @@ t_redirect	*init_redirect(t_ast *s_ast)
 	redirect->stdout_fd = dup(1);
 	redirect->stdin_fd = dup(0);
 	redirect->fdin = 0;
-	redirect->fdout = 0;
+	redirect->fdout = fdout;
 	if (open_files(s_ast, redirect) == ERROR)
 		return (NULL);
 	return (redirect);
