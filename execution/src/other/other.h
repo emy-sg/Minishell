@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.h                                           :+:      :+:    :+:   */
+/*   other.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 14:22:26 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 14:22:27 by emallah          ###   ########.fr       */
+/*   Created: 2021/11/15 15:43:53 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/15 15:43:55 by emallah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define OTHER_H
 
 //other.c
-int	other(t_ast *s_ast, t_env_export *env_export);
+int		other(t_ast *s_ast, t_env_export *env_export);
 
 //run_cmd.c
 void	run_cmd(t_ast *s_ast, t_env_export *env_export);

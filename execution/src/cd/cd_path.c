@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*                                                :+:      :+:    :+:   */
+/*   cd_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 13:32:13 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 13:32:15 by emallah          ###   ########.fr       */
+/*   Created: 2021/11/15 15:29:39 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/15 15:29:40 by emallah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,37 @@ char	*path_w_slash(const char *arg)
 char	*home_path(char **env)
 {
 	int		i;
-	char	**temp;
-	char	*path;
 
 	i = 0;
 	while (env[i] != NULL)
 	{
 		if (ft_strbstr(env[i], "HOME="))
-		{
-			temp = ft_fsplit(env[i], '=');
-			if (temp == NULL)
-			{
-				sys_error("cd", NULL);
-				return (NULL);
-			}
-			path = ft_fstrdup(temp[1]);
-			free_double(temp);
-			if (path == NULL)
-			{
-				sys_error("cd", NULL);
-				return (NULL);
-			}
-			return (path);
-		}
+			return (get_path(env[i]));
 		i++;
 	}
 	prg_error("cd", NULL, "HOME not set");
 	return (NULL);
+}
+
+char	*get_path(char *env_element)
+{
+	char	**temp;
+	char	*path;
+
+	temp = ft_fsplit(env_element, '=');
+	if (temp == NULL)
+	{
+		sys_error("cd", NULL);
+		return (NULL);
+	}
+	path = ft_fstrdup(temp[1]);
+	free_double(temp);
+	if (path == NULL)
+	{
+		sys_error("cd", NULL);
+		return (NULL);
+	}
+	return (path);
 }
 
 char	*abs_path(const char *arg)
@@ -89,4 +93,3 @@ char	*abs_path(const char *arg)
 	free(path_w_slash);
 	return (joined_path);
 }
-

@@ -18,7 +18,7 @@ void	add_redir_to_simple_cmd(t_lexer *s_lexer, t_token **s_token,
 	t_token	*s_next_token;
 
 	s_next_token = tokenize(s_lexer);
-	if (s_next_token->type != TOKEN_STRING)
+	if (s_next_token->e_type != TOKEN_STRING)
 	{
 		printf("Error Syntax\n");
 		free_lexer(&s_lexer);

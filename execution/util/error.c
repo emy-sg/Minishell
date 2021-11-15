@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:17:43 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 13:17:45 by emallah          ###   ########.fr       */
@@ -33,7 +33,6 @@ int	sys_error(char *cmd, char *arg)
 
 int	prg_error(char *cmd, char *arg, char *msg)
 {
-
 	g_status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)

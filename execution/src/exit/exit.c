@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:21:46 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 14:21:48 by emallah          ###   ########.fr       */
@@ -27,7 +27,7 @@ int	ft_exit(t_ast *s_ast)
 	}
 	else if (length == 1)
 		exit(ft_fatoi(s_ast->argv[1]));
-	prg_error(s_ast->argv[0], NULL,  "too many arguments");
+	prg_error(s_ast->argv[0], NULL, "too many arguments");
 	return (EXIT_SUCCESS);
 }
 

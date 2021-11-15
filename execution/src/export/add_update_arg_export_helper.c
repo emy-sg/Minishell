@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   add_update_arg_export_helper.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:23:28 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 14:23:29 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/15 15:38:57 by emallah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	export_exist(char **export, char *var_name)
 {
-	char *temp;
-	char *var_name_w_equal;
+	char	*temp;
+	char	*var_name_w_equal;
 
 	temp = ft_fstrjoin("declare -x ", var_name);
 	if (temp == NULL)

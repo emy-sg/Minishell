@@ -1,9 +1,9 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   unset_env_export.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 15:07:33 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 15:07:34 by emallah          ###   ########.fr       */
@@ -21,7 +21,8 @@ int	unset_env_export(t_ast *s_ast, t_env_export *env_export)
 	{
 		if (valid_arg(s_ast->argv[i]) == EXIT_SUCCESS)
 		{
-			if (remove_arg_env_export(env_export, s_ast->argv[i]) == EXIT_FAILURE)
+			if (remove_arg_env_export(env_export, s_ast->argv[i])
+				== EXIT_FAILURE)
 				return (EXIT_FAILURE);
 		}
 		i++;
@@ -89,7 +90,6 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 	free(temp);
 	return (ret);
 }
-
 
 int	delete_export_elements(char **export, char *temp)
 {

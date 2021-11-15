@@ -14,8 +14,8 @@
 
 int	execute_command(t_ast *s_ast, t_env_export *env_export)
 {
-	char    *heredoc_file_name;
-	
+	char	*heredoc_file_name;
+
 	if (s_ast->nbr_pipes > 0)
 		return (ft_pipe(s_ast, env_export));
 	if (s_ast->redir)
@@ -33,9 +33,9 @@ int	execute_command(t_ast *s_ast, t_env_export *env_export)
 	return (ft_cmd(s_ast, env_export));
 }
 
-int ft_cmd(t_ast *s_ast, t_env_export *env_export)
+int	ft_cmd(t_ast *s_ast, t_env_export *env_export)
 {
-	int ret;
+	int	ret;
 
 	g_status = 0;
 	ret = ft_cmd_phase_1(s_ast, env_export);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_redirection.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/15 16:20:57 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/15 16:20:58 by emallah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
 t_redirect	*init_redirect(t_ast *s_ast, char *heredoc_file_name)
@@ -27,14 +39,16 @@ int	open_files(t_ast *s_ast, t_redirect *redirect, char *heredoc_file_name)
 	i = 0;
 	while (s_ast->redir[i])
 	{
-		if (s_ast->redir[i]->type == INPUT_REDIR)
+		if (s_ast->redir[i]->e_type == INPUT_REDIR)
 			redirect->fdin = open(s_ast->redir[i]->file_name, O_RDONLY, 0777);
-		if (s_ast->redir[i]->type == HERE_DOC_REDIR)
+		if (s_ast->redir[i]->e_type == HERE_DOC_REDIR)
 			redirect->here_doc_length--;
-		if (s_ast->redir[i]->type == OVERWRITE_REDIR )
-			redirect->fdout = open(s_ast->redir[i]->file_name, O_RDWR | O_CREAT | O_TRUNC, 0777);
-		if (s_ast->redir[i]->type == APPEND_REDIR )
-			redirect->fdout = open(s_ast->redir[i]->file_name, O_RDWR | O_CREAT | O_APPEND, 0777);
+		if (s_ast->redir[i]->e_type == OVERWRITE_REDIR)
+			redirect->fdout = open(s_ast->redir[i]->file_name,
+					O_RDWR | O_CREAT | O_TRUNC, 0777);
+		if (s_ast->redir[i]->e_type == APPEND_REDIR)
+			redirect->fdout = open(s_ast->redir[i]->file_name,
+					O_RDWR | O_CREAT | O_APPEND, 0777);
 		if (redirect->here_doc_length == 0)
 			redirect->fdin = open(heredoc_file_name, O_RDONLY, 0777);
 		if (redirect->fdin == -1 || redirect->fdout == -1)

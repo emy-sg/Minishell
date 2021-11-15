@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   export.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:22:26 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 14:22:27 by emallah          ###   ########.fr       */
@@ -37,7 +37,8 @@ int		add_arg_env(t_env_export *env_export, char *var_name, char *var_value);
 char	**refill_env(char **env);
 
 //add_update_arg_export.c
-int		add_arg_export(t_env_export *env_export, char *var_name, char *var_value);
+int		add_arg_export(t_env_export *env_export,
+			char *var_name, char *var_value);
 char	*added_arg(char *var_name, char *var_value);
 char	**refill_export(char **export);
 int		update_arg_export(char **export, char *var_name, char *var_value);

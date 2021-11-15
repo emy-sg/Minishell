@@ -22,7 +22,6 @@ int	ft_fstrlen_double(const char **str)
 	return (i);
 }
 
-
 int	ft_fstrlen(const char *str)
 {
 	int	i;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_phase.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/15 15:34:35 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/15 15:34:37 by emallah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../minishell.h"
 
-int ft_cmd_phase_1(t_ast *s_ast, t_env_export *env_export)
+int	ft_cmd_phase_1(t_ast *s_ast, t_env_export *env_export)
 {
 	if (ft_strcstr(s_ast->argv[0], "cd"))
 	{
@@ -17,7 +29,7 @@ int ft_cmd_phase_1(t_ast *s_ast, t_env_export *env_export)
 	return (EXIT_FAILURE);
 }
 
-int ft_cmd_phase_2(t_ast *s_ast, t_env_export *env_export)
+int	ft_cmd_phase_2(t_ast *s_ast, t_env_export *env_export)
 {
 	if (ft_strcstr(s_ast->argv[0], "export"))
 	{
@@ -34,7 +46,7 @@ int ft_cmd_phase_2(t_ast *s_ast, t_env_export *env_export)
 	return (EXIT_FAILURE);
 }
 
-int ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export)
+int	ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export)
 {
 	if (ft_strcstr(s_ast->argv[0], "unset"))
 	{
@@ -51,7 +63,7 @@ int ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export)
 	return (EXIT_FAILURE);
 }
 
-int ft_cmd_phase_4(t_ast *s_ast, t_env_export *env_export)
+int	ft_cmd_phase_4(t_ast *s_ast, t_env_export *env_export)
 {
 	if (ft_strcstr(s_ast->argv[0], "exit"))
 	{

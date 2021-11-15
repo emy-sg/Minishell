@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_env_export_old_pwd.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/15 15:29:43 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/15 15:29:46 by emallah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../minishell.h"
 
 int	update_env_export_old_pwd(t_env_export *env_export)
@@ -33,6 +45,7 @@ int	update_env_old_pwd(char **env, char *old_pwd)
 	}
 	return (EXIT_SUCCESS);
 }
+
 int	update_export_old_pwd(char **export, char *old_pwd)
 {
 	int	i;

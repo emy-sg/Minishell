@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   add_update_arg_export.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:23:28 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 14:23:29 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/15 15:38:52 by emallah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*added_arg(char *var_name, char *var_value)
 	char	*helper;
 	char	*var_name_w_equal;
 	char	*temp;
-
 
 	helper = ft_fstrjoin("declare -x ", var_name);
 	if (helper == NULL)
@@ -79,7 +78,7 @@ int	update_arg_export(char **export, char *var_name, char *var_value)
 	int		i;
 	char	*temp;
 	char	*new_arg;
-	
+
 	i = 0;
 	temp = ft_fstrjoin("declare -x ", var_name);
 	if (temp == NULL)

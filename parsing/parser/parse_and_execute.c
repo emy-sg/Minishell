@@ -18,13 +18,13 @@ int	parse_and_execute(t_lexer *s_lexer, t_env_export *env_export)
 	t_ast	*s_ast;
 
 	s_token = tokenize(s_lexer);
-	if (s_token->type == TOKEN_EOF)
+	if (s_token->e_type == TOKEN_EOF)
 	{
 		free_token(&s_token);
 		free_lexer(&s_lexer);
 		return (0);
 	}
-	while (s_token->type != TOKEN_EOF)
+	while (s_token->e_type != TOKEN_EOF)
 	{
 		s_ast = parse_command(&s_token, s_lexer, env_export->env);
 		if (!s_ast)

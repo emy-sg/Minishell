@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:41:17 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 13:41:19 by emallah          ###   ########.fr       */
@@ -42,7 +42,7 @@ int	ft_echo(t_ast *s_ast)
 
 int	valid_opt(char *opt)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (opt == NULL || opt[0] != '-')
@@ -55,4 +55,3 @@ int	valid_opt(char *opt)
 	}
 	return (EXIT_SUCCESS);
 }
-

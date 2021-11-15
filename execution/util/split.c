@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:18:29 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 13:18:36 by emallah          ###   ########.fr       */
@@ -83,7 +83,8 @@ char	**ft_fsplit(const char *str, char delim)
 	i = 0;
 	if (str == NULL)
 		return (NULL);
-	splited = (char **)ft_fcalloc(sizeof (char *), delim_length(str, delim) + 2);
+	splited = (char **)ft_fcalloc(sizeof (char *),
+			delim_length(str, delim) + 2);
 	if (splited == NULL)
 		return (NULL);
 	while (i < delim_length(str, delim) + 1)

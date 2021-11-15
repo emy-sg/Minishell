@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/15 22:59:25 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/15 22:59:47 by emallah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int main(int argc, char **argv, char **arge)
+int	main(int argc, char **argv, char **arge)
 {
-	char	*cmdline_buf;
-	t_env_export *env_export;
-	t_lexer	*s_lexer;
+	char			*cmdline_buf;
+	t_env_export	*env_export;
+	t_lexer			*s_lexer;
 
 	env_export = init_env_export((const char **)arge);
 	while (1)

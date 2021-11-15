@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   util.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:17:22 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 13:17:26 by emallah          ###   ########.fr       */
@@ -12,11 +12,6 @@
 
 #ifndef UTIL_H
 # define UTIL_H
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
 
 void	*ft_fcalloc(int a, int b);
 int		sys_error(char *cmd, char *arg);

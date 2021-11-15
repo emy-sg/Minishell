@@ -24,6 +24,6 @@ t_ast	*init_ast(int type)
 
 	s_cmd = malloc(sizeof(t_ast));
 	ft_memset(s_cmd, '\0', sizeof(t_ast));
-	s_cmd->type = type;
+	s_cmd->e_type = type;
 	return (s_cmd);
 }

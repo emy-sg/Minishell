@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   add_update_arg_env.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:23:28 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 14:23:29 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/15 15:38:42 by emallah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	update_arg_env(char **env, char *var_name, char *var_value)
 {
 	int		i;
 	char	*new_arg;
-	
+
 	i = 0;
 	new_arg = ft_fstrjoin(var_name, "=");
 	if (new_arg == NULL)
@@ -42,7 +42,7 @@ int	add_arg_env(t_env_export *env_export, char *var_name, char *var_value)
 	char	**temp;
 	char	*var_name_w_equal;
 
-	i = ft_fstrlen_double((const char **)env_export->env);;
+	i = ft_fstrlen_double((const char **)env_export->env);
 	temp = refill_env(env_export->env);
 	if (temp == NULL)
 		return (ERROR);
@@ -89,7 +89,7 @@ char	**refill_env(char **env)
 
 int	env_exist(char **env, char *var_name)
 {
-	char *var_name_w_equal;
+	char	*var_name_w_equal;
 
 	var_name_w_equal = ft_fstrjoin(var_name, "=");
 	if (var_name_w_equal == NULL)
@@ -114,4 +114,3 @@ int	env_exist_try_1(char **env, char *var_name_w_equal)
 	free(var_name_w_equal);
 	return (EXIT_FAILURE);
 }
-

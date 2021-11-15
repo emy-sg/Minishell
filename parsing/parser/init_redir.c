@@ -25,16 +25,16 @@ t_redir	*init_redir(t_token *s_token, char *name_file)
 	if (ft_strlen(s_token->value) == 1)
 	{
 		if (ft_strncmp(s_token->value, "<", 1) == 0)
-			s_redir->type = INPUT_REDIR;
+			s_redir->e_type = INPUT_REDIR;
 		else
-			s_redir->type = OVERWRITE_REDIR;
+			s_redir->e_type = OVERWRITE_REDIR;
 	}
 	else
 	{
 		if (ft_strncmp(s_token->value, "<<", 2) == 0)
-			s_redir->type = HERE_DOC_REDIR;
+			s_redir->e_type = HERE_DOC_REDIR;
 		else
-			s_redir->type = APPEND_REDIR;
+			s_redir->e_type = APPEND_REDIR;
 	}
 	s_redir->file_name = name_file;
 	return (s_redir);

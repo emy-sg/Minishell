@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:32:08 by emallah           #+#    #+#             */
 /*   Updated: 2021/11/02 13:32:09 by emallah          ###   ########.fr       */
@@ -31,4 +31,3 @@ int	cd(t_ast *s_ast, t_env_export *env_export)
 		return (ERROR);
 	return (EXIT_SUCCESS);
 }
-
