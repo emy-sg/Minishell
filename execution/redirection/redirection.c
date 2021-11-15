@@ -1,10 +1,10 @@
 #include "../../minishell.h"
 
-int	ft_redir(t_ast *s_ast, t_env_export *env_export, int fdout)
+int	ft_redir(t_ast *s_ast, t_env_export *env_export, char *heredoc_file_name)
 {
 	t_redirect *redirect;
 	
-	redirect = init_redirect(s_ast, fdout);
+	redirect = init_redirect(s_ast, heredoc_file_name);
 	if (redirect == NULL)
 		return (ERROR);
 	if (redirect->fdin != 0)
@@ -17,5 +17,6 @@ int	ft_redir(t_ast *s_ast, t_env_export *env_export, int fdout)
 	if (redirect->fdout != 0)
 		redir_out_back_to_normal(redirect);
 	free(redirect);
+	free (heredoc_file_name);
 	return (EXIT_SUCCESS);
 }

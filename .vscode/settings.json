@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"algorithm": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"cstdlib": "c"
 	}
 }

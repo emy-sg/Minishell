@@ -14,10 +14,22 @@
 
 int	execute_command(t_ast *s_ast, t_env_export *env_export)
 {
+	char    *heredoc_file_name;
+	
 	if (s_ast->nbr_pipes > 0)
 		return (ft_pipe(s_ast, env_export));
 	if (s_ast->redir)
-		return (ft_redir(s_ast, env_export, 0));
+	{
+		heredoc_file_name = ft_fstrdup("/tmp/heredoc");
+		if (heredoc_file_name == NULL)
+			return (sys_error(NULL, NULL));
+		if (cmd_has_here_doc(s_ast) == EXIT_SUCCESS)
+		{
+			if (exec_here_doc(s_ast, heredoc_file_name) == ERROR)
+				return (ERROR);
+		}
+		return (ft_redir(s_ast, env_export, heredoc_file_name));
+	}
 	return (ft_cmd(s_ast, env_export));
 }
 
