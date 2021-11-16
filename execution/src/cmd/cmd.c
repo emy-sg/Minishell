@@ -38,6 +38,8 @@ int	ft_cmd(t_ast *s_ast, t_env_export *env_export)
 	int	ret;
 
 	g_status = 0;
+	if (s_ast->argv == NULL)
+		return (EXIT_SUCCESS);
 	ret = ft_cmd_phase_1(s_ast, env_export);
 	if (ret == EXIT_FAILURE)
 		ret = ft_cmd_phase_2(s_ast, env_export);

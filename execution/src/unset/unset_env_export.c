@@ -53,12 +53,10 @@ int	remove_arg_env(t_env_export *env_export, char *arg)
 		if (ft_strbstr(env_export->env[i], temp))
 		{
 			free(env_export->env[i]);
+			free(temp);
 			env_export->env[i] = ft_fstrdup("NaN");
 			if (env_export->env[i] == NULL)
-			{
-				free(temp);
 				return (ERROR);
-			}
 			return (EXIT_SUCCESS);
 		}
 		i++;

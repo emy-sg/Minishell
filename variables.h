@@ -104,6 +104,7 @@ typedef struct ast_struct
 typedef struct s_cmd_pipe
 {
 	char	**heredoc_files_names;
+	char	**heredoc_files_names_free;
 	int		*pid_child;
 	int		nbr_pipe;
 	int		pipe_fd[2];

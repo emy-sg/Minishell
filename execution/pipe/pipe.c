@@ -30,10 +30,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 			return (sys_error(NULL, NULL));
 		exec_child_cmd(the_cmd, env_export, cmd_pipe, i);
 		if (cmd_has_here_doc(the_cmd) == EXIT_SUCCESS)
-		{
-			free(cmd_pipe->heredoc_files_names[0]);
 			cmd_pipe->heredoc_files_names++;
-		}
 		i++;
 	}
 	wait_for_child(cmd_pipe);
@@ -55,5 +52,6 @@ t_cmd_pipe	*init_cmd_pipe(t_ast *s_ast)
 		exec_here_doc_all_cmd(s_ast, cmd_pipe->heredoc_files_names);
 	cmd_pipe->fdin = -1;
 	cmd_pipe->nbr_pipe = s_ast->nbr_pipes;
+	cmd_pipe->heredoc_files_names_free = cmd_pipe->heredoc_files_names;
 	return (cmd_pipe);
 }
