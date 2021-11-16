@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 22:50:32 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 22:50:34 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/16 20:22:44 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@
 # include "execution/init/init.h"
 # include "execution/redirection/redirection.h"
 # include "execution/pipe/pipe.h"
-
+void	catch_int(int sig);
+void	catch_quit(int sig);
 #endif
