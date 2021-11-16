@@ -19,9 +19,11 @@ char	*extract_string_within_quotes(char *content, int *index,
 	int		length;
 
 	length = find_closing_quote(content, *index, char_quote);
-	if (length == 0)
-	{
+	if (length == -1)
 		new_content = ft_substr(content, *index, 1);
+	else if (length == 0)
+	{
+		new_content = ft_strdup("");
 		*index += 1;
 	}
 	else

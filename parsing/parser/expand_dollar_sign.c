@@ -31,6 +31,11 @@ char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var)
 	}
 	else
 	{
+		if (content[next_char] == '\0')
+		{
+			str = ft_strdup("$");
+			return (str);
+		}
 		if (content[next_char] == '?')
 			str = ft_itoa(g_status);
 		else
