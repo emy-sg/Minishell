@@ -79,6 +79,6 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 	if (WEXITSTATUS(status) != 0)
 		g_status = WEXITSTATUS(status);
 	free(cmd_pipe->pid_child);
-	if (cmd_pipe->heredoc_files_names != NULL)
-		free_double(cmd_pipe->heredoc_files_names);
+	//if (cmd_pipe->heredoc_files_names != NULL)
+	//	free_double(cmd_pipe->heredoc_files_names);
 }

@@ -1,0 +1,11 @@
+echo ''''''''''$USER''''''''''
+echo """"""""$USER""""""""
+echo $USER'$USER'text oui oui     oui  oui $USER oui      $USER ''
+echo '"$USER"''$USER'"""$USER"
+echo " $USER  \$ "'$PWD'
+echo $USER$12USER$USER=4$USER12
+echo $USER $9999USER $8888USER $7777USER
+echo $USER $USER9999 $USER8888 $USER7777 "$USER"
+echo "$9USER" "'$USER=12$SOMETHING'"
+export ""=""
+export ''=''

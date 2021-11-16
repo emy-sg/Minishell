@@ -13,7 +13,9 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-int		valid_arg(char *arg);
-int		valid_input(t_ast *s_ast);
+int	valid_arg_export(char *arg);
+int	valid_arg_unset(char *arg);
+int	valid_input_export(t_ast *s_ast);
+int	valid_input_unset(t_ast *s_ast);
 
 #endif

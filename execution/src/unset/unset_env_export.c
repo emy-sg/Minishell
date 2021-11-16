@@ -19,7 +19,7 @@ int	unset_env_export(t_ast *s_ast, t_env_export *env_export)
 	i = 1;
 	while (s_ast->argv[i])
 	{
-		if (valid_arg(s_ast->argv[i]) == EXIT_SUCCESS)
+		if (valid_arg_unset(s_ast->argv[i]) == EXIT_SUCCESS)
 		{
 			if (remove_arg_env_export(env_export, s_ast->argv[i])
 				== EXIT_FAILURE)
@@ -27,7 +27,7 @@ int	unset_env_export(t_ast *s_ast, t_env_export *env_export)
 		}
 		i++;
 	}
-	return (valid_input(s_ast));
+	return (valid_input_unset(s_ast));
 }
 
 int	remove_arg_env_export(t_env_export *env_export, char *arg)

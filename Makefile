@@ -1,6 +1,7 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror -g -fsanitize=address
+FLAG = -Wall -Wextra -Werror 
+#-g -fsanitize=address
 
 EXECUTION = execution/init/init_env.c\
 			execution/init/init_env_export.c\

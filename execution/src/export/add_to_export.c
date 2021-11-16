@@ -20,7 +20,7 @@ int	add_to_export(t_ast *s_ast, t_env_export *env_export)
 	i = 1;
 	while (s_ast->argv[i])
 	{
-		if (valid_arg(s_ast->argv[i]) == EXIT_SUCCESS)
+		if (valid_arg_export(s_ast->argv[i]) == EXIT_SUCCESS)
 		{
 			if (ft_fstrnstr(s_ast->argv[i], "=", 1))
 			{
@@ -35,5 +35,5 @@ int	add_to_export(t_ast *s_ast, t_env_export *env_export)
 		}
 		i++;
 	}
-	return (valid_input(s_ast));
+	return (valid_input_export(s_ast));
 }
