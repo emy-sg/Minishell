@@ -1,6 +1,5 @@
 ERROR
-./file permissions ?
-
+./file permissions
 
 ==================== LEAKS
 env | grep "_="

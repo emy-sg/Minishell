@@ -12,15 +12,47 @@
 
 #include "../../../minishell.h"
 
-void	run_cmd(t_ast *s_ast, t_env_export *env_export)
+int	str_includes(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	return (EXIT_FAILURE);
+}
+
+void	rum_cmd_abs_path(t_ast *s_ast, t_env_export *env_export)
+{
+	char		*the_cmd;
+	struct stat	buf;
+
+	the_cmd = ft_fstrdup(s_ast->argv[0]);
+	if (stat(the_cmd, &buf) == -1)
+	{
+		free(the_cmd);
+		sys_error(s_ast->argv[0], NULL);
+		exit(127);
+	}
+	if (access(the_cmd, X_OK) == -1)
+	{
+		free(the_cmd);
+		prg_error(s_ast->argv[0], NULL, "Permission denied");
+		exit(126);
+	}
+	if (execve(the_cmd, s_ast->argv, env_export->env) == -1)
+		exit(1);
+}
+
+void	rum_cmd_env_path(t_ast *s_ast, t_env_export *env_export)
 {
 	char	*the_cmd;
 
-	if (s_ast->argv[0][0] == '/'
-		|| (s_ast->argv[0][0] == '.' && s_ast->argv[0][1] == '/'))
-		the_cmd = ft_fstrdup(s_ast->argv[0]);
-	else
-		the_cmd = get_cmd_path(s_ast->argv[0], env_export->env);
+	the_cmd = get_cmd_path(s_ast->argv[0], env_export->env);
 	if (the_cmd == NULL)
 	{
 		free(the_cmd);

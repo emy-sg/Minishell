@@ -27,3 +27,11 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 		g_status = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
 }
+
+void	run_cmd(t_ast *s_ast, t_env_export *env_export)
+{
+	if (str_includes(s_ast->argv[0], '/') == EXIT_SUCCESS)
+		rum_cmd_abs_path(s_ast, env_export);
+	else
+		rum_cmd_env_path(s_ast, env_export);
+}

@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-int	exec_here_doc_all_cmd(t_ast *s_ast, char **heredoc_files_names)
+int	exec_here_doc_all_cmd(t_ast *s_ast, t_env_export *env_export, char **heredoc_files_names)
 {
 	t_ast	*the_cmd;
 	int		i;
@@ -26,7 +26,7 @@ int	exec_here_doc_all_cmd(t_ast *s_ast, char **heredoc_files_names)
 		the_cmd = the_cmd->child_cmd;
 		if (cmd_has_here_doc(the_cmd) == EXIT_SUCCESS)
 		{
-			if (exec_here_doc(the_cmd, heredoc_files_names[j++]) == ERROR)
+			if (exec_here_doc(the_cmd, env_export, heredoc_files_names[j++]) == ERROR)
 				return (ERROR);
 		}
 		i++;

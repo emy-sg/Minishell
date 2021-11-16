@@ -2,6 +2,7 @@
 	"files.associations": {
 		"algorithm": "c",
 		"minishell.h": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"__config": "cpp"
 	}
 }

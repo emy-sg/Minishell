@@ -38,7 +38,8 @@ int	valid_arg_unset(char *arg)
 		return (EXIT_FAILURE);
 	while (arg[i])
 	{
-		if (!ft_fisalnum(arg[i]) && arg[i] != '_' && arg[i] != ' ' && arg[0] != '/')
+		if (!ft_fisalnum(arg[i]) && arg[i] != '_'
+			&& arg[i] != ' ' && arg[0] != '/')
 			return (EXIT_FAILURE);
 		i++;
 	}

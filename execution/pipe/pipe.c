@@ -19,7 +19,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 	int			i;
 
 	i = 0;
-	cmd_pipe = init_cmd_pipe(s_ast);
+	cmd_pipe = init_cmd_pipe(s_ast, env_export);
 	if (cmd_pipe == NULL)
 		return (sys_error(NULL, NULL));
 	the_cmd = s_ast;
@@ -37,7 +37,7 @@ int	ft_pipe(t_ast *s_ast, t_env_export *env_export)
 	return (EXIT_SUCCESS);
 }
 
-t_cmd_pipe	*init_cmd_pipe(t_ast *s_ast)
+t_cmd_pipe	*init_cmd_pipe(t_ast *s_ast, t_env_export *env_export)
 {
 	t_cmd_pipe	*cmd_pipe;
 
@@ -49,7 +49,7 @@ t_cmd_pipe	*init_cmd_pipe(t_ast *s_ast)
 		return (NULL);
 	cmd_pipe->heredoc_files_names = heredoc_files_names_all_cmd(s_ast);
 	if (cmd_pipe->heredoc_files_names != NULL)
-		exec_here_doc_all_cmd(s_ast, cmd_pipe->heredoc_files_names);
+		exec_here_doc_all_cmd(s_ast, env_export, cmd_pipe->heredoc_files_names);
 	cmd_pipe->fdin = -1;
 	cmd_pipe->nbr_pipe = s_ast->nbr_pipes;
 	cmd_pipe->heredoc_files_names_free = cmd_pipe->heredoc_files_names;

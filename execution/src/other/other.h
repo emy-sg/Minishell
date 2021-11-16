@@ -15,9 +15,12 @@
 
 //other.c
 int		other(t_ast *s_ast, t_env_export *env_export);
+void	run_cmd(t_ast *s_ast, t_env_export *env_export);
 
 //run_cmd.c
-void	run_cmd(t_ast *s_ast, t_env_export *env_export);
+int		str_includes(char *str, char c);
+void	rum_cmd_abs_path(t_ast *s_ast, t_env_export *env_export);
+void	rum_cmd_env_path(t_ast *s_ast, t_env_export *env_export);
 char	*try_all_paths(char **all_paths, char *cmd);
 char	*get_cmd_path(char *cmd, char **env);
 

@@ -12,7 +12,7 @@
 
 #include "../../minishell.h"
 
-int	exec_here_doc(t_ast *s_ast, char *heredoc_file_name)
+int	exec_here_doc(t_ast *s_ast, t_env_export *env_export, char *heredoc_file_name)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ int	exec_here_doc(t_ast *s_ast, char *heredoc_file_name)
 	{
 		if (s_ast->redir[i]->e_type == HERE_DOC_REDIR)
 		{
-			if (here_doc(s_ast->redir[i]->file_name,
+			if (here_doc(env_export, s_ast->redir[i]->file_name,
 					heredoc_file_name) == ERROR)
 				return (ERROR);
 		}
@@ -30,7 +30,30 @@ int	exec_here_doc(t_ast *s_ast, char *heredoc_file_name)
 	return (EXIT_FAILURE);
 }
 
-int	here_doc(char *limiter, char *heredoc_file_name)
+
+void	expand_line(t_env_export *env_export, char **line)
+{
+	char	*new_str;
+	char	*cap_content;
+	int		i;
+
+	i = 0;
+	cap_content = ft_strdup("");
+	while ((*line)[i] != '\0')
+	{
+		if ((*line)[i] == '$')
+			new_str = expand_dollar_sign(*line, &i, env_export->env);
+		else
+			new_str = ft_substr(*line, i, 1);
+		i++;
+		ft_strjoin_and_free(&cap_content, &new_str);
+	}
+	free(*line);
+	*line = NULL;
+	*line = cap_content;
+}
+
+int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 {
 	int		fd;
 	char	*line;
@@ -44,6 +67,8 @@ int	here_doc(char *limiter, char *heredoc_file_name)
 	{
 		write(STDOUT_FILENO, "> ", 2);
 		line = mini_gnl();
+		if (ft_strchr(line, '$'))
+			expand_line(env_export, &line);
 		if (ft_strcstr(limiter_w_efl, line))
 		{
 			free(limiter_w_efl);
