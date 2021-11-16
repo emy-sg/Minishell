@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 18:03:47 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 18:03:48 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/16 22:45:56 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	exec_child_cmd(t_ast *the_cmd, t_env_export *env_export,
 	pid_t	pid;
 
 	pid = fork();
+	g_global = 1;
 	if (pid > 0)
 		cmd_pipe->pid_child[i] = pid;
 	if (pid == 0)
@@ -76,6 +77,14 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			waitpid(cmd_pipe->pid_child[i], &status, 0);
 		i++;
 	}
+	g_signaled = 0;
+	if (WIFSIGNALED(status)) {
+		g_signaled = 1;
+		g_signal = WTERMSIG(status);
+		if (g_signaled && g_signal == SIGQUIT)
+			printf("Quit:3\n");
+	}
+	g_global = 0;
 	if (WEXITSTATUS(status) != 0)
 		g_status = WEXITSTATUS(status);
 	free(cmd_pipe->pid_child);

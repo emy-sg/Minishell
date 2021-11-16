@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 22:50:53 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 22:50:56 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/16 22:44:12 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 
 # define ERROR -1
 int	g_status;
+int	g_global;
+
+int	g_signaled;
+int	g_signal;
 
 typedef struct s_redirect
 {
