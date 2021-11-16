@@ -35,7 +35,9 @@ int	main(int argc, char **argv, char **arge)
 			s_lexer = init_lexer(cmdline_buf);
 			parse_and_execute(s_lexer, env_export);
 		}
-		system("leaks minishell");
+		else
+			free(cmdline_buf);
+		//system("leaks minishell");
 	}
 	clear_history();
 	return (0);
