@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 22:50:53 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/17 04:17:17 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 22:04:20 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_global
 {
 	int	status;
 	int	global;
-	int	signaled;
-	int	signal;
 	int here_doc;
 }	t_global;
 
