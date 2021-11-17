@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 18:03:47 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/17 04:09:22 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 21:44:19 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,21 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			waitpid(cmd_pipe->pid_child[i], &status, 0);
 		i++;
 	}
-	global.global = 0;
-	global.signaled = 0;
-	if (WIFSIGNALED(status)) {
-		global.signaled = 1;
-		global.signal = WTERMSIG(status);
-		if (global.signaled && global.signal == SIGQUIT)
-		{
-			printf("Quit:3\n");
-			global.status = 131;
-		}
-	}
+	// global.signaled = 0;
+	// if (WIFSIGNALED(status)) {
+	// 	global.signaled = 1;
+	// 	global.signal = WTERMSIG(status);
+	// 	if (global.signaled && global.signal == SIGQUIT)
+	// 	{
+	// 		printf("Quit:3\n");
+	// 		global.status = 128 + SIGQUIT;
+	// 	}
+	// }
 	if (WEXITSTATUS(status) != 0)
 		global.status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status) && (WTERMSIG(status) + 128 != 141))
+		global.status = WTERMSIG(status) + 128;
+	global.global = 0;
 	free(cmd_pipe->pid_child);
 	if (cmd_pipe->heredoc_files_names_free != NULL)
 		free_double(cmd_pipe->heredoc_files_names_free);

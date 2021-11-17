@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:43:35 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/17 04:09:50 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 21:44:13 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,22 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 	else if (pid == 0)
 		run_cmd(s_ast, env_export);
 	waitpid(pid, &status, 0);
-	global.signaled = 0;
-	if (WIFSIGNALED(status))
-	{
-		global.signaled = 1;
-		global.signal = WTERMSIG(status);
-		if (global.signaled && global.signal == SIGQUIT)
-		{
-			printf("Quit:3\n");
-			global.status = 131;
-		}
-	}
-	global.global = 0;
+	// global.signaled = 0;
+	// if (WIFSIGNALED(status))
+	// {
+	// 	global.signaled = 1;
+	// 	global.signal = WTERMSIG(status);
+	// 	if (global.signaled && global.signal == SIGQUIT)
+	// 	{
+	// 		printf("Quit:3\n");
+	// 		global.status = 128 + SIGQUIT;
+	// 	}
+	// }
 	if (WEXITSTATUS(status) != 0)
 		global.status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status) && (WTERMSIG(status) + 128 != 141))
+		global.status = WTERMSIG(status) + 128;
+	global.global = 0;
 	return (EXIT_SUCCESS);
 }
 
