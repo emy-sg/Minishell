@@ -77,6 +77,7 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			waitpid(cmd_pipe->pid_child[i], &status, 0);
 		i++;
 	}
+	global.global = 0;
 	global.signaled = 0;
 	if (WIFSIGNALED(status)) {
 		global.signaled = 1;
@@ -87,7 +88,6 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			global.status = 131;
 		}
 	}
-	global.global = 0;
 	if (WEXITSTATUS(status) != 0)
 		global.status = WEXITSTATUS(status);
 	free(cmd_pipe->pid_child);

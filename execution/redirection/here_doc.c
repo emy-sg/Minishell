@@ -60,6 +60,7 @@ void	here_doc_int(int sig)
 	//printf("\n");
 	//rl_on_new_line();
 	//rl_redisplay();
+	printf("sig = %d\n", sig);
 	exit(1);
 }
 
@@ -86,7 +87,7 @@ int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 			line = mini_gnl();
 			if (ft_strchr(line, '$'))
 				expand_line(env_export, &line);
-			if (ft_strcstr(limiter_w_efl, line))
+			if (ft_strcstr(limiter_w_efl, line) || ft_fstrlen(line) == 0)
 			{
 				free(limiter_w_efl);
 				free(line);
@@ -96,10 +97,9 @@ int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 			free(line);
 		}
 		close(fd);
+		exit(0);
 	}
 	waitpid(pid, &status, 0);
-	printf("sig = %d\n", WTERMSIG(status));
-	printf("status = %d\n", WEXITSTATUS(status));
 	close(fd);
 	return (EXIT_SUCCESS);
 }

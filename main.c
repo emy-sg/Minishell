@@ -38,6 +38,7 @@ void	catch_quit(int sig)
 	if (global.global == 0)
 	{
 		(void)sig;
+		
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -49,28 +50,18 @@ int	main(int argc, char **argv, char **arge)
 	t_env_export	*env_export;
 	t_lexer			*s_lexer;
 	
-	global.global = 0;
-	
-	signal(SIGINT, catch_int);
-	signal(SIGQUIT, catch_quit);
-
-
+	global.global = 0;	
+	signal(SIGINT, catch_int); // ctrl + c
+	signal(SIGQUIT, catch_quit);  //ctrl + "\"
 	env_export = init_env_export((const char **)arge);
 	while (1)
 	{
-		
 		(void)argc;
 		(void)*argv;
-		//cmdline_buf = readline("$ \033[s");
 		cmdline_buf = readline("$ ");
-		//tputs(tgetstr("sc", NULL), 1, putchar);
-
-		if (!cmdline_buf)
+		if (!cmdline_buf)          // ctrl + d 
 		{
-			//////////////////////////////////
-			//printf("\033[uexit\n");	
 			printf("exit\n");
-			///////////////////////////////////
 			clear_history();
 			exit(1);
 		}

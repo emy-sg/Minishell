@@ -18,7 +18,7 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 	pid_t	pid;
 
 	pid = fork();
-	global.status = 1;
+	global.global = 1;
 	if (pid == -1)
 		return (ERROR);
 	else if (pid == 0)
@@ -35,7 +35,7 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 			global.status = 131;
 		}
 	}
-	global.status = 0;
+	global.global = 0;
 	if (WEXITSTATUS(status) != 0)
 		global.status = WEXITSTATUS(status);
 	return (EXIT_SUCCESS);
