@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:28:44 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/12 19:11:57 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 18:46:40 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,12 @@ char	*extract_string_within_dollar_sign(t_ast **s_cmd, char **str_before,
 	char	**str;
 	int		size;
 
-	if (ft_strchr(content, ' ') == 0)
+	if (ft_strncmp(*str_before, "", 1) == 0 && ft_strncmp(content, "", 1) == 0)
+	{
+		free(content);
+		return (NULL);
+	}
+	else if (ft_strchr(content, ' ') == 0)
 		return (content);
 	else
 	{
