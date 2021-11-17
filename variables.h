@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 22:50:53 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/16 22:44:12 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 04:17:17 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@
 # include <term.h>
 
 # define ERROR -1
-int	g_status;
-int	g_global;
+typedef struct s_global
+{
+	int	status;
+	int	global;
+	int	signaled;
+	int	signal;
+	int here_doc;
+}	t_global;
 
-int	g_signaled;
-int	g_signal;
+t_global global;
 
 typedef struct s_redirect
 {

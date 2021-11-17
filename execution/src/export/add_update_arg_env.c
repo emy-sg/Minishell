@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_update_arg_env.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:23:28 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 15:38:42 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/17 04:12:32 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	update_arg_env(char **env, char *var_name, char *var_value)
 		{
 			free(env[i]);
 			env[i] = ft_fstrjoin(new_arg, var_value);
+			free(new_arg);
 			if (env[i] == NULL)
 				return (ERROR);
 			return (EXIT_SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:21:46 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 14:21:48 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/17 04:08:42 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_exit(t_ast *s_ast)
 	length = ft_fstrlen_double((const char **)(s_ast->argv + 1));
 	printf("exit\n");
 	if (length == 0)
-		exit(g_status);
+		exit(global.status);
 	else if (valid_arg_exit(s_ast->argv[1]) == EXIT_FAILURE)
 	{
 		prg_error(s_ast->argv[0], s_ast->argv[1], "numeric argument required");

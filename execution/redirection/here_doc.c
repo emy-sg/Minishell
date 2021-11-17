@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:20:52 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 16:20:55 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/17 04:23:14 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,17 @@ void	expand_line(t_env_export *env_export, char **line)
 	*line = cap_content;
 }
 
+void	here_doc_int(int sig)
+{
+	(void)sig;
+	global.here_doc = 1;
+	// printf("\n");
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_on_new_line();
+	rl_redisplay();
+}
+
 int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 {
 	int		fd;
@@ -60,11 +71,15 @@ int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 	char	*limiter_w_efl;
 
 	limiter_w_efl = ft_fstrjoin(limiter, "\n");
+	global.here_doc = 0;
 	fd = open(heredoc_file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		return (sys_error(NULL, NULL));
+	signal(SIGINT, here_doc_int);
 	while (1)
 	{
+		if (global.here_doc)
+			break ;
 		write(STDOUT_FILENO, "> ", 2);
 		line = mini_gnl();
 		if (ft_strchr(line, '$'))

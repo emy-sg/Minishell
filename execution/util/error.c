@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 13:17:43 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/02 13:17:45 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/17 04:08:42 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	sys_error(char *cmd, char *arg)
 {
-	g_status = 1;
+	global.status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{
@@ -35,7 +35,7 @@ int	sys_error(char *cmd, char *arg)
 
 int	prg_error(char *cmd, char *arg, char *msg)
 {
-	g_status = 1;
+	global.status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{

@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 18:03:47 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/16 22:45:56 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 04:09:22 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_child_cmd(t_ast *the_cmd, t_env_export *env_export,
 	pid_t	pid;
 
 	pid = fork();
-	g_global = 1;
+	global.global = 1;
 	if (pid > 0)
 		cmd_pipe->pid_child[i] = pid;
 	if (pid == 0)
@@ -31,7 +31,7 @@ void	exec_child_cmd(t_ast *the_cmd, t_env_export *env_export,
 			ft_cmd_pipe(the_cmd, env_export, NULL);
 		close(cmd_pipe->pipe_fd[1]);
 		close(cmd_pipe->fdin);
-		exit(g_status);
+		exit(global.status);
 	}
 	close(cmd_pipe->fdin);
 	cmd_pipe->fdin = cmd_pipe->pipe_fd[0];
@@ -77,16 +77,19 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			waitpid(cmd_pipe->pid_child[i], &status, 0);
 		i++;
 	}
-	g_signaled = 0;
+	global.signaled = 0;
 	if (WIFSIGNALED(status)) {
-		g_signaled = 1;
-		g_signal = WTERMSIG(status);
-		if (g_signaled && g_signal == SIGQUIT)
+		global.signaled = 1;
+		global.signal = WTERMSIG(status);
+		if (global.signaled && global.signal == SIGQUIT)
+		{
 			printf("Quit:3\n");
+			global.status = 131;
+		}
 	}
-	g_global = 0;
+	global.global = 0;
 	if (WEXITSTATUS(status) != 0)
-		g_status = WEXITSTATUS(status);
+		global.status = WEXITSTATUS(status);
 	free(cmd_pipe->pid_child);
 	if (cmd_pipe->heredoc_files_names_free != NULL)
 		free_double(cmd_pipe->heredoc_files_names_free);

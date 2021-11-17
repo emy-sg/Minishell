@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 13:38:46 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 19:20:28 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 04:08:42 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parse_and_execute(t_lexer *s_lexer, t_env_export *env_export)
 		s_ast = parse_command(&s_token, s_lexer, env_export->env);
 		if (!s_ast)
 		{
-			g_status = 258;
+			global.status = 258;
 			return (1);
 		}
 		execute_command(s_ast, env_export);

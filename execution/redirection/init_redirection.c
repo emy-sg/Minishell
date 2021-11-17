@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 16:20:57 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 16:20:58 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/17 04:08:42 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	open_files(t_ast *s_ast, t_redirect *redirect, char *heredoc_file_name)
 			redirect->fdin = open(heredoc_file_name, O_RDONLY, 0777);
 		if (redirect->fdin == -1 || redirect->fdout == -1)
 		{
-			g_status = 1;
+			global.status = 1;
 			return (sys_error(NULL, s_ast->redir[i]->file_name));
 		}
 		i++;

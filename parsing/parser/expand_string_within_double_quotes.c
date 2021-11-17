@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:16:07 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/09 19:44:54 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 04:12:13 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ char	*expand_string_within_double_quotes(char **table_of_env_var,
 			i++;
 		}
 	}
+	free(content);
 	return (cap_content);
 }

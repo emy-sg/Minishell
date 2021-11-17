@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_update_arg_export.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emallah <emallah@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:23:28 by emallah           #+#    #+#             */
-/*   Updated: 2021/11/15 15:38:52 by emallah          ###   ########.fr       */
+/*   Updated: 2021/11/17 04:13:31 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,13 @@ int	update_arg_export(char **export, char *var_name, char *var_value)
 			if (new_arg == NULL)
 				return (ERROR);
 			export[i] = ft_fstrjoin_w_quote(new_arg, var_value);
+			free(new_arg);
 			if (export[i] == NULL)
 				return (ERROR);
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
+	free(temp);
 	return (EXIT_SUCCESS);
 }
