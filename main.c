@@ -24,6 +24,7 @@ void	catch_int(int sig)
 	}
 	else
 	{
+		ft_putstr_fd("parent\n", 2);
 		(void)sig;
 		rl_replace_line("", 0);
 		printf("\n");
