@@ -56,17 +56,18 @@ void	expand_line(t_env_export *env_export, char **line)
 void	here_doc_int(int sig)
 {
 	(void)sig;
-	global.here_doc = 1;
-	// printf("\n");
-	rl_replace_line("", 0);
-	printf("\n");
-	rl_on_new_line();
-	rl_redisplay();
+	//rl_replace_line("", 0);
+	//printf("\n");
+	//rl_on_new_line();
+	//rl_redisplay();
+	exit(1);
 }
 
 int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 {
 	int		fd;
+	pid_t	pid;
+	int		status;
 	char	*line;
 	char	*limiter_w_efl;
 
@@ -75,24 +76,30 @@ int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 	fd = open(heredoc_file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		return (sys_error(NULL, NULL));
-	signal(SIGINT, here_doc_int);
-	while (1)
+	pid = fork();
+	if (pid == 0)
 	{
-		if (global.here_doc)
-			break ;
-		write(STDOUT_FILENO, "> ", 2);
-		line = mini_gnl();
-		if (ft_strchr(line, '$'))
-			expand_line(env_export, &line);
-		if (ft_strcstr(limiter_w_efl, line))
+		signal(SIGINT, here_doc_int);
+		while (1)
 		{
-			free(limiter_w_efl);
+			write(STDOUT_FILENO, "> ", 2);
+			line = mini_gnl();
+			if (ft_strchr(line, '$'))
+				expand_line(env_export, &line);
+			if (ft_strcstr(limiter_w_efl, line))
+			{
+				free(limiter_w_efl);
+				free(line);
+				break ;
+			}
+			write(fd, line, ft_fstrlen(line));
 			free(line);
-			break ;
 		}
-		write(fd, line, ft_fstrlen(line));
-		free(line);
+		close(fd);
 	}
+	waitpid(pid, &status, 0);
+	printf("sig = %d\n", WTERMSIG(status));
+	printf("status = %d\n", WEXITSTATUS(status));
 	close(fd);
 	return (EXIT_SUCCESS);
 }

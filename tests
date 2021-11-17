@@ -1,6 +1,0 @@
-ERROR
-./file permissions
-
-==================== LEAKS
-env | grep "_="
-hitting enter

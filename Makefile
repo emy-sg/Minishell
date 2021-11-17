@@ -145,7 +145,7 @@ MAIN = main.c
 all : $(NAME)
 
 $(NAME): $(EXECUTION) $(PARSING)
-	gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib  -I/Users/$(USER)/.brew/opt/readline/include -o $(NAME)
+	@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /goinfre//.brew/opt/readline/lib  -I /goinfre//.brew/opt/readline/include -o $(NAME)
 
 clean:
 	@rm -fr minishell.dSYM
