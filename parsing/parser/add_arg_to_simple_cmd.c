@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:15:41 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/12 19:08:23 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 23:10:09 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	add_arg_to_simple_cmd(t_token **s_token, t_lexer *s_lexer,
 {
 	char	**new_argv;
 	int		size;
+	int		i;
 
 	if ((*s_cmd)->argv == NULL)
 	{
@@ -32,7 +33,8 @@ void	add_arg_to_simple_cmd(t_token **s_token, t_lexer *s_lexer,
 		new_argv[size + 1] = NULL;
 		(*s_cmd)->argv = new_argv;
 	}
-	unlock_string((*s_token)->value, s_cmd, table_of_env_var);
+	i = 0;
+	unlock_string((*s_token)->value, &i, s_cmd, table_of_env_var);
 	free((*s_token)->value);
 	free(*s_token);
 	*s_token = NULL;

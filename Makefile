@@ -114,6 +114,7 @@ PARSING = parsing/lexer/find_closing_quote.c\
 		parsing/parser/add_redir_to_table_of_redirection.c\
 		parsing/parser/add_simple_cmd_to_pipeline.c\
 		parsing/parser/add_string_to_table_of_args.c\
+		parsing/parser/delete_string_from_table_of_args.c\
 		parsing/parser/expand_dollar_sign.c\
 		parsing/parser/expand_string_within_double_quotes.c\
 		parsing/parser/extract_string_within_dollar_sign.c\
