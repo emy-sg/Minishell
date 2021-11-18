@@ -44,7 +44,7 @@ char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var)
 	{
 		if (content[next_char] == '\0')
 			return (ft_strdup("$"));
-		str = other_cases(next_char, content, index);
+		str = other_cases(next_char, content, *index);
 		*index += 1;
 	}
 	return (str);

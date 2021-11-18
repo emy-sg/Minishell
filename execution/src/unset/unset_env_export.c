@@ -30,13 +30,22 @@ int	unset_env_export(t_ast *s_ast, t_env_export *env_export)
 	return (valid_input_unset(s_ast));
 }
 
+int	new_export_env(t_env_export *env_export)
+{
+	if (new_export(env_export) == ERROR)
+		return (ERROR);
+	if (new_env(env_export) == ERROR)
+		return (ERROR);
+	return (EXIT_SUCCESS);
+}
+
 int	remove_arg_env_export(t_env_export *env_export, char *arg)
 {
 	if (remove_arg_env(env_export, arg) == ERROR)
 		return (ERROR);
 	if (remove_arg_export(env_export, arg) == ERROR)
 		return (ERROR);
-	return (EXIT_SUCCESS);
+	return (new_export_env(env_export));
 }
 
 int	remove_arg_env(t_env_export *env_export, char *arg)
@@ -74,7 +83,7 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 	temp0 = ft_fstrjoin("declare -x ", arg);
 	if (temp0 == NULL)
 		return (ERROR);
-	ret = delete_export_elements(env_export->export, temp0);
+	ret = delete_export_elements2(env_export->export, temp0);
 	if (ret != EXIT_FAILURE)
 	{
 		free (temp0);
@@ -87,24 +96,4 @@ int	remove_arg_export(t_env_export *env_export, char *arg)
 	ret = delete_export_elements(env_export->export, temp);
 	free(temp);
 	return (ret);
-}
-
-int	delete_export_elements(char **export, char *temp)
-{
-	int	i;
-
-	i = 0;
-	while (export[i])
-	{
-		if (ft_strbstr(export[i], temp))
-		{
-			free(export[i]);
-			export[i] = ft_fstrdup("NaN");
-			if (export[i] == NULL)
-				return (ERROR);
-			return (EXIT_SUCCESS);
-		}
-		i++;
-	}
-	return (EXIT_FAILURE);
 }

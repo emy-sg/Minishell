@@ -13,6 +13,6 @@
 #ifndef ENV_H
 # define ENV_H
 
-int		env(char **env);
+int		ft_env(char **env);
 
 #endif

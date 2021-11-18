@@ -23,9 +23,7 @@ int	sys_error(char *cmd, char *arg)
 	}
 	if (arg)
 	{
-		ft_putstr_fd("`", 2);
 		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("'", 2);
 		ft_putstr_fd(": ", 2);
 	}
 	ft_putstr_fd(strerror(errno), 2);

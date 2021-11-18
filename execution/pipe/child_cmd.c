@@ -77,11 +77,10 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			waitpid(cmd_pipe->pid_child[i], &status, 0);
 		i++;
 	}
-	g_global.global = 0;
-	if (WEXITSTATUS(status) != 0)
-		g_global.status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status) && (WTERMSIG(status) + 128 != 141))
+	g_global.status = WEXITSTATUS(status);
+	if (WIFSIGNALED(status) && (WTERMSIG(status) + 128 != 141))
 		g_global.status = WTERMSIG(status) + 128;
+	g_global.global = 0;
 	free(cmd_pipe->pid_child);
 	if (cmd_pipe->heredoc_files_names_free != NULL)
 		free_double(cmd_pipe->heredoc_files_names_free);

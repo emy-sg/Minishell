@@ -18,7 +18,7 @@ int	ft_cmd_phase_1(t_ast *s_ast, t_env_export *env_export)
 	{
 		g_global.status = 0;
 		if (cd(s_ast, env_export) == ERROR)
-			return (sys_error(s_ast->argv[0], NULL));
+			return (sys_error(s_ast->argv[0], s_ast->argv[1]));
 		return (EXIT_SUCCESS);
 	}
 	else if (ft_strcstr(s_ast->argv[0], "pwd"))
@@ -43,7 +43,7 @@ int	ft_cmd_phase_2(t_ast *s_ast, t_env_export *env_export)
 	else if (ft_strcstr(s_ast->argv[0], "env"))
 	{
 		g_global.status = 0;
-		if (env(env_export->env) == ERROR)
+		if (ft_env(env_export->env) == ERROR)
 			return (sys_error(s_ast->argv[0], NULL));
 		return (EXIT_SUCCESS);
 	}
@@ -55,7 +55,7 @@ int	ft_cmd_phase_3(t_ast *s_ast, t_env_export *env_export)
 	if (ft_strcstr(s_ast->argv[0], "unset"))
 	{
 		g_global.status = 0;
-		if (unset(s_ast, env_export) == ERROR)
+		if (ft_unset(s_ast, env_export) == ERROR)
 			return (sys_error(s_ast->argv[0], NULL));
 		return (EXIT_SUCCESS);
 	}

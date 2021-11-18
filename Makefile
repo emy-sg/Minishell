@@ -1,6 +1,6 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror -g -fsanitize=address
+FLAG = -Wall -Wextra -Werror #-g -fsanitize=address
 
 EXECUTION = execution/init/init_env.c\
 			execution/init/init_env_export.c\
@@ -35,6 +35,7 @@ EXECUTION = execution/init/init_env.c\
 			execution/src/other/run_cmd.c\
 			execution/src/pwd/pwd.c\
 			execution/src/unset/unset.c\
+			execution/src/unset/new_env_export.c\
 			execution/src/unset/unset_env_export.c\
 			execution/src/utils/export_unset.c\
 			execution/util/atoi.c\
