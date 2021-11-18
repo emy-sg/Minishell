@@ -15,13 +15,11 @@
 
 # include "variables.h"
 
-// parsing
 # include "parsing/libft/libft.h"
 
 # include "parsing/lexer/lexer.h"
 # include "parsing/parser/parser.h"
 
-//execution
 # include "execution/util/util.h"
 # include "execution/src/cmd/cmd.h"
 # include "execution/src/cd/cd.h"
@@ -38,7 +36,6 @@
 # include "execution/pipe/pipe.h"
 # include "execution/signal/signal.h"
 
-//main
 void	main_exec(t_lexer *s_lexer, t_env_export *env_export);
 
 #endif

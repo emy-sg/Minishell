@@ -13,11 +13,8 @@
 #ifndef OTHER_H
 # define OTHER_H
 
-//other.c
 int		other(t_ast *s_ast, t_env_export *env_export);
 void	run_cmd(t_ast *s_ast, t_env_export *env_export);
-
-//run_cmd.c
 int		str_includes(char *str, char c);
 void	rum_cmd_abs_path(t_ast *s_ast, t_env_export *env_export);
 void	rum_cmd_env_path(t_ast *s_ast, t_env_export *env_export);

@@ -21,7 +21,7 @@ int	new_export(t_env_export *env_export)
 	i = 0;
 	j = 0;
 	export = (char **)ft_fcalloc(sizeof(char *),
-			ft_fstrlen_double((const char **)env_export->export));
+			ft_fstrlen_double((const char **)env_export->export) + 1);
 	if (export == NULL)
 		return (ERROR);
 	while (env_export->export[i])
@@ -44,7 +44,7 @@ int	new_env(t_env_export *env_export)
 	i = 0;
 	j = 0;
 	env = (char **)ft_fcalloc(sizeof(char *),
-			ft_fstrlen_double((const char **)env_export->env));
+			ft_fstrlen_double((const char **)env_export->env) + 1);
 	if (env == NULL)
 		return (ERROR);
 	while (env_export->env[i])

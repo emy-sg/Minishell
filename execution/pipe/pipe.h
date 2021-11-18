@@ -13,11 +13,9 @@
 #ifndef PIPE_H
 # define PIPE_H
 
-//pipe.c
 int			ft_pipe(t_ast *s_ast, t_env_export *env_export);
 t_cmd_pipe	*init_cmd_pipe(t_ast *s_ast, t_env_export *env_export);
 
-//here_doc_pipe.c
 int			exec_here_doc_all_cmd(t_ast *s_ast, t_env_export *env_export,
 				char **heredoc_files_names);
 char		*here_doc_file_name_gen(int j);
@@ -25,7 +23,6 @@ void		heredoc_file_name_fill(t_ast *s_ast, char **heredoc_files_names);
 char		**heredoc_files_names_all_cmd(t_ast *s_ast);
 int			nbr_here_doc_all_cmd(t_ast *s_ast);
 
-//child_cmd.c
 void		exec_child_cmd(t_ast *the_cmd, t_env_export *env_export,
 				t_cmd_pipe *cmd_pipe, int i);
 void		redirect_child_cmd(t_cmd_pipe *cmd_pipe, int i);

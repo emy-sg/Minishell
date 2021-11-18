@@ -13,19 +13,14 @@
 #ifndef UNSET_H
 # define UNSET_H
 
-//unset.c
 int	ft_unset(t_ast *s_ast, t_env_export *env_export);
 int	delete_export_elements2(char **export, char *temp);
 int	delete_export_elements(char **export, char *temp);
-
-//unset_env_export.c
 int	unset_env_export(t_ast *s_ast, t_env_export *env_export);
 int	remove_arg_env(t_env_export *env_export, char *arg);
 int	remove_arg_export(t_env_export *env_export, char *arg);
 int	remove_arg_env_export(t_env_export *env_export, char *arg);
 int	new_export_env(t_env_export *env_export);
-
-//new_export_env
 int	new_export(t_env_export *env_export);
 int	new_env(t_env_export *env_export);
 

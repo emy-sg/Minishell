@@ -1,6 +1,6 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror #-g -fsanitize=address
+FLAG = -Wall -Wextra -Werror -g -fsanitize=address
 
 EXECUTION = execution/init/init_env.c\
 			execution/init/init_env_export.c\
@@ -145,8 +145,10 @@ PARSING = parsing/lexer/find_closing_quote.c\
 		parsing/parser/unlock_file_name.c\
 		parsing/parser/unlock_string.c
 
+EXECUTION_OBJ = $(EXECUTION:.c=.o)
 
-#@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib  -I /Users/$(USER)/.brew/opt/readline/include -o $(NAME)
+PARSING_OBJ = $(PARSING:.c=.o)
+
 MAIN = main.c
 
 all : $(NAME)
@@ -155,7 +157,7 @@ $(NAME): $(EXECUTION) $(PARSING)
 	@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /goinfre//.brew/opt/readline/lib  -I /goinfre//.brew/opt/readline/include -o $(NAME)
 
 clean:
-	@rm -fr minishell.dSYM
+	@rm -fr $(EXECUTION_OBJ) $(PARSING_OBJ) minishell.dSYM
 
 fclean: clean
 	@rm -fr $(NAME)

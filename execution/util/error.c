@@ -33,7 +33,12 @@ int	sys_error(char *cmd, char *arg)
 
 int	prg_error(char *cmd, char *arg, char *msg)
 {
+	int	a;
+
+	a = 0;
 	g_global.status = 1;
+	if (ft_strcstr(cmd, "unset") || ft_strcstr(cmd, "export"))
+		a = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{
@@ -42,9 +47,11 @@ int	prg_error(char *cmd, char *arg, char *msg)
 	}
 	if (arg)
 	{
-		ft_putstr_fd("`", 2);
+		if (a)
+			ft_putstr_fd("`", 2);
 		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("'", 2);
+		if (a)
+			ft_putstr_fd("'", 2);
 		ft_putstr_fd(": ", 2);
 	}
 	ft_putstr_fd(msg, 2);

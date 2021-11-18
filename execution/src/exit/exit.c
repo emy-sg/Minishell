@@ -35,12 +35,21 @@ int	valid_arg_exit(char *arg)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
+	if (arg[0] != '-' && arg[0] != '+' && !ft_fisdigit(arg[0]))
+		return (EXIT_FAILURE);
 	while (arg[i])
 	{
 		if (!ft_fisdigit(arg[i]))
 			return (EXIT_FAILURE);
 		i++;
+	}
+	if (ft_fstrlen(arg) > 19)
+		return (EXIT_FAILURE);
+	if (ft_fstrlen(arg) == 19)
+	{
+		if (ft_atoi_exit(arg) == 0)
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

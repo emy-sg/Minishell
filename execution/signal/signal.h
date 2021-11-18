@@ -13,7 +13,6 @@
 #ifndef SIGNAL_H
 # define SIGNAL_H
 
-//signal.c
 void	here_doc_int_child(int sig);
 void	catch_int(int sig);
 void	catch_quit(int sig);
