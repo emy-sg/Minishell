@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:28 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/12 18:48:07 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/17 23:34:00 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	add_redir_to_simple_cmd(t_lexer *s_lexer, t_token **s_token,
 			t_ast **s_cmd, char **table_of_env_var);
 void	add_simple_cmd_to_pipeline(t_ast *s_parent, t_ast *s_child);
 void	add_string_to_table_of_args(char **cap_content, t_ast **s_cmd);
+void	delete_string_from_table_of_args(t_ast **s_cmd,
+			char **cap_content, char **new_str);
 
 char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var);
 char	*expand_string_within_double_quotes(char **table_of_env_var,
@@ -54,7 +56,8 @@ void	fill_table_of_redir(t_ast *s_cmd, t_token **s_redir,
 t_redir	*init_redir(t_token *s_redir, char *name_file);
 
 char	*unlock_file_name(char *content, char **table_of_env_var);
-void	unlock_string(char *content, t_ast **cmd, char **table_of_env_var);
+void	unlock_string(char *content, int *i, t_ast **cmd,
+			char **table_of_env_var);
 
 char	**ft_realloc_table(char **args, int size);
 t_redir	**ft_realloc_redir_table(t_redir **s_redir, int i);
