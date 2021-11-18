@@ -10,7 +10,7 @@ EXECUTION = execution/init/init_env.c\
 			execution/pipe/pipe.c\
 			execution/redirection/back_to_normal.c\
 			execution/redirection/here_doc.c\
-			execution/redirection/here_doc_expand.c\ 
+			execution/redirection/here_doc_expand.c\
 			execution/redirection/init_redirection.c\
 			execution/redirection/redirection.c\
 			execution/redirection/simple_redirection.c\

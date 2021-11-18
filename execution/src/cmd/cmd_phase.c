@@ -79,6 +79,7 @@ int	ft_cmd_phase_4(t_ast *s_ast, t_env_export *env_export)
 	}
 	else
 	{
+		g_global.status = 0;
 		if (other(s_ast, env_export) == ERROR)
 			return (sys_error(s_ast->argv[0], NULL));
 		return (EXIT_SUCCESS);

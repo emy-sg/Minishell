@@ -24,7 +24,7 @@ void	main_exec(t_lexer *s_lexer, t_env_export *env_export)
 	{
 		printf("exit\n");
 		clear_history();
-		exit(1);
+		exit(g_global.status);
 	}
 	if (cmdline_buf[0] != '\0')
 	{
@@ -43,6 +43,7 @@ int	main(int argc, char **argv, char **arge)
 
 	(void)argc;
 	(void)*argv;
+	s_lexer = NULL;
 	signal(SIGINT, catch_int);
 	signal(SIGQUIT, catch_quit);
 	env_export = init_env_export((const char **)arge);

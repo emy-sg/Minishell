@@ -29,6 +29,7 @@ void	catch_int(int sig)
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();
+			g_global.status = 1;
 		}
 		else if (g_global.global == 1 || g_global.global == 2)
 			printf("\n");

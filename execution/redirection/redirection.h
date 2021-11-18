@@ -20,7 +20,9 @@ int			ft_redir(t_ast *s_ast, t_env_export *env_export,
 //back_to_normal.c
 int			redir_in_back_to_normal(t_redirect *redirect);
 int			redir_out_back_to_normal(t_redirect *redirect);
-
+int			exec_here_doc(t_ast *s_ast, t_env_export *env_export,
+				char *heredoc_file_name);
+void		expand_line(t_env_export *env_export, char **line);
 //here_doc.c
 int			exec_here_doc(t_ast *s_ast, t_env_export *env_export,
 				char *heredoc_file_name);
