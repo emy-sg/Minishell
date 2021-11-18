@@ -6,7 +6,7 @@
 /*   By: isghioua <isghioua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 21:43:28 by isghioua          #+#    #+#             */
-/*   Updated: 2021/11/17 23:34:00 by isghioua         ###   ########.fr       */
+/*   Updated: 2021/11/18 04:09:35 by isghioua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	delete_string_from_table_of_args(t_ast **s_cmd,
 			char **cap_content, char **new_str);
 
 char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var);
+char	*other_cases(int next_char, char *content, int index);
 char	*expand_string_within_double_quotes(char **table_of_env_var,
 			char *content);
 char	*extract_string_within_dollar_sign(t_ast **s_cmd, char **str_before,
