@@ -75,15 +75,10 @@ char	**refill_export(char **export)
 
 char	*update_arg_export_help(char *temp, char *var_value)
 {
-	char	*new_arg;
 	char	*export;
 
-	new_arg = ft_fstrjoin(temp, "=");
+	export = ft_fstrjoin_w_quote(temp, var_value);
 	free(temp);
-	if (new_arg == NULL)
-		return (NULL);
-	export = ft_fstrjoin_w_quote(new_arg, var_value);
-	free(new_arg);
 	if (export == NULL)
 		return (NULL);
 	return (export);
@@ -92,10 +87,14 @@ char	*update_arg_export_help(char *temp, char *var_value)
 int	update_arg_export(char **export, char *var_name, char *var_value)
 {
 	int		i;
+	char	*temp0;
 	char	*temp;
 
 	i = 0;
-	temp = ft_fstrjoin("declare -x ", var_name);
+	temp0 = ft_fstrjoin("declare -x ", var_name);
+	if (temp0 == NULL)
+		return (ERROR);
+	temp = ft_fstrjoin(temp0, "=");
 	if (temp == NULL)
 		return (ERROR);
 	while (export[i])

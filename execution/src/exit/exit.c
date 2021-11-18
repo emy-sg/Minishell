@@ -14,20 +14,23 @@
 
 int	ft_exit(t_ast *s_ast)
 {
-	int	length;
+	int		length;
+	char	*trim_arg;
 
 	length = ft_fstrlen_double((const char **)(s_ast->argv + 1));
 	printf("exit\n");
 	if (length == 0)
 		exit(g_global.status);
-	else if (valid_arg_exit(s_ast->argv[1]) == EXIT_FAILURE)
+	trim_arg = ft_strtrim(s_ast->argv[1], " ");
+	if (valid_arg_exit(trim_arg) == EXIT_FAILURE)
 	{
 		prg_error(s_ast->argv[0], s_ast->argv[1], "numeric argument required");
 		exit(255);
 	}
-	else if (length == 1)
-		exit(ft_fatoi(s_ast->argv[1]));
+	if (length == 1)
+		exit(ft_fatoi(trim_arg));
 	prg_error(s_ast->argv[0], NULL, "too many arguments");
+	free(trim_arg);
 	return (EXIT_SUCCESS);
 }
 
@@ -44,9 +47,7 @@ int	valid_arg_exit(char *arg)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	if (ft_fstrlen(arg) > 19)
-		return (EXIT_FAILURE);
-	if (ft_fstrlen(arg) == 19)
+	if (ft_fstrlen(arg) >= 19)
 	{
 		if (ft_atoi_exit(arg) == 0)
 			return (EXIT_FAILURE);

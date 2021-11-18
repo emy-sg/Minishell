@@ -33,5 +33,6 @@ int			open_files(t_ast *s_ast, t_redirect *redirect,
 				char *heredoc_file_name);
 int			simple_redir_in(t_redirect *redirect, t_ast *s_ast);
 int			simple_redir_out(t_redirect *redirect, t_ast *s_ast);
+int			sys_err_return(t_ast *s_ast, int i);
 
 #endif

@@ -1,6 +1,6 @@
 NAME = minishell
 
-FLAG = -Wall -Wextra -Werror -g -fsanitize=address
+FLAG = -Wall -Wextra -Werror
 
 EXECUTION = execution/init/init_env.c\
 			execution/init/init_env_export.c\
@@ -157,7 +157,7 @@ $(NAME): $(EXECUTION) $(PARSING)
 	@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /goinfre//.brew/opt/readline/lib  -I /goinfre//.brew/opt/readline/include -o $(NAME)
 
 clean:
-	@rm -fr $(EXECUTION_OBJ) $(PARSING_OBJ) minishell.dSYM
+	@rm -fr $(EXECUTION_OBJ) $(PARSING_OBJ)
 
 fclean: clean
 	@rm -fr $(NAME)

@@ -12,28 +12,50 @@
 
 #include "../../../minishell.h"
 
+int	arg_w_equal(t_ast *s_ast, t_env_export *env_export, int i)
+{
+	char	**temp;
+
+	temp = ft_fsplite(s_ast->argv[i], '=');
+	if (temp == NULL)
+		return (ERROR);
+	if (valid_arg_export(temp[0]) == EXIT_SUCCESS)
+	{
+		if (add_env_export(env_export, temp) == ERROR)
+			return (sys_error(s_ast->argv[0], s_ast->argv[i]));
+	}
+	else
+	{
+		prg_error(s_ast->argv[0], s_ast->argv[i], "not a valid identifier");
+		free_double(temp);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	add_to_export(t_ast *s_ast, t_env_export *env_export)
 {
 	int		i;
-	char	**temp;
 
 	i = 1;
 	while (s_ast->argv[i])
 	{
-		if (valid_arg_export(s_ast->argv[i]) == EXIT_SUCCESS)
+		if (ft_fstrnstr(s_ast->argv[i], "=", 1))
 		{
-			if (ft_fstrnstr(s_ast->argv[i], "=", 1))
+			if (arg_w_equal(s_ast, env_export, i) == ERROR)
+				return (ERROR);
+		}
+		else
+		{
+			if (valid_arg_export(s_ast->argv[i]) == EXIT_SUCCESS)
 			{
-				temp = ft_fsplite(s_ast->argv[i], '=');
-				if (temp == NULL)
-					return (ERROR);
-				if (add_env_export(env_export, temp) == ERROR)
+				if (add_export(env_export, s_ast->argv[i]) == ERROR)
 					return (sys_error(s_ast->argv[0], s_ast->argv[i]));
 			}
-			else if (add_export(env_export, s_ast->argv[i]) == ERROR)
-				return (sys_error(s_ast->argv[0], s_ast->argv[i]));
+			else
+				prg_error(s_ast->argv[0], s_ast->argv[i],
+					"not a valid identifier");
 		}
 		i++;
 	}
-	return (valid_input_export(s_ast));
+	return (EXIT_SUCCESS);
 }

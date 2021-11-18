@@ -32,6 +32,12 @@ t_redirect	*init_redirect(t_ast *s_ast, char *heredoc_file_name)
 	return (redirect);
 }
 
+int	sys_err_return(t_ast *s_ast, int i)
+{
+	g_global.status = 1;
+	return (sys_error(NULL, s_ast->redir[i]->file_name));
+}
+
 int	open_files(t_ast *s_ast, t_redirect *redirect, char *heredoc_file_name)
 {
 	int			i;
@@ -50,12 +56,12 @@ int	open_files(t_ast *s_ast, t_redirect *redirect, char *heredoc_file_name)
 			redirect->fdout = open(s_ast->redir[i]->file_name,
 					O_RDWR | O_CREAT | O_APPEND, 0777);
 		if (redirect->here_doc_length == 0)
-			redirect->fdin = open(heredoc_file_name, O_RDONLY, 0777);
-		if (redirect->fdin == -1 || redirect->fdout == -1)
 		{
-			g_global.status = 1;
-			return (sys_error(NULL, s_ast->redir[i]->file_name));
+			redirect->here_doc_length--;
+			redirect->fdin = open(heredoc_file_name, O_RDONLY, 0777);
 		}
+		if (redirect->fdin == -1 || redirect->fdout == -1)
+			return (sys_err_return(s_ast, i));
 		i++;
 	}
 	return (EXIT_SUCCESS);
