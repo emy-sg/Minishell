@@ -25,7 +25,7 @@ int	execute_command(t_ast *s_ast, t_env_export *env_export)
 			return (sys_error(NULL, NULL));
 		if (cmd_has_here_doc(s_ast) == EXIT_SUCCESS)
 		{
-			global.here_doc = 1;
+			g_global.here_doc = 1;
 			if (exec_here_doc(s_ast, env_export, heredoc_file_name) == ERROR)
 				return (ERROR);
 		}
@@ -41,7 +41,7 @@ int	ft_cmd(t_ast *s_ast, t_env_export *env_export)
 	ret = EXIT_SUCCESS;
 	if (s_ast->argv == NULL)
 		return (EXIT_SUCCESS);
-	if (global.here_doc_exit == 0)
+	if (g_global.here_doc_exit == 0)
 	{
 		ret = ft_cmd_phase_1(s_ast, env_export);
 		if (ret == EXIT_FAILURE)

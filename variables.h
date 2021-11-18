@@ -33,15 +33,16 @@
 # include <term.h>
 
 # define ERROR -1
+
 typedef struct s_global
 {
 	int	status;
 	int	global;
-	int here_doc;
-	int here_doc_exit;
+	int	here_doc;
+	int	here_doc_exit;
 }	t_global;
 
-t_global global;
+t_global	g_global;
 
 typedef struct s_redirect
 {

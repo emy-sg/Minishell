@@ -53,7 +53,7 @@ int	open_files(t_ast *s_ast, t_redirect *redirect, char *heredoc_file_name)
 			redirect->fdin = open(heredoc_file_name, O_RDONLY, 0777);
 		if (redirect->fdin == -1 || redirect->fdout == -1)
 		{
-			global.status = 1;
+			g_global.status = 1;
 			return (sys_error(NULL, s_ast->redir[i]->file_name));
 		}
 		i++;

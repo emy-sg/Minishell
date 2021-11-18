@@ -19,7 +19,7 @@ int	ft_exit(t_ast *s_ast)
 	length = ft_fstrlen_double((const char **)(s_ast->argv + 1));
 	printf("exit\n");
 	if (length == 0)
-		exit(global.status);
+		exit(g_global.status);
 	else if (valid_arg_exit(s_ast->argv[1]) == EXIT_FAILURE)
 	{
 		prg_error(s_ast->argv[0], s_ast->argv[1], "numeric argument required");

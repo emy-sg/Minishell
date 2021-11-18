@@ -29,7 +29,7 @@ int	parse_and_execute(t_lexer *s_lexer, t_env_export *env_export)
 		s_ast = parse_command(&s_token, s_lexer, env_export->env);
 		if (!s_ast)
 		{
-			global.status = 258;
+			g_global.status = 258;
 			return (1);
 		}
 		execute_command(s_ast, env_export);

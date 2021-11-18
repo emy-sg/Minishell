@@ -38,4 +38,7 @@
 # include "execution/pipe/pipe.h"
 # include "execution/signal/signal.h"
 
+//main
+void	main_exec(t_lexer *s_lexer, t_env_export *env_export);
+
 #endif

@@ -20,7 +20,7 @@ int	exec_here_doc(t_ast *s_ast, t_env_export *env_export,
 	i = 0;
 	while (s_ast->redir[i] != NULL)
 	{
-		if (global.here_doc_exit == 0)
+		if (g_global.here_doc_exit == 0)
 		{
 			if (s_ast->redir[i]->e_type == HERE_DOC_REDIR)
 			{

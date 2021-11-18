@@ -52,7 +52,7 @@ int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 		child_here_doc(env_export, limiter, fd);
 	waitpid(pid, &status, 0);
 	if (WEXITSTATUS(status) != 0)
-		global.here_doc_exit = 1;
+		g_global.here_doc_exit = 1;
 	close(fd);
 	return (EXIT_SUCCESS);
 }

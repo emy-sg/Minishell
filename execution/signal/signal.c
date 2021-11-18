@@ -21,16 +21,16 @@ void	here_doc_int_child(int sig)
 void	catch_int(int sig)
 {
 	(void)sig;
-	if (global.here_doc == 0)
+	if (g_global.here_doc == 0)
 	{
-		if (global.global == 0)
+		if (g_global.global == 0)
 		{
 			printf("\n");
 			rl_replace_line("", 0);
 			rl_on_new_line();
 			rl_redisplay();
 		}
-		else if (global.global == 1 || global.global == 2)
+		else if (g_global.global == 1 || g_global.global == 2)
 			printf("\n");
 	}
 	else
@@ -43,15 +43,15 @@ void	catch_int(int sig)
 
 void	catch_quit(int sig)
 {
-	if (global.here_doc == 0)
+	if (g_global.here_doc == 0)
 	{
 		(void)sig;
-		if (global.global == 0)
+		if (g_global.global == 0)
 		{
 			rl_on_new_line();
 			rl_redisplay();
 		}
-		else if (global.global == 1)
+		else if (g_global.global == 1)
 			printf("Quit: 3\n");
 	}
 }

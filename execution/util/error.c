@@ -14,7 +14,7 @@
 
 int	sys_error(char *cmd, char *arg)
 {
-	global.status = 1;
+	g_global.status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{
@@ -35,7 +35,7 @@ int	sys_error(char *cmd, char *arg)
 
 int	prg_error(char *cmd, char *arg, char *msg)
 {
-	global.status = 1;
+	g_global.status = 1;
 	ft_putstr_fd("minishell: ", 2);
 	if (cmd)
 	{

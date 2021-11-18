@@ -27,7 +27,7 @@ int	exec_here_doc_all_cmd(t_ast *s_ast, t_env_export *env_export,
 		the_cmd = the_cmd->child_cmd;
 		if (cmd_has_here_doc(the_cmd) == EXIT_SUCCESS)
 		{
-			global.here_doc = 1;
+			g_global.here_doc = 1;
 			if (exec_here_doc(the_cmd, env_export,
 					heredoc_files_names[j++]) == ERROR)
 				return (ERROR);

@@ -37,7 +37,7 @@ char	*expand_dollar_sign(char *content, int *index, char **table_of_env_var)
 			return (str);
 		}
 		if (content[next_char] == '?')
-			str = ft_itoa(global.status);
+			str = ft_itoa(g_global.status);
 		else
 			str = ft_substr(content, *index, 2);
 		*index += 1;
