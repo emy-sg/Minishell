@@ -14,6 +14,7 @@ EXECUTION = execution/init/init_env.c\
 			execution/redirection/init_redirection.c\
 			execution/redirection/redirection.c\
 			execution/redirection/simple_redirection.c\
+			execution/signal/signal.c\
 			execution/src/cd/cd.c\
 			execution/src/cd/cd_path.c\
 			execution/src/cd/update_env_export_old_pwd.c\
@@ -34,8 +35,8 @@ EXECUTION = execution/init/init_env.c\
 			execution/src/other/other.c\
 			execution/src/other/run_cmd.c\
 			execution/src/pwd/pwd.c\
-			execution/src/unset/unset.c\
 			execution/src/unset/new_env_export.c\
+			execution/src/unset/unset.c\
 			execution/src/unset/unset_env_export.c\
 			execution/src/utils/export_unset.c\
 			execution/util/atoi.c\
@@ -53,8 +54,8 @@ EXECUTION = execution/init/init_env.c\
 			execution/util/strjoin.c\
 			execution/util/strjoin_w_quote.c\
 			execution/util/strlen.c\
-			execution/util/strnstr.c\
-			execution/signal/signal.c\
+			execution/util/strnstr.c
+
 
 PARSING = parsing/lexer/find_closing_quote.c\
 		parsing/lexer/get_string_btw_quotes.c\
@@ -142,7 +143,8 @@ PARSING = parsing/lexer/find_closing_quote.c\
 		parsing/parser/parse_command.c\
 		parsing/parser/parse_simple_command.c\
 		parsing/parser/unlock_file_name.c\
-		parsing/parser/unlock_string.c\
+		parsing/parser/unlock_string.c
+
 
 #@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib  -I /Users/$(USER)/.brew/opt/readline/include -o $(NAME)
 MAIN = main.c

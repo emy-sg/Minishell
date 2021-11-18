@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_env_export.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/18 17:47:08 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/18 17:47:10 by emallah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../minishell.h"
 
 int	new_export(t_env_export *env_export)
@@ -8,7 +20,8 @@ int	new_export(t_env_export *env_export)
 
 	i = 0;
 	j = 0;
-	export = (char **)ft_fcalloc(sizeof(char *), ft_fstrlen_double((const char **)env_export->export));
+	export = (char **)ft_fcalloc(sizeof(char *),
+			ft_fstrlen_double((const char **)env_export->export));
 	if (export == NULL)
 		return (ERROR);
 	while (env_export->export[i])
@@ -30,7 +43,8 @@ int	new_env(t_env_export *env_export)
 
 	i = 0;
 	j = 0;
-	env = (char **)ft_fcalloc(sizeof(char *), ft_fstrlen_double((const char **)env_export->env));
+	env = (char **)ft_fcalloc(sizeof(char *),
+			ft_fstrlen_double((const char **)env_export->env));
 	if (env == NULL)
 		return (ERROR);
 	while (env_export->env[i])
