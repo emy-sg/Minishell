@@ -42,6 +42,7 @@ int		add_arg_export(t_env_export *env_export,
 char	*added_arg(char *var_name, char *var_value);
 char	**refill_export(char **export);
 int		update_arg_export(char **export, char *var_name, char *var_value);
+char	*update_arg_export_help(char *temp, char *var_value);
 
 //add_update_arg_export_helper.c
 int		export_exist(char **export, char *var_name);

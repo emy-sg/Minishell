@@ -73,30 +73,43 @@ char	**refill_export(char **export)
 	return (temp);
 }
 
+char	*update_arg_export_help(char *temp, char *var_value)
+{
+	char	*new_arg;
+	char	*export;
+
+	new_arg = ft_fstrjoin(temp, "=");
+	free(temp);
+	if (new_arg == NULL)
+		return (NULL);
+	export = ft_fstrjoin_w_quote(new_arg, var_value);
+	free(new_arg);
+	if (export == NULL)
+		return (NULL);
+	return (export);
+}
+
 int	update_arg_export(char **export, char *var_name, char *var_value)
 {
 	int		i;
 	char	*temp;
-	char	*new_arg;
 
 	i = 0;
+	temp = ft_fstrjoin("declare -x ", var_name);
+	if (temp == NULL)
+		return (ERROR);
 	while (export[i])
 	{
 		if (ft_strbstr(export[i], temp))
 		{
 			free(export[i]);
-			temp = ft_fstrjoin("declare -x ", var_name);
-			new_arg = ft_fstrjoin(temp, "=");
-			if (temp == NULL || new_arg == NULL)
-				return (ERROR);
-			free(temp);
-			export[i] = ft_fstrjoin_w_quote(new_arg, var_value);
-			free(new_arg);
+			export[i] = update_arg_export_help(temp, var_value);
 			if (export[i] == NULL)
 				return (ERROR);
 			return (EXIT_SUCCESS);
 		}
 		i++;
 	}
+	free(temp);
 	return (EXIT_SUCCESS);
 }
