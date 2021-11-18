@@ -17,8 +17,8 @@ void	exec_child_cmd(t_ast *the_cmd, t_env_export *env_export,
 {
 	pid_t	pid;
 
+	global.global = 2;
 	pid = fork();
-	global.global = 1;
 	if (pid > 0)
 		cmd_pipe->pid_child[i] = pid;
 	if (pid == 0)
@@ -77,11 +77,11 @@ void	wait_for_child(t_cmd_pipe *cmd_pipe)
 			waitpid(cmd_pipe->pid_child[i], &status, 0);
 		i++;
 	}
+	global.global = 0;
 	if (WEXITSTATUS(status) != 0)
 		global.status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status) && (WTERMSIG(status) + 128 != 141))
 		global.status = WTERMSIG(status) + 128;
-	global.global = 0;
 	free(cmd_pipe->pid_child);
 	if (cmd_pipe->heredoc_files_names_free != NULL)
 		free_double(cmd_pipe->heredoc_files_names_free);

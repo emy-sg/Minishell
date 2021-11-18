@@ -12,94 +12,47 @@
 
 #include "../../minishell.h"
 
-int	exec_here_doc(t_ast *s_ast, t_env_export *env_export, char *heredoc_file_name)
+void	child_here_doc(t_env_export *env_export, char *limiter, int fd)
 {
-	int	i;
+	char	*limiter_w_efl;
+	char	*line;
 
-	i = 0;
-	while (s_ast->redir[i] != NULL)
+	limiter_w_efl = ft_fstrjoin(limiter, "\n");
+	signal(SIGINT, here_doc_int_child);
+	while (1)
 	{
-		if (s_ast->redir[i]->e_type == HERE_DOC_REDIR)
+		write(STDOUT_FILENO, "> ", 2);
+		line = mini_gnl();
+		if (ft_strchr(line, '$'))
+			expand_line(env_export, &line);
+		if (ft_strcstr(limiter_w_efl, line) || ft_fstrlen(line) == 0)
 		{
-			if (here_doc(env_export, s_ast->redir[i]->file_name,
-					heredoc_file_name) == ERROR)
-				return (ERROR);
+			free(limiter_w_efl);
+			free(line);
+			break ;
 		}
-		i++;
+		write(fd, line, ft_fstrlen(line));
+		free(line);
 	}
-	return (EXIT_FAILURE);
-}
-
-
-void	expand_line(t_env_export *env_export, char **line)
-{
-	char	*new_str;
-	char	*cap_content;
-	int		i;
-
-	i = 0;
-	cap_content = ft_strdup("");
-	while ((*line)[i] != '\0')
-	{
-		if ((*line)[i] == '$')
-			new_str = expand_dollar_sign(*line, &i, env_export->env);
-		else
-			new_str = ft_substr(*line, i, 1);
-		i++;
-		ft_strjoin_and_free(&cap_content, &new_str);
-	}
-	free(*line);
-	*line = NULL;
-	*line = cap_content;
-}
-
-void	here_doc_int(int sig)
-{
-	(void)sig;
-	//rl_replace_line("", 0);
-	//printf("\n");
-	//rl_on_new_line();
-	//rl_redisplay();
-	printf("sig = %d\n", sig);
-	exit(1);
+	close(fd);
+	exit(0);
 }
 
 int	here_doc(t_env_export *env_export, char *limiter, char *heredoc_file_name)
 {
-	int		fd;
 	pid_t	pid;
+	int		fd;
 	int		status;
-	char	*line;
-	char	*limiter_w_efl;
 
-	limiter_w_efl = ft_fstrjoin(limiter, "\n");
-	global.here_doc = 0;
 	fd = open(heredoc_file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 		return (sys_error(NULL, NULL));
 	pid = fork();
 	if (pid == 0)
-	{
-		signal(SIGINT, here_doc_int);
-		while (1)
-		{
-			write(STDOUT_FILENO, "> ", 2);
-			line = mini_gnl();
-			if (ft_strchr(line, '$'))
-				expand_line(env_export, &line);
-			if (ft_strcstr(limiter_w_efl, line) || ft_fstrlen(line) == 0)
-			{
-				free(limiter_w_efl);
-				free(line);
-				break ;
-			}
-			write(fd, line, ft_fstrlen(line));
-			free(line);
-		}
-		close(fd);
-		exit(0);
-	}
+		child_here_doc(env_export, limiter, fd);
 	waitpid(pid, &status, 0);
+	if (WEXITSTATUS(status) != 0)
+		global.here_doc_exit = 1;
 	close(fd);
 	return (EXIT_SUCCESS);
 }

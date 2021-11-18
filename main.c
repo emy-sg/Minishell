@@ -12,49 +12,12 @@
 
 #include "minishell.h"
 
-void	catch_int(int sig)
-{
-	if (global.global == 1)
-	{
-		(void)sig;
-		rl_replace_line("", 0);
-		printf("\n");
-		rl_on_new_line();
-	}
-	else
-	{
-		ft_putstr_fd("parent\n", 2);
-		(void)sig;
-		rl_replace_line("", 0);
-		printf("\n");
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
-
-void	catch_quit(int sig)
-{
-	if (global.global == 1)
-	{
-		rl_replace_line("", 0);
-		printf("Quit:3");
-	}
-	if (global.global == 0)
-	{
-		(void)sig;
-		
-		rl_on_new_line();
-		rl_redisplay();
-	}
-}
-
 int	main(int argc, char **argv, char **arge)
 {
 	char			*cmdline_buf;
 	t_env_export	*env_export;
 	t_lexer			*s_lexer;
 	
-	global.global = 0;	
 	signal(SIGINT, catch_int);
 	signal(SIGQUIT, catch_quit);
 	env_export = init_env_export((const char **)arge);
@@ -62,6 +25,9 @@ int	main(int argc, char **argv, char **arge)
 	{
 		(void)argc;
 		(void)*argv;
+		global.global = 0;
+		global.here_doc = 0;
+		global.here_doc_exit = 0;
 		cmdline_buf = readline("$ ");
 		if (!cmdline_buf)
 		{
@@ -77,7 +43,6 @@ int	main(int argc, char **argv, char **arge)
 		}
 		else
 			free(cmdline_buf);
-		//system("leaks minishell");
 	}
 	clear_history();
 	return (0);

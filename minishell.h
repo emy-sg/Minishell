@@ -36,6 +36,6 @@
 # include "execution/init/init.h"
 # include "execution/redirection/redirection.h"
 # include "execution/pipe/pipe.h"
-void	catch_int(int sig);
-void	catch_quit(int sig);
+# include "execution/signal/signal.h"
+
 #endif

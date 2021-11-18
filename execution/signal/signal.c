@@ -1,16 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: emallah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/18 02:47:39 by emallah           #+#    #+#             */
+/*   Updated: 2021/11/18 02:47:40 by emallah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../minishell.h"
 
-void	terminate_processe(int sig)
+void	here_doc_int_child(int sig)
 {
-	if (sig == SIGINT)
-		exit(1);
+	(void)sig;
+	exit(1);
 }
 
-void	terminate_here_doc(int sig)
+void	catch_int(int sig)
 {
-	int exit_value;
+	(void)sig;
+	if (global.here_doc == 0)
+	{
+		if (global.global == 0)
+		{
+			printf("\n");
+			rl_replace_line("", 0);
+			rl_on_new_line();
+			rl_redisplay();
+		}
+		else if (global.global == 1 || global.global == 2)
+			printf("\n");
+	}
+	else
+	{
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
 
-	exit_value = 125 + sig;
-	global.here_doc = 1;
-	exit(exit_value);
+void	catch_quit(int sig)
+{
+	if (global.here_doc == 0)
+	{
+		(void)sig;
+		if (global.global == 0)
+		{
+			rl_on_new_line();
+			rl_redisplay();
+		}
+		else if (global.global == 1)
+			printf("Quit: 3\n");
+	}
 }

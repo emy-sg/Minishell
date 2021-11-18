@@ -38,6 +38,7 @@ typedef struct s_global
 	int	status;
 	int	global;
 	int here_doc;
+	int here_doc_exit;
 }	t_global;
 
 t_global global;

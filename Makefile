@@ -10,6 +10,7 @@ EXECUTION = execution/init/init_env.c\
 			execution/pipe/pipe.c\
 			execution/redirection/back_to_normal.c\
 			execution/redirection/here_doc.c\
+			execution/redirection/here_doc_expand.c\ 
 			execution/redirection/init_redirection.c\
 			execution/redirection/redirection.c\
 			execution/redirection/simple_redirection.c\
@@ -52,6 +53,7 @@ EXECUTION = execution/init/init_env.c\
 			execution/util/strjoin_w_quote.c\
 			execution/util/strlen.c\
 			execution/util/strnstr.c\
+			execution/signal/signal.c\
 
 PARSING = parsing/lexer/find_closing_quote.c\
 		parsing/lexer/get_string_btw_quotes.c\
@@ -140,12 +142,13 @@ PARSING = parsing/lexer/find_closing_quote.c\
 		parsing/parser/unlock_file_name.c\
 		parsing/parser/unlock_string.c\
 
+#@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib  -I /Users/$(USER)/.brew/opt/readline/include -o $(NAME)
 MAIN = main.c
 
 all : $(NAME)
 
 $(NAME): $(EXECUTION) $(PARSING)
-	@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /Users/$(USER)/.brew/opt/readline/lib  -I/Users/$(USER)/.brew/opt/readline/include -o $(NAME)
+	@gcc $(FLAG) $(EXECUTION) $(PARSING) $(MAIN) -lreadline -L /goinfre//.brew/opt/readline/lib  -I /goinfre//.brew/opt/readline/include -o $(NAME)
 
 clean:
 	@rm -fr minishell.dSYM

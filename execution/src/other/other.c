@@ -17,18 +17,18 @@ int	other(t_ast *s_ast, t_env_export *env_export)
 	int		status;
 	pid_t	pid;
 
-	pid = fork();
 	global.global = 1;
+	pid = fork();
 	if (pid == -1)
 		return (ERROR);
 	else if (pid == 0)
 		run_cmd(s_ast, env_export);
 	waitpid(pid, &status, 0);
+	global.global = 0;
 	if (WEXITSTATUS(status) != 0)
 		global.status = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status) && (WTERMSIG(status) + 128 != 141))
 		global.status = WTERMSIG(status) + 128;
-	global.global = 0;
 	return (EXIT_SUCCESS);
 }
 

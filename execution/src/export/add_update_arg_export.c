@@ -80,18 +80,16 @@ int	update_arg_export(char **export, char *var_name, char *var_value)
 	char	*new_arg;
 
 	i = 0;
-	temp = ft_fstrjoin("declare -x ", var_name);
-	if (temp == NULL)
-		return (ERROR);
 	while (export[i])
 	{
 		if (ft_strbstr(export[i], temp))
 		{
-			new_arg = ft_fstrjoin(temp, "=");
 			free(export[i]);
-			free(temp);
-			if (new_arg == NULL)
+			temp = ft_fstrjoin("declare -x ", var_name);
+			new_arg = ft_fstrjoin(temp, "=");
+			if (temp == NULL || new_arg == NULL)
 				return (ERROR);
+			free(temp);
 			export[i] = ft_fstrjoin_w_quote(new_arg, var_value);
 			free(new_arg);
 			if (export[i] == NULL)
@@ -100,6 +98,5 @@ int	update_arg_export(char **export, char *var_name, char *var_value)
 		}
 		i++;
 	}
-	free(temp);
 	return (EXIT_SUCCESS);
 }
